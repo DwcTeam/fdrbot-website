@@ -61,4 +61,4 @@ class Auth(object):
         r = request("GET", f"{BASE}/users/@me",
                     headers={"Authorization": f"Bot {bot_token}"})
         r.raise_for_status()
-        return r.json()
+        return Bot(r.json(), bot_token)

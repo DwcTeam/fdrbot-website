@@ -128,15 +128,15 @@ class User(object):
         self.token = token
 
     @property
-    def id(self):
+    def id(self) -> str:
         return self.data.get("id")
 
     @property
-    def username(self):
+    def username(self) -> str:
         return self.data.get("username")
 
     @property
-    def avatar(self):
+    def avatar(self) -> str:
         avatar_hash: str = self.data.get("avatar")
         ext = "png"
         if avatar_hash.startswith("a_"):
@@ -161,12 +161,14 @@ class User(object):
         return [Guild(guild) for guild in x]
 
 class Bot(User):
-    def __init__(self, data: dict) -> None:
-        self.data = data
+
+    def guilds(self) -> list[Guild]:
+        r = request("GET", f"{BASE}/users/@me/guilds", headers={"Authorization": f"Bot {self.token}"})
+        return [Guild(i) for i in r.json()]
 
     @property
     def discriminator(self):
-        return self.data("discriminator")
+        return self.data.get("discriminator")
 
     def __repr__(self) -> str:
         return f"{self.username}#{self.discriminator}"
