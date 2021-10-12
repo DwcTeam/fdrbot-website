@@ -91,15 +91,17 @@ class Token(AccessToken):
 
 class Guild(object):
     def __init__(self, data: dict) -> None:
-        self.data = data
+        self._data = data
     
     @property
     def id(self) -> str:
-        return self.data.get("id")
+        return self._data.get("id")
 
     @property
     def icon(self) -> str:
-        icon_hash: str = self.data.get("icon")
+        icon_hash: str = self._data.get("icon")
+        if not icon_hash:
+            return f"https://via.placeholder.com/1024/262b2f/fff?text={self.name[:2]}"
         ext = "png"
         if icon_hash.startswith("a_"):
             ext = "gif"
@@ -107,14 +109,18 @@ class Guild(object):
     
     @property
     def name(self) -> str:
-        return self.data.get("name")
+        return self._data.get("name")
     
     @property
     def is_owner(self) -> bool:
-        return self.data.get("owner")
+        return self._data.get("owner")
+
+    @property
+    def data(self) -> dict:
+        return {"id": self.id, "name": self.name, "icon": self.icon, "is_owner": self.is_owner}
 
     def __repr__(self) -> str:
-        return {"id": self.id, "name": self.name, "icon": self.icon, "is_owner": self.is_owner}
+        return self.name
 
 class User(object):
     def __init__(self, data: dict, token: str) -> None:

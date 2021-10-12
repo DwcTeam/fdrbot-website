@@ -13,7 +13,7 @@ def api_main():
 def guilds():
     token = session.get("token")
     guilds = auth.user(token).guilds()
-    return jsonify([im for im in guilds])
+    return jsonify([i.data for i in guilds])
 
 @api.route("/api/guilds/<guild_id>", methods=["GET"])
 @login_required
