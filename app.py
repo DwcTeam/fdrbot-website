@@ -1,6 +1,7 @@
 from flask import Flask
 from utlits import Auth
 
+
 app = Flask(__name__, instance_relative_config=True)
 app_ctx = app.app_context()
 app_ctx.push()
@@ -13,7 +14,7 @@ app.auth = Auth(
     client_secret=app.config["CLIENT_SECRET"],
     redirect_uri=app.config["REDIRECR_URI"]
 )
-from routs import home, api, dashboard, callback
+from views import home, api, dashboard, callback
 
 app.register_blueprint(home)
 app.register_blueprint(api)
