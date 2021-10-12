@@ -18,7 +18,6 @@ class Auth(object):
         self.CLIENT_ID = client_id
         self.CLIENT_SECRET = client_secret
         self.REDIRECT_URI = redirect_uri
-        self.SCOPE = "identify+guilds+email"
 
     def access_token(self, code: str) -> AccessToken:
         data = {
