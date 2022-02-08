@@ -1,11 +1,110 @@
-<ul>
+{% extends 'base.html' %}
 
-    
-    {% for guild in guilds %}
-        <li>
-            <a>{{ guild.name }}</a>
-        </li>
-    {% endfor %}
-    
+{% block stats_for_login %}
+<li class="nav-item">
+  <a href="/logout" class="nav-link">
+    <button class="btn btn-outline-danger text-white c" type="submit">
+      تسجيل الخروج
+    </button>
+  </a>
+</li>
+{% endblock %}
 
-</ul>
+{% block content %}
+
+<div class="all text first div">  
+<!-- bot join -->
+  <section class="py-5 main text div first">
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-center flex-row-reverse">
+        <div class="py-3">
+            <h1 class="display-5 text-white" align="right" dir="rtl">فاذك<span class="saqr-color-logo">روني</span></h1>
+            <p class="py-1 lead text-white">بوت فاذكروني اول بوت عربي اسلامي للاذكار | بوت فاذكروني للتذكير بذكر الله في الشات</p>
+        </div>
+        <img class="img-fluid w-25 px-2" id="logo" src="{{ url_for('static', filename='/images/logo.png') }}" alt="FdrBots">
+    </div>
+        <h2 class="text-center mb-5 saqr-color-logo title">اضبط إعدادات السيرفر</h2>
+        <div class="row text-center row-cols-1 row-cols-md-4 g-4">
+			
+			{% for guild in available_guilds %}
+
+				<div class="col-sm filter-1">
+				<a href="/dashboard/{{ guild.id }}" class="nav-link">
+					<div class="card text-light mb-3 saqr-5 card-2">
+						<div class="h1 mt-3 icon-1">
+						<img class="img-fluid w-50 saqr-img" src="{{ guild.icon }}" alt="{{ guild.name }}">
+						</div>
+						<div class="card-body text-center">
+							<h6 class="card-title saqr-color-logo mb-3">{{ guild.name }}</h6>
+						</div>
+					</div>
+					</a>
+				</div>
+			{% endfor %}
+     </div>
+   </div> 
+</section>
+
+<hr class="container mx-auto">
+<hr class="container mx-auto">
+<!-- no join -->
+<section class="py-5 main text div first">
+    <div class="container">
+        <h2 class="text-center mb-5 saqr-color-logo title">إضافة البوت</h2>
+        <div class="row text-center row-cols-1 row-cols-md-4 g-4">
+            <div class="col-sm">
+                <div class="card text-light mb-3 saqr-5 card-1">
+                    <div class="h1 mt-3 icon-1">
+                     <img class="img-fluid w-50 filter saqr-img" src="https://cdn.discordapp.com/icons/547436115741900801/a_90d8c6373b0d8637bcd743239f00e90e.gif?size=1024" alt="SERVER Ibrahim$">
+                    </div>
+                    <div class="card-body text-center">
+                        <h6 class="card-title saqr-color-logo mb-3">oCMz</h6>
+                      <button type="button"  class="btn btn-outline-warning text-white">اضافة البوت</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+                <div class="card text-light mb-3 saqr-5 card-1">
+                    <div class="h1 mt-3 icon-1">
+                     <img class="img-fluid w-50 filter saqr-img" src="https://cdn.discordapp.com/icons/490539398627328010/a_a3a7b9231e793594fd895ae564306c8e.gif?size=1024" alt="SERVER Ibrahim$">
+                    </div>
+                    <div class="card-body text-center">
+                        <h6 class="card-title saqr-color-logo mb-3">3Gaming</h6>
+                      <button type="button" class="btn btn-outline-warning text-white">اضافة البوت</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm">
+             <div class="card text-light mb-3 saqr-5 card-1">
+                 <div class="h1 mt-3 icon-1">
+                  <img class="img-fluid w-50 filter saqr-img" src="https://cdn.discordapp.com/icons/729526735749513267/ed37c6160d0a9f2d0d4fb91bb1e7d1af.png?size=1024" alt="avatar server">
+                 </div>
+                 <div class="card-body text-center">
+                    <h6 class="card-title saqr-color-logo mb-3">بوت فاذكروني</h6>
+                   <button type="button" class="btn btn-outline-warning text-white">اضافة البوت</button>
+                 </div>
+             </div>
+         </div>
+         <div class="col-sm">
+           <div class="card text-light mb-3 saqr-5 card-1">
+               <div class="h1 mt-3 icon-1">
+                <img class="img-fluid w-50 filter saqr-img" src="https://cdn.discordapp.com/icons/843865725886398554/a_8bd60c7b683e19cde4564e1f9da1c4fc.gif?size=1024" alt="avatar server">
+               </div>
+               <div class="card-body text-center">
+                <h6 class="card-title saqr-color-logo mb-3">Ottawa 4 programming</h6>
+                   <button type="button" class="btn btn-outline-warning text-white">اضافة البوت</button>
+               </div>
+           </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</section>
+</div>
+
+
+{% endblock %}
+
+{% block footer %}
+{{ super() }}
+{% endblock %}

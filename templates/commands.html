@@ -1,0 +1,33 @@
+
+{% extends 'base.html' %}
+
+{% block stats_for_login %}
+<li class="nav-item">
+  <a href="/dashboard" class="nav-link">
+    <button class="btn btn-outline-warning text-white c" type="submit">
+      لوحة التحكم
+    </button>
+  </a>
+</li>
+{% endblock %}
+
+{% block content %}
+
+
+<section class="py-5">
+    <div class="container">
+        <div class="flex flex-col items-center mb-6">
+            <h2 class="text-white text-center title">الاوامر <span class="saqr-color-logo">فاذكروني</span></h2>
+            </div>
+    </div>
+</section>
+
+
+
+
+{% endblock %}
+
+
+{% block footer %}
+{{ super() }}
+{% endblock %}

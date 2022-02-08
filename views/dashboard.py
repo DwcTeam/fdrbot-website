@@ -1,19 +1,23 @@
-from flask import Blueprint, session, redirect, render_template, current_app
+from flask import Blueprint, render_template, current_app, session
 from utlits import login_required, Auth
 
+dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
-dashboard = Blueprint("dashboard", __name__)
-auth: Auth = current_app.auth
+auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URL'])
 
-@dashboard.route("/dashboard/<guild_id>", methods=["GET"])
+@dashboard.route('/')
 @login_required
-def _dashboard(guild_id):
-    return "OKS"
+def index_page():
+    guilds = auth.user(session['token']).guilds()
+    available_guilds = [i for i in guilds]
+    unavailable_guilds = [i for i in guilds]
+    return render_template('dashboard.html', available_guilds=available_guilds, unavailable_guilds=unavailable_guilds)
 
-@dashboard.route("/dashboard", methods=["GET"])
+@dashboard.route('/<int:guild_id>')
 @login_required
-def _dashboard_guild():
-    token = session.get("token")
-    guilds = auth.user(token).guilds()
-    return render_template("dashboard.html", guilds=guilds)
+def guild_page(guild_id):
+    guild = auth.user(session['token']).get_guild(guild_id)
+    if isinstance(guild, dict):
+        return "يا بزر مالك صلاحيات"
+    return render_template('guild.html', guild=guild)
 

@@ -1,4 +1,5 @@
-from .home import home
 from .api import api
+from .auth import auth
 from .dashboard import dashboard
-from .login import callback
+from .index import index
+from .errors import errors

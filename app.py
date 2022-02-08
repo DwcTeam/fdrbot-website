@@ -1,26 +1,24 @@
 from flask import Flask
-from utlits import Auth
-
+from flask_cors import CORS
 
 app = Flask(__name__, instance_relative_config=True)
+
+CORS(app)
+
 app_ctx = app.app_context()
 app_ctx.push()
 
-app.config.from_pyfile("config.py")
-app.secret_key = "Dwc Team"
+app.config.from_pyfile('config.py')
+app.secret_key = app.config["SECRET_KEY"]
 
-app.auth = Auth(
-    client_id=app.config["CLIENT_ID"],
-    client_secret=app.config["CLIENT_SECRET"],
-    redirect_uri=app.config["REDIRECR_URI"]
-)
-from views import home, api, dashboard, callback
+import views
 
-app.register_blueprint(home)
-app.register_blueprint(api)
-app.register_blueprint(dashboard)
-app.register_blueprint(callback)
+app.register_blueprint(views.api)
+app.register_blueprint(views.auth)
+app.register_blueprint(views.dashboard)
+app.register_blueprint(views.index)
+app.register_blueprint(views.errors)
 
+if __name__ == '__main__':
+    app.run(debug=True, port=3939)
 
-if __name__ == "__main__":
-    app.run(port="9000", debug=True)

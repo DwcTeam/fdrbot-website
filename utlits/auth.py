@@ -1,6 +1,5 @@
-from flask.json import jsonify
 from requests import request
-from ._objects import AccessToken, RefreshToken, Token, User, Bot
+from .objects import AccessToken, RefreshToken, Token, User, Bot
 
 BASE = "https://discord.com/api/v9"
 headers = {
@@ -25,9 +24,10 @@ class Auth(object):
             "client_secret": self.CLIENT_SECRET,
             "grant_type": "authorization_code",
             "code": code,
-            "redirect_uri": self.REDIRECT_URI
+            "redirect_uri": "http://127.0.0.1:3939/outh"
         }
         r = request("POST", f"{BASE}/oauth2/token", data=data, headers=headers)
+        print(r.json())
         r.raise_for_status()
         return AccessToken(r.json())
 
