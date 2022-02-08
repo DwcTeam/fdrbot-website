@@ -3,7 +3,7 @@ from utlits import login_required, Auth
 
 dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
-auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URL'])
+auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URI'])
 
 @dashboard.route('/')
 @login_required

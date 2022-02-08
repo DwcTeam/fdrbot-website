@@ -12,7 +12,7 @@ def login():
 def outh():
     if "token" in session:
         return redirect("/dashboard")
-    auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URL'])
+    auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URI'])
     access_token = auth.access_token(request.args.get('code'))
     session['token'] = access_token.access_token
     print(session.values())

@@ -20,5 +20,7 @@ app.register_blueprint(views.index)
 app.register_blueprint(views.errors)
 
 if __name__ == '__main__':
+    # from waitress import serve
+    # serve(app, host="127.0.0.1", port=3939)
     app.run(debug=True, port=3939)
 

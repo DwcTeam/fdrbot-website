@@ -24,7 +24,7 @@ class Auth(object):
             "client_secret": self.CLIENT_SECRET,
             "grant_type": "authorization_code",
             "code": code,
-            "redirect_uri": "http://127.0.0.1:3939/outh"
+            "redirect_uri": self.REDIRECT_URI.replace("%3A", ":").replace("%2F", "/")
         }
         r = request("POST", f"{BASE}/oauth2/token", data=data, headers=headers)
         print(r.json())
