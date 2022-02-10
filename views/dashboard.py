@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, current_app, session
-from utlits import login_required, Auth, check_guild, guild_info, get_guild_channels
+from utlits import login_required, Auth, check_guild, guild_info, get_guild_channels, get_guild_roles
 
 dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
@@ -21,5 +21,8 @@ def guild_page(guild_id):
         return "يا بزر مالك صلاحيات"
     info = guild_info(guild_id)
     channels = get_guild_channels(guild_id)
-    return render_template('guild.html', guild=guild, info=info, channels=channels)
+    text_channels = [i for i in channels if i.type == 0]
+    voice_channels = [i for i in channels if i.type == 2]
+    roles = get_guild_roles(guild_id)
+    return render_template('guild.html', guild=guild, info=info, text_channels=text_channels, voice_channels=voice_channels, roles=roles)
 

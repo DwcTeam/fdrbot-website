@@ -190,4 +190,11 @@ class GuildInfo:
 class Channel:
     id: int
     name: str
+    type: t.Any
+
+
+@dataclass
+class Role:
+    id: int
+    name: str
 

@@ -4,7 +4,7 @@ from functools import wraps
 import typing as t
 import requests
 
-from utlits.objects import Channel, GuildInfo
+from utlits.objects import Channel, GuildInfo, Role
 
 
 def login_required(function_to_protect):
@@ -23,7 +23,6 @@ def check_guild(guild_id: int) -> bool:
 
 def guild_info(guild_id: int) -> GuildInfo:
     r = requests.get(f"{current_app.config['BOT_SERVER']}/get_guild/{guild_id}/info")
-    print(r.json())
     return GuildInfo(**r.json().get("guild"))
 
 def get_guild_channels(guild_id: int) -> t.Optional[t.List[Channel]]:
@@ -45,3 +44,7 @@ def get_users_count():
 def get_channels_count():
     r = requests.get(f"{current_app.config['BOT_SERVER']}/channels_count")
     return r.json().get("count")
+
+def get_guild_roles(guild_id: int):
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/get_guild/{guild_id}/roles")
+    return [Role(**i) for i in r.json().get("roles")]
