@@ -25,6 +25,7 @@
 					أختيار قناة أرسال الأذكار
 				</button>
 
+<<<<<<< HEAD
 				<!-- Modal -->
 				<div class="modal" id="setroom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 					<div class="modal-dialog">
@@ -49,6 +50,31 @@
 						</div>
 					</div>
 				</div>
+=======
+<!-- Modal -->
+<div class="modal" id="setroom" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="exampleColorInput" class="form-label">تحديد شات الاذكار</label>
+        <select class="form-select text-end" aria-label="Default select example">
+          <option selected>...اختر</option>
+          <option value="1" class="text-start">#test-1</option>
+          <option value="2" class="text-start">#test-2</option>
+          <option value="3" class="text-start">#test-3</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">العودة</button>
+        <button type="button" class="btn btn-warning text-white" id="setroom-true">حفظ</button>
+      </div>
+    </div>
+  </div>
+</div>
+>>>>>>> 8f4fb67a50b20a22f701b59b7f64377538c46a43
 
 				<!-- Button trigger modal -->
 				<button type="button" class="btn btn-outline-warning saqr-y" data-bs-toggle="modal"
@@ -56,6 +82,7 @@
 					تحديد روم صوتي للقرآن الكريم
 				</button>
 
+<<<<<<< HEAD
 				<!-- Modal -->
 				<div class="modal fade" id="quran-play" tabindex="-1" aria-labelledby="exampleModalLabel"
 					aria-hidden="true">
@@ -294,6 +321,220 @@
 			</div>
 		</div>
 	</div>
+=======
+<!-- Modal -->
+<div class="modal fade" id="quran-play" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="exampleColorInput" class="form-label">تحديد روم صوتي</label>
+        <select class="form-select text-end" aria-label="Default select example">
+          <option selected>...اختر</option>
+          <option value="1" class="text-start">#test-1</option>
+          <option value="2" class="text-start">#test-2</option>
+          <option value="3" class="text-start">#test-3</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">العودة</button>
+        <button type="button" class="btn btn-warning text-white" id="quran-play-true">حفظ</button>
+      </div>
+    </div>
+  </div>
+</div>
+<section class="py-5">
+  <div class="container">
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-warning saqr-y" data-bs-toggle="modal" data-bs-target="#quran-role">
+  تحديد رتبة تحكم في القران
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="quran-role" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="exampleColorInput" class="form-label">تحديد رتبة</label>
+        <select class="form-select text-end" aria-label="Default select example">
+          <option selected>...اختر</option>
+          <option value="1" class="text-start">@test-1</option>
+          <option value="2" class="text-start">@test-2</option>
+          <option value="3" class="text-start">@test-3</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">العودة</button>
+        <button type="button" class="btn btn-warning text-white" id="quran-role-true">حفظ</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-secondary saqr-y m-3" data-bs-toggle="modal" data-bs-target="#embed">
+  تغير لون الامبد | و الوقة
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="embed" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <!-- <h5 class="modal-title" id="exampleModalLabel">علبة الوان</h5> -->
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <label for="exampleColorInput" class="form-label">تغير الوقة</label>
+        <select class="form-select text-end" aria-label="Default select example">
+          <option selected>...اختر</option>
+          <option value="1" class="text-end">دقيقه 30</option>
+          <option value="2" class="text-end">ساعة</option>
+          <option value="3" class="text-end">ساعتين</option>
+          <option value="3" class="text-end">ساعات 3</option>
+          <option value="3" class="text-end">ساعات 3</option>
+        </select>
+        <div>
+        <label for="exampleColorInput" class="form-label">علبة الوان</label>
+        <input type="color" class="form-control form-control-color w-100" id="exampleColorInput" value="#FFD700" title="Choose your color">
+      </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">العودة</button>
+        <button type="button" class="btn btn-warning text-white" id="embed-true">حفظ</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</section>
+
+<section class="py-2">
+  <div class="container">
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-outline-secondary saqr-y m-3" data-bs-toggle="modal" data-bs-target="#spam">
+  تكرار الرسائل
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="spam" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body py-5">
+        <label for="exampleColorInput" class="form-label">تحديد نوع الارسال</label>
+        <select class="form-select text-end" aria-label="Default select example">
+          <option selected>...اختر</option>
+          <option value="1" class="text-end">تشغيل</option>
+          <option value="2" class="text-end">ايقاف</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">العودة</button>
+        <button type="button" class="btn btn-warning text-white" id="spam-true">حفظ</button>
+      </div>
+    </div>
+  </div>
+</div>
+   <!-- Button trigger modal -->
+   <button type="button" class="btn btn-outline-warning saqr-y" data-bs-toggle="modal" data-bs-target="#embed-1">
+    الامبد
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="embed-1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body py-5">
+        <label for="exampleColorInput" class="form-label">تحديد نوع الارسال</label>
+          <select class="form-select text-end" aria-label="Default select example">
+            <option selected>...اختر</option>
+            <option value="1" class="text-end">تشغيل</option>
+            <option value="2" class="text-end">ايقاف</option>
+          </select>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">العودة</button>
+          <button type="button" class="btn btn-warning text-white" id="embed-1-true">حفظ</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</section>
+    </div>
+  </div>
+</section>
+<!--  -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="setroom-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle rounded me-2 saqr-true"></i>
+      <strong class="me-auto">تم الحفظ</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="quran-play-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle rounded me-2 saqr-true"></i>
+      <strong class="me-auto">تم الحفظ</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="quran-role-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle rounded me-2 saqr-true"></i>
+      <strong class="me-auto">تم الحفظ</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="embed-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle rounded me-2 saqr-true"></i>
+      <strong class="me-auto">تم الحفظ</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="spam-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle rounded me-2 saqr-true"></i>
+      <strong class="me-auto">تم الحفظ</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+<!--  -->
+<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+  <div id="embed-1-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div class="toast-header">
+      <i class="fas fa-check-circle rounded me-2 saqr-true"></i>
+      <strong class="me-auto">تم الحفظ</strong>
+      <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+</div>
+>>>>>>> 8f4fb67a50b20a22f701b59b7f64377538c46a43
 </div>
 
 

@@ -28,6 +28,7 @@ hr {
     justify-content: right;
     align-items: center;
     text-align: center;
+    color: gold;
 }
 .c {
     border-radius: 20px;
@@ -75,7 +76,7 @@ hr {
 }
 .saqr-y {
     width: 400px;
-    max-width: 50%;
+    /* max-width: 50%; */
     border-radius: 2px;
     margin: 0 0.6rem;
     border-radius: 10px;
@@ -316,4 +317,27 @@ tt {
     margin-bottom: 40px;
     display: block;
     transform: translateY(17px);
+}
+/*  */
+.border {
+    color: white;
+}
+/*  */
+.text-1 {
+    color: gold;
+    font-size: 20px;
+    background-color: rgba(0,0,0,.4);
+    border-left: 5px double gold;
+    z-index: 20;
+}
+.text-1-1 {
+    color: gold;
+    font-size: 20px;
+    background-color: rgba(0,0,0,.4);
+    border-left: 5px double gold;
+    border-right: 5px double gold;
+    z-index: 20;
+}
+.cmd {
+    background-color: #222222;
 }
