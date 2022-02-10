@@ -1,8 +1,11 @@
 from __future__ import annotations
 from flask import session, redirect, current_app
 from functools import wraps
-from typing import Any
-from utlits import Guild
+import typing as t
+import requests
+
+from utlits.objects import Channel, GuildInfo
+
 
 def login_required(function_to_protect):
     @wraps(function_to_protect)
@@ -14,15 +17,31 @@ def login_required(function_to_protect):
     return wrapper
 
 
-def check_guild(guild_id: Any) -> dict | Any:
-    token = session.get("token")
-    guild = current_app.auth.user(token).get_guild(guild_id)
-    if not guild:
-        return {"Error": "Guild Not Found", "code": 0}
-    if guild.get("code") == 1:
-        return guild
-    x = Guild(guild_id)
-    if not x.info:
-        x.insert()
-    return x.info
+def check_guild(guild_id: int) -> bool:
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/get_guild/{guild_id}")
+    return r.json().get("status")
 
+def guild_info(guild_id: int) -> GuildInfo:
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/get_guild/{guild_id}/info")
+    print(r.json())
+    return GuildInfo(**r.json().get("guild"))
+
+def get_guild_channels(guild_id: int) -> t.Optional[t.List[Channel]]:
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/get_guild/{guild_id}/channels")
+    return [Channel(**i) for i in r.json().get("channels")]
+
+def get_shards_count():
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/shards_count")
+    return r.json().get("count")
+
+def get_guilds_count():
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/guilds_count")
+    return r.json().get("count")
+
+def get_users_count():
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/users_count")
+    return r.json().get("count")
+
+def get_channels_count():
+    r = requests.get(f"{current_app.config['BOT_SERVER']}/channels_count")
+    return r.json().get("count")

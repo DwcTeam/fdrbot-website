@@ -1,5 +1,7 @@
 from __future__ import annotations
 from requests import request
+from dataclasses import dataclass
+import typing as t
 
 
 BASE = "https://discord.com/api/v9"
@@ -171,3 +173,21 @@ class Bot(User):
 
     def __repr__(self) -> str:
         return f"{self.username}#{self.discriminator}"
+
+
+@dataclass
+class GuildInfo:
+    _id: int
+    prefix: str
+    channel: t.Optional[int]
+    time: int
+    anti_spam: bool
+    embed: bool
+    role_id: int
+
+
+@dataclass
+class Channel:
+    id: int
+    name: str
+

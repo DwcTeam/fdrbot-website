@@ -15,7 +15,7 @@ def guilds():
 def guild(guild_id):
     return jsonify({"message": "Working on it!"})
 
-@api.route("/guilds/<guild_id>/quran/channel", methods=['POST'])
+@api.route("/guilds/<int:guild_id>/quran/channel", methods=['POST'])
 def quran_channel(guild_id):
     return jsonify({"message": "Working on it!"})
 
