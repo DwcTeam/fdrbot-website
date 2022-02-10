@@ -24,8 +24,35 @@
     font-family: Arial, sans-serif;
     font-size: 20px;
     font-weight: 100;
+  }
+  .title::before {
+    transform: translateY(60px);
+  }
+  .saqr-cmd {
+    width: 80%;
+  }
+  .cmd-1 {
+    font-size: 1px;
+    font-weight: 900;
+  }
 }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*  */
 #saqr {
     animation: saqr 10s linear infinite;
   }
@@ -59,9 +86,22 @@
   }
 }
 
+
 ::-webkit-scrollbar {
-    width: 6px;
+	width: 10px;
+	color: #ffffff;
 }
+
+::-webkit-scrollbar-track {
+	background: #110e0f;
+}
+
 ::-webkit-scrollbar-thumb {
-    background: gold;
+	background: #222327;
+	border-radius: 100px;
+	transition: all 1s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: gold;
 }
