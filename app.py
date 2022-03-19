@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, render_template
 from flask_cors import CORS
 
 app = Flask(__name__, instance_relative_config=True)
@@ -17,7 +17,8 @@ app.register_blueprint(views.api)
 app.register_blueprint(views.auth)
 app.register_blueprint(views.dashboard)
 app.register_blueprint(views.index)
-app.register_blueprint(views.errors)
+app.register_error_handler(404, views.not_found)
+app.register_error_handler(403, views.forbidden)
 
 if __name__ == '__main__':
     # from waitress import serve

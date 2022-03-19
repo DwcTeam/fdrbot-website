@@ -1,5 +1,8 @@
-from flask import Blueprint, render_template, current_app, session
-from utlits import login_required, Auth, check_guild, guild_info, get_guild_channels, get_guild_roles
+from flask import Blueprint, render_template, current_app, session, abort
+from utlits import (
+    login_required, Auth, check_guild, guild_info, 
+    get_guild_channels, get_guild_roles, check_permission
+)
 
 dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
@@ -15,10 +18,9 @@ def index_page():
 
 @dashboard.route('/<int:guild_id>')
 @login_required
+@check_permission
 def guild_page(guild_id):
     guild = auth.user(session['token']).get_guild(guild_id)
-    if isinstance(guild, dict):
-        return "يا بزر مالك صلاحيات"
     info = guild_info(guild_id)
     channels = get_guild_channels(guild_id)
     text_channels = [i for i in channels if i.type == 0]

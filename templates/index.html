@@ -34,38 +34,35 @@
 
   <section class="py-5 main">
     <div class="container">
-      <h2 class="text-center mb-4 saqr-color-logo title">خدمات</h2>
+      <h2 class="text-center mb-4 saqr-color-logo title">المميزات</h2>
       <div class="row text-center row-cols-1 row-cols-md-3 g-5">
         <div class="col-sm">
           <div class="card text-light mb-3 saqr-5 card-1">
             <div class="h1 mt-3 icon-1">
-              <i class="fas fa-sort-amount-up"></i>
+              <i class="fa-solid fa-book-quran"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">test 1</h4>
-              <p class="card-text text-light">test a</p>
+              <h4 class="card-title saqr-color-logo">القرآن الكريم</h4>
             </div>
           </div>
         </div>
         <div class="col-sm">
           <div class="card text-light mb-3 saqr-5 card-1">
             <div class="h1 mt-3 icon-1">
-              <i class="fas fa-sort-amount-up"></i>
+              <i class="fa-solid fa-mosque"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">test 2</h4>
-              <p class="card-text text-light">test b</p>
+              <h4 class="card-title saqr-color-logo">الأذكار</h4>
             </div>
           </div>
         </div>
         <div class="col-sm">
           <div class="card text-light mb-3 saqr-5 card-1">
             <div class="h1 mt-3 icon-1">
-              <i class="fas fa-sort-amount-up"></i>
+              <i class="fa-solid fa-star-and-crescent"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">test 3</h4>
-              <p class="card-text text-light">test c</p>
+              <h4 class="card-title saqr-color-logo">السنه النبوية</h4>
             </div>
           </div>
         </div>
@@ -81,7 +78,7 @@
       <div class="row g-0 flex-row-reverse">
         <div class="col-md-4">
           <img id="saqr"
-            src="https://cdn.discordapp.com/icons/729526735749513267/ed37c6160d0a9f2d0d4fb91bb1e7d1af.png?size=1024"
+            src="{{ url_for('static', filename='images/easy_to_use.png') }}"
             class="img-fluid rounded-start p-5" alt="...">
         </div>
         <div class="col-md-8 text-end">
@@ -96,7 +93,7 @@
       <div class="row g-0">
         <div class="col-md-4">
           <img id="saqr"
-            src="https://cdn.discordapp.com/icons/729526735749513267/ed37c6160d0a9f2d0d4fb91bb1e7d1af.png?size=1024"
+            src="{{ url_for('static', filename='images/Easy_to_Use_2.png') }}"
             class="img-fluid rounded-start py-5 p-5" alt="...">
         </div>
         <div class="col-md-8 text-end">
@@ -114,16 +111,16 @@
 
   <section class="py-5 main">
     <div class="container">
-      <h2 class="text-center mb-4 saqr-color-logo title">خدمات</h2>
+      <h2 class="text-center mb-4 saqr-color-logo title">الإحصائيات</h2>
       <div class="row text-center row-cols-1 row-cols-md-2 g-5">
         <div class="col-sm">
           <div class="card text-light mb-3 saqr-5 card-1">
             <div class="h1 mt-3 icon-1">
-              <i class="fas fa-users"></i>
+              <i class="fa-solid fa-terminal"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">عدد المستخدمين</h4>
-              <p class="card-text text-light counter">{{ users_count }}</p>
+              <h4 class="card-title saqr-color-logo">عدد الأوامر</h4>
+              <p class="card-text text-light counter">{{ commands_count }}</p>
             </div>
           </div>
         </div>
@@ -144,7 +141,7 @@
               <i class="fas fa-server"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">عدد السيرفرات</h4>
+              <h4 class="card-title saqr-color-logo">عدد الخوادم</h4>
               <p class="card-text text-light counter">{{ guilds_count }}</p>
             </div>
           </div>

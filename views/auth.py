@@ -15,7 +15,6 @@ def outh():
     auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URI'])
     access_token = auth.access_token(request.args.get('code'))
     session['token'] = access_token.access_token
-    print(session.values())
     return redirect("/dashboard")
 
 

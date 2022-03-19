@@ -35,7 +35,7 @@
 							</div>
 							<div class="modal-body">
 								<label for="exampleColorInput" class="form-label">تحديد شات الاذكار</label>
-								<select class="form-select text-end" aria-label="Default select example">
+								<select class="form-select text-end" aria-label="Default select example" id="channel-id">
 									<option value="reset" selected>غير محدد</option>
 									{% for channel in text_channels %}
 										{% if channel.id == info.channel %}
@@ -48,7 +48,7 @@
 							</div>
 							<div class="modal-footer">
 								<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">الرجوع</button>
-								<button type="button" class="btn btn-warning text-white" id="setroom-true">حفظ</button>
+								<button type="button" class="btn btn-warning text-white" id="setroom-save-button">حفظ</button>
 							</div>
 						</div>
 					</div>
@@ -150,7 +150,7 @@
 											aria-label="Close"></button>
 									</div>
 									<div class="modal-body">
-										<label for="exampleColorInput" class="form-label">تغير الوقة</label>
+										<label for="exampleColorInput" class="form-label">تغير الوقت</label>
 										<select class="form-select text-end" aria-label="Default select example">
 
 											<option value="1800" class="text-end" {% if 1800 == info.time %} selected {% endif %}>دقيقه 30</option>
@@ -248,122 +248,105 @@
 		</div>
 	</section>
 	<!--  -->
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-		<div id="setroom-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<i class="fas fa-check-circle rounded me-2 saqr-true"></i>
-				<strong class="me-auto">تم الحفظ</strong>
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-			</div>
-		</div>
-	</div>
-	<!--  -->
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-		<div id="quran-play-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<i class="fas fa-check-circle rounded me-2 saqr-true"></i>
-				<strong class="me-auto">تم الحفظ</strong>
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-			</div>
-		</div>
-	</div>
-	<!--  -->
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-		<div id="quran-role-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<i class="fas fa-check-circle rounded me-2 saqr-true"></i>
-				<strong class="me-auto">تم الحفظ</strong>
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-			</div>
-		</div>
-	</div>
-	<!--  -->
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-		<div id="embed-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<i class="fas fa-check-circle rounded me-2 saqr-true"></i>
-				<strong class="me-auto">تم الحفظ</strong>
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-			</div>
-		</div>
-	</div>
-	<!--  -->
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-		<div id="spam-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<i class="fas fa-check-circle rounded me-2 saqr-true"></i>
-				<strong class="me-auto">تم الحفظ</strong>
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-			</div>
-		</div>
-	</div>
-	<!--  -->
-	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
-		<div id="embed-1-true-1" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-			<div class="toast-header">
-				<i class="fas fa-check-circle rounded me-2 saqr-true"></i>
-				<strong class="me-auto">تم الحفظ</strong>
-				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-			</div>
-		</div>
-	</div>
-</div>
 
+	<!-- if saved -->
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="true-save" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="toast-header-true toast-header">
+				<i class="fas fa-check-circle rounded me-2 saqr-true"></i>
+				<strong class="me-auto">تم الحفظ</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
 
+	<!-- not saved -->
+
+	<div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+		<div id="false-save" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+			<div class="alert alert-dange toast-header-true toast-header">
+				<i class="fa-solid fa-x rounded me-2"></i>
+				<strong class="me-auto">لم يتم حفظ التعديلات</strong>
+				<button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+			</div>
+		</div>
+	</div>
 
 <script>
-	var toastTrigger = document.getElementById('setroom-true')
-	var toastLiveExample = document.getElementById('setroom-true-1')
-	if (toastTrigger) {
-		toastTrigger.addEventListener('click', function () {
-			var toast = new bootstrap.Toast(toastLiveExample)
+	var trueSave = document.getElementById('true-save')
+	var falseSave = document.getElementById('false-save')
 
-			toast.show()
-		})
-	}
+	document.getElementById('setroom-save-button').addEventListener('click', function () {
+		$.ajax({
+			url: `/api/guilds/{{ guild.id }}/channel`,
+			type: "post",
+			data: {
+				"channel_id": "lol",
+			},
+			success: function (data, status, xhr) {
+				console.log(data)
+				if (!data.error) {
+					var toast = new bootstrap.Toast(trueSave)
+					toast.show()
+				} else {
+					var toast = new bootstrap.Toast(falseSave)
+					toast.show()
+				}
+			},
+			error: function (data, status) {
+				var toast = new bootstrap.Toast(falseSave)
+				toast.show()
+			}
+		});
+	})
+
+
+	// if (toastTrigger) {
+	// 	toastTrigger.addEventListener('click', function () {
+	// 		var toast = new bootstrap.Toast(toastLiveExample)
+
+	// 		toast.show()
+	// 	})
+	// }
+
 	var toastTrigger = document.getElementById('quran-play-true')
 	var toastLiveExample = document.getElementById('quran-play-true-1')
 	if (toastTrigger) {
 		toastTrigger.addEventListener('click', function () {
-			var toast = new bootstrap.Toast(toastLiveExample)
-
-			toast.show()
+					var toast = new bootstrap.Toast(falseSave)
+					toast.show()
 		})
 	}
 	var toastTrigger = document.getElementById('quran-role-true')
 	var toastLiveExample = document.getElementById('quran-role-true-1')
 	if (toastTrigger) {
 		toastTrigger.addEventListener('click', function () {
-			var toast = new bootstrap.Toast(toastLiveExample)
-
-			toast.show()
+					var toast = new bootstrap.Toast(trueSave)
+					toast.show()
 		})
 	}
 	var toastTrigger = document.getElementById('embed-true')
 	var toastLiveExample = document.getElementById('embed-true-1')
 	if (toastTrigger) {
 		toastTrigger.addEventListener('click', function () {
-			var toast = new bootstrap.Toast(toastLiveExample)
-
-			toast.show()
+					var toast = new bootstrap.Toast(trueSave)
+					toast.show()
 		})
 	}
 	var toastTrigger = document.getElementById('spam-true')
 	var toastLiveExample = document.getElementById('spam-true-1')
 	if (toastTrigger) {
 		toastTrigger.addEventListener('click', function () {
-			var toast = new bootstrap.Toast(toastLiveExample)
-
-			toast.show()
+					var toast = new bootstrap.Toast(trueSave)
+					toast.show()
 		})
 	}
 	var toastTrigger = document.getElementById('embed-1-true')
 	var toastLiveExample = document.getElementById('embed-1-true-1')
 	if (toastTrigger) {
 		toastTrigger.addEventListener('click', function () {
-			var toast = new bootstrap.Toast(toastLiveExample)
-
-			toast.show()
+					var toast = new bootstrap.Toast(trueSave)
+					toast.show()
 		})
 	}
 

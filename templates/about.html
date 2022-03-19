@@ -1,70 +1,16 @@
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <title>فاذكروني</title>
-  <!--  -->
-  <meta name="theme-color" content="#014dffde">
-  <meta name="og:title" content="فاذكروني">
-  <meta name="description" content="لبوت يذكرك بالله بإرسال الاذكار , الحديث او القران كل ساعة او المدة التي تقوم بتحديدها">
-  <meta name="og:url" content="https://fdrbot.xyz/">
-  <meta name="og:description" content=".يجب عليك بعد دعوة البوت تحديد روم لكي يبدا البوت بإرسال رسائل في الروم المحدد, البوت غير ربحي و اهدافه خالصه لله عز و جل">
-  <meta name="twitter:card" content="summary">
-  <meta name="og:image" content="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png">
-<!--  -->
-  <link rel="icon" href="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="css/min.css" rel="stylesheet">
-  <link href="css/mian.css" rel="stylesheet">
-  <link href="css/media.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
-  <script src="https://unpkg.com/discord-fetcher@1.0.3/index.min.js"></script> 
-</head>
-<body onload="myFunction()">
-  <!-- loading -->
-<div id="loading">
-  <img class="container py-5 w-25 d-flex justify-content-center align-items-center text-center" src="/img/Loading-FdrBot.gif" alt="">
-  <h6 class="text-white container py-5 w-25 d-flex justify-content-center align-items-center text-center">موقة راح اغيره</h6>
-</div>
-<!-- ----------------- -->
+{% extends 'base.html' %}
 
-<header>
-  <nav class="navbar navbar-expand-md bg-dark navbar-dark text-white">
-    <div class="container">
-        <a href="/" class="navbar-brand saqr-logo">
-          فاذك<span class="saqr-color-logo">روني</span>
-        </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+{% block stats_for_login %}
+<li class="nav-item">
+  <a href="/dashboard" class="nav-link">
+    <button class="btn btn-outline-warning text-white c" type="submit">
+      لوحة التحكم
+    </button>
+  </a>
+</li>
+{% endblock %}
 
-        <div class="collapse navbar-collapse" id="mainmenu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a href="/dashboard.html" class="nav-link">الصفحة الرئيسية</a></li>
-                <!-- <li class="nav-item"><a href="/about.html" class="nav-link">حول</a></li> -->
-                <li class="nav-item"><a href="#" class="nav-link">الاوامر</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">اضافة البوت</a></li>
-                <li class="nav-item"><a href="#" class="nav-link"><button class="btn btn-outline-warning text-white c" type="submit">التسجيل الدخول</button></a></li>
-            </ul>
-        </div>
-    </div>
-</nav>
-</header>
-
-
-
+{% block content %}
 
 
 <div class="all text first div">
@@ -116,7 +62,7 @@
             </div>
             <div class="card-body text-center">
                 <h6 class="card-title mb-3"><strong id="username-2"></strong></h6>
-                <p class="card-title saqr-color-logo mb-3 h3">مؤسس ومطور ويب</strong></p>
+                <p class="card-title saqr-color-logo mb-3 h3">مطور الموقع</strong></p>
               </div>
         </div>
     </div>
@@ -128,7 +74,7 @@
           </div>
           <div class="card-body text-center">
               <h6 class="card-title mb-3"><strong id="username-3"></strong></h6>
-              <p class="card-title saqr-color-logo mb-3 h3">مؤسس ومطور بوت</strong></p>
+              <p class="card-title saqr-color-logo mb-3 h3">مطور بوت</strong></p>
             </div>
       </div>
   </div>
@@ -140,7 +86,7 @@
         </div>
         <div class="card-body text-center">
             <h6 class="card-title mb-3"><strong id="username-4"></strong></h6>
-            <p class="card-title saqr-color-logo mb-3 h3">مؤسس الاداره</strong></p>
+            <p class="card-title saqr-color-logo mb-3 h3">أداره البوت</strong></p>
           </div>
     </div>
 </div>
@@ -152,7 +98,7 @@
       </div>
       <div class="card-body text-center">
           <h6 class="card-title mb-3"><strong id="username-5"></strong></h6>
-          <p class="card-title saqr-color-logo mb-3 h3">مؤسس الاعلام</strong></p>
+          <p class="card-title saqr-color-logo mb-3 h3">العلاقات الخارجيه</strong></p>
       </div>
   </div>
 </div>
@@ -164,7 +110,7 @@
       </div>
       <div class="card-body text-center">
           <h6 class="card-title mb-3"><strong id="username-6"></strong></h6>
-          <p class="card-title mb-3 h3 saqr-color-logo">مؤسس الدعم الفني</strong></p>
+          <p class="card-title mb-3 h3 saqr-color-logo">الدعم الفني</strong></p>
 
       </div>
   </div>
@@ -292,45 +238,9 @@ async function user_7() {
   </script>
 
 
+{% endblock %}
 
 
-
-
-
-
-
-
-
-
-
-
-
-<!-- min js -->
-<script src="js/min.js"></script>
-<!-- ------------------------ -->
-  <hr class="container mx-auto">
-    <!-- footer -->
-<footer class="py-4 text-white text-center">
-  <div class="container">
-      <p class="lead ">
-        جميع الحقوق محفوظة <span><a class="text-decoration-none h4 saqr-color-logo" href="https://discord.com/channels/@me/845033464357191691">فاذكروني </a></span> &copy; 2022 
-      </p>
-      <div class="social-icons text-decoration-none h4 m-2">
-          <!-- <a href="https://twitter.com/SAQR_SUBAIE"><i class="fab fa-twitter"></i></a> -->
-      </div>
-  </div>
-</footer>
-
-
-
-<script>
-  var preloader = document.getElementById("loading");
-
-  function myFunction(){
-      preloader.style.display = "none";
-  }
-</script>
-
-
-</body>
-</html>
+{% block footer %}
+{{ super() }}
+{% endblock %}

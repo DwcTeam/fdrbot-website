@@ -18,7 +18,6 @@
     <!--  -->
     <link rel="icon"
         href="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
@@ -29,7 +28,8 @@
     <link href="{{ url_for('static', filename='css/min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/media.css') }}" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="{{ url_for('static', filename='css/normalize.css') }}" rel="stylesheet">
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
@@ -44,8 +44,6 @@
     <div id="loading">
         <img class="container py-5 w-25 d-flex justify-content-center align-items-center text-center"
             src="{{ url_for('static', filename='images/loading.gif') }}" alt="">
-        <h6 class="text-white container py-5 w-25 d-flex justify-content-center align-items-center text-center">موقة راح
-            اغيره</h6>
     </div>
     <div id="stars"></div>
     <div id="stars2"></div>
@@ -64,9 +62,15 @@
 
                 <div class="collapse navbar-collapse" id="mainmenu">
                     <ul class="navbar-nav ms-auto">
-                        <li class="nav-item"><a href="/about.html" class="nav-link">حول</a></li>
-                        <li class="nav-item"><a href="/commands" class="nav-link">الاوامر</a></li>
-                        <li class="nav-item"><a href="/invite" class="nav-link">اضافة البوت</a></li>
+                        
+                        <li class="nav-item"><a href="/invite" class="nav-link" target="_blank">أضافة البوت</a></li>
+                        
+                        <li class="nav-item"><a href="/support" class="nav-link" target="_blank">الدعم الفني</a></li>
+                        
+                        <li class="nav-item"><a href="/about" class="nav-link">حول</a></li>
+                        
+                        <li class="nav-item"><a href="/commands" class="nav-link" >الأوامر</a></li>
+                        
                         {% block stats_for_login %}{% endblock %}
                     </ul>
                 </div>
@@ -121,13 +125,8 @@
             var preloader = document.getElementById("loading");
             preloader.style.display = "none";
         });
-
-        function open_login_page() {
-            window.open('/login', 'تسجيل الدخول - فاذكروني', 'width=720, height=700').focus();
-        }
     </script>
-
-
+<script src="https://kit.fontawesome.com/e10a7454a4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>
