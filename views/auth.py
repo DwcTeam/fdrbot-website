@@ -1,8 +1,7 @@
-from flask import Blueprint, redirect, request, session, current_app, after_this_request
-from utlits import login_required, Auth
+from flask import Blueprint, redirect, request, session, current_app
+from utlits import Auth
 
 auth = Blueprint('auth', __name__)
-
 
 @auth.route('/login')
 def login():

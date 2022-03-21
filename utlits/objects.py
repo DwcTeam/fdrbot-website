@@ -110,6 +110,10 @@ class Guild(object):
         return f"{IMAGE_BASE}/icons/{self.id}/{icon_hash}.{ext}"
     
     @property
+    def is_icon(self) -> bool:
+        return True if self._data.get("icon") else False
+
+    @property
     def name(self) -> str:
         return self._data.get("name")
     

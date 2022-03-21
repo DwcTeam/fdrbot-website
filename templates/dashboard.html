@@ -1,76 +1,98 @@
 {% extends 'base.html' %}
 
 {% block stats_for_login %}
-<li class="nav-item">
-  <a href="/logout" class="nav-link">
-    <button class="btn btn-outline-danger text-white c" type="submit">
-      تسجيل الخروج
+<ul class="navbar-nav ml-auto text-center" dir="ltr">
+  <div class="btn-group d-block me-lg-1 mx-lg-1" role="group">
+    <button id="users" type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <img src="https://cdn.discordapp.com/avatars/716783245387235410/4e1581b67a4e10269da668db41716590.png?size=1024"
+        width="28" height="28" class="ims"> <b>S A Q R</b>
     </button>
-  </a>
-</li>
+    <ul class="dropdown-menu saqrs" aria-labelledby="users">
+      <li class="nav-item"><a class="dropdown-item text-center primary" href="/dashboard">السيرفرات</a></li>
+      {% if is_admin %}
+      <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin.html">لوحة الادمن</a></li>
+      <li class="nav-item"><a class="dropdown-item text-center primary" href="/logs.html">السجلات</a></li>
+      {% endif %}
+      <li class="nav-item"><a class="dropdown-item text-center primary red" href="/login">تسجيل خروج</a></li>
+    </ul>
+  </div>
+</ul>
 {% endblock %}
 
 {% block content %}
-
-<div class="all text first div">  
-<!-- bot join -->
-  <section class="py-5 main text div first">
-    <div class="container">
-      <div class="d-sm-flex align-items-center justify-content-center flex-row-reverse">
-        <div class="py-3">
-            <h1 class="display-5 text-white text-center">فاذك<span class="saqr-color-logo">روني</span></h1>
-            <p class="py-1 lead text-white">بوت فاذكروني اول بوت عربي اسلامي للاذكار | بوت فاذكروني للتذكير بذكر الله في الشات</p>
-        </div>
-        <img class="d-none d-sm-block img-fluid w-25 px-2" id="logo" src="{{ url_for('static', filename='/images/logo.png') }}" alt="FdrBots">
+<!--  -->
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
+      <!-- dont forget name for user -->
+      <h1 class="text-white text-center title">يا هلا والله فيك, S A Q R</h1>
     </div>
-        <h2 class="text-center mb-5 saqr-color-logo title">اضبط إعدادات السيرفر</h2>
-        <div class="row text-center row-cols-1 row-cols-md-4 g-4">
-			
-			{% for guild in available_guilds %}
 
-				<div class="col-sm filter-1">
-				<a href="/dashboard/{{ guild.id }}" class="nav-link">
-					<div class="card text-light mb-3 saqr-5 card-2">
-						<div class="h1 mt-3 icon-1">
-						<img class="img-fluid w-50 saqr-img" src="{{ guild.icon }}" alt="{{ guild.name }}">
-						</div>
-						<div class="card-body text-center">
-							<h6 class="card-title saqr-color-logo mb-3">{{ guild.name }}</h6>
-						</div>
-					</div>
-					</a>
-				</div>
-			{% endfor %}
-     </div>
-   </div> 
-</section>
+    <div class="row row-cols-1 row-cols-md-3 g-5">
+      {% for guild in available_guilds %}
 
-<hr class="container mx-auto">
-<hr class="container mx-auto">
-<!-- no join -->
-<section class="py-5 main text div first">
-    <div class="container">
-        <h2 class="text-center mb-5 saqr-color-logo title">إضافة البوت</h2>
-        <div class="row text-center row-cols-1 row-cols-md-4 g-4">
-          {% for guild in unavailable_guilds %}
-            <div class="col-sm">
-                <div class="card text-light mb-3 saqr-5 card-1">
-                    <div class="h1 mt-3 icon-1">
-                     <img class="img-fluid w-50 filter saqr-img" src="{{ guild.icon }}" alt="{{ guild.name }}">
-                    </div>
-                    <div class="card-body text-center">
-                        <h6 class="card-title saqr-color-logo mb-3">{{ guild.name }}</h6>
-                      <a href="https://discord.com/oauth2/authorize?client_id=826712661844164609&permissions=8&scope=bot%20applications.commands&guild_id={{ guild.id }}&disable_guild_select=false" target="_blank"><button type="button" class="btn btn-outline-warning text-white">اضافة البوت</button></a>
-                    </div>
-                </div>
+      <div class="col  text-center">
+        <div class="card h-75 card-1">
+          <div class="card-body">
+            {% if guild.is_icon %}
+            <div class="sc-1vemdld-4 banner"
+              style="background: url('{{ guild.icon }}') center center / cover no-repeat;"></div>
+            {% else %}
+            <div class="sc-1vemdld-4 banner"
+              style="background: url('{{ url_for('static', filename='images/banner.jpg') }}') center center / cover no-repeat;background-size: 100%">
             </div>
-          {% endfor %}
-     </div>
-   </div>
- </div>
+            {% endif %}
+            <img src="{{ guild.icon }}"
+              class="avatar-server avatar-server-1 justify-content-center align-items-center w-50 avalidated"
+              alt="{{ guild.name }}">
+          </div>
+        </div>
+        <div class="pt-2 ">
+          <small class="text-muted float-end">{{ guild.name }}
+            <!-- <br><b class="text-muted float-end">ادمن</b> -->
+          </small>
+          <a href="/dashboard/{{ guild.id }}"><button class="btn primary card-title float-start pe-3 px-3 pt-2 pb-2 saqr-but">تحكم</button></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
 </section>
-</div>
 
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
+      <!-- dont forget name for user -->
+      <h1 class="text-white text-center title">الخوادم غير المتاحه</h1>
+    </div>
+
+    <div class="row row-cols-1 row-cols-md-3 g-5">
+      {% for guild in unavailable_guilds %}
+      <div class="col  text-center">
+        <div class="card h-75 card-1">
+          <div class="card-body">
+            {% if guild.is_icon %}
+            <div class="sc-1vemdld-4 banner"
+              style="background: url('{{ guild.icon }}') center center / cover no-repeat;"></div>
+            {% else %}
+            <div class="sc-1vemdld-4 banner"
+              style="background: url('{{ url_for('static', filename='images/banner.jpg') }}') center center / cover no-repeat;background-size: 100%">
+            </div>
+            {% endif %}
+            <img src="{{ guild.icon }}"
+              class="avatar-server avatar-server-1 justify-content-center align-items-center w-50 unvalidated"
+              alt="{{ guild.name }}">
+          </div>
+        </div>
+        <div class="pt-2 ">
+          <small class="text-muted float-end">{{ guild.name }}
+          </small>
+          <a href="https://discord.com/oauth2/authorize?client_id=826712661844164609&permissions=8&scope=bot%20applications.commands&guild_id={{ guild.id }}&disable_guild_select=false" target="_blank"><button class="btn primary card-title float-start pe-3 px-3 pt-2 pb-2 saqr-1"> إضافه البوت</button></a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+</section>
 
 {% endblock %}
 

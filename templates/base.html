@@ -1,132 +1,76 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 
 <head>
+    <title>فاذكروني{% if title %} - {{ title }}{% endif %}</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/forever.ico') }}">
+    <!-- style css -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/media.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <meta charset="UTF-8">
-    <title>فاذكروني</title>
-    <!--  -->
-    <meta name="theme-color" content="#014dffde">
-    <meta name="og:title" content="فاذكروني">
-    <meta name="description"
-        content="لبوت يذكرك بالله بإرسال الاذكار , الحديث او القران كل ساعة او المدة التي تقوم بتحديدها">
-    <meta name="og:url" content="https://fdrbot.xyz/">
-    <meta name="og:description"
-        content=".يجب عليك بعد دعوة البوت تحديد روم لكي يبدا البوت بإرسال رسائل في الروم المحدد, البوت غير ربحي و اهدافه خالصه لله عز و جل">
-    <meta name="twitter:card" content="summary">
-    <meta name="og:image"
-        content="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png">
-    <!--  -->
-    <link rel="icon"
-        href="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#FED302">
+    <meta name="og:image" content="{{ url_for('static', filename='images/forever.ico') }}">
+    <meta name="og:title" content="فاذكروني">
+    <meta property="og:site_name" content="بوت فاذكروني">
+    <meta name="description" content="بوت فاذكروني اول بوت عربي اسلامي للاذكار و القران الكريم">
+    <meta name="og:url" content="https://fdrbot.xyz/">
+    <meta property="og:locale" content="ar-SA">
+    <meta name="og:description" content="بوت فاذكروني اول بوت عربي اسلامي للاذكار و القران الكريم">
+    <meta name="twitter:card" content="summary">
 
-    <link href="{{ url_for('static', filename='css/min.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/media.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/normalize.css') }}" rel="stylesheet">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amiri&display=swap" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Counter-Up/1.0.0/jquery.counterup.min.js"></script>
-    <script src="https://unpkg.com/discord-fetcher@1.0.3/index.min.js"></script>
 </head>
 
-<body>
-    <!-- loading -->
-    <div id="loading">
-        <img class="container py-5 w-25 d-flex justify-content-center align-items-center text-center"
-            src="{{ url_for('static', filename='images/loading.gif') }}" alt="">
-    </div>
-    <div id="stars"></div>
-    <div id="stars2"></div>
-    <div id="stars3"></div>
-    <!-- ----------------- -->
-
-    <header>
-        <nav class="navbar navbar-expand-md bg-dark navbar-dark text-white">
-            <div class="container">
-                <a href="/" class="navbar-brand saqr-logo">
-                    فاذك<span class="saqr-color-logo">روني</span>
-                </a>
+<body dir="rtl">
+    <!--  -->
+    <nav class="py-4">
+        <div class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
+            <div class="container saqr">
+                <a href="/" class="navbar-brand d-lg-none d-block" id="male-1"><img
+                        src="{{ url_for('static', filename='images/forever.ico') }}"
+                        alt="" width="50" height="50"></a>
+                <hr>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu">
-                    <span class="navbar-toggler-icon"></span>
+                    <i class="fa-solid fa-bars" id="SAQR"></i>
                 </button>
+                <div class="collapse navbar-collapse text-center" id="mainmenu">
+                    <ul class="navbar-nav nav-pillsnav navbar-nav ml-auto w-100 justify-content-center nav-pills">
+                        <li class="nav-item me-2 pe-3"><a href="/" class="nav-link">الرئيسية</a></li>
+                        <li class="nav-item me-2 pe-3"><a href="/about" class="nav-link">حول</a></li>
+                        <li class="nav-item me-2 pe-3"><a href="/#Services" class="nav-link">خدمات</a></li>
+                    </ul>
+                    <a href="/" class="navbar-brand d-none d-lg-block" id="male-1"><img
+                            src="{{ url_for('static', filename='images/forever.ico') }}"
+                            alt="" width="50" height="50"></a>
+                    <ul class="navbar-nav nav-pillsnav navbar-nav ml-auto w-100 justify-content-center nav-pills">
+                        <li class="nav-item me-2 pe-3"><a href="/commands.html" class="nav-link">الاوامر</a></li>
+                        <li class="nav-item me-2"><a href="/" target="_blank" class="nav-link">أضف البوت</a></li>
+                        <li class="nav-item me-2"><a href="/" target="_blank" class="nav-link">سيرفر الدعم</a></li>
 
-                <div class="collapse navbar-collapse" id="mainmenu">
-                    <ul class="navbar-nav ms-auto">
-                        
-                        <li class="nav-item"><a href="/invite" class="nav-link" target="_blank">أضافة البوت</a></li>
-                        
-                        <li class="nav-item"><a href="/support" class="nav-link" target="_blank">الدعم الفني</a></li>
-                        
-                        <li class="nav-item"><a href="/about" class="nav-link">حول</a></li>
-                        
-                        <li class="nav-item"><a href="/commands" class="nav-link" >الأوامر</a></li>
-                        
                         {% block stats_for_login %}{% endblock %}
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-
-
+        </div>
+    </nav>
     {% block content %} {% endblock %}
 
     {% block footer %}
-    <script>
-        $(document).ready(function () {
-
-            $('.counter').each(function () {
-
-                $(this).prop('counter', 0).animate({
-
-                    counter: $(this).text()
-
-                }, {
-                    duration: 3500,
-                    easing: 'swing',
-                    step: function (now) {
-                        $(this).text(Math.ceil(now) + '+')
-                    }
-
-                });
-
-            });
-        });
-    </script>
-
-    <!-- min js -->
-    <script src="{{ url_for('static', filename='js/min.js') }}"></script>
-    <!-- ------------------------ -->
-    <hr class="container mx-auto">
-    <!-- footer -->
-    <footer class="py-4 text-white text-center">
-        <div class="container">
-            <p class="lead ">
-                جميع الحقوق محفوظة <span><a class="text-decoration-none h4 saqr-color-logo"
-                        href="https://discord.com/channels/@me/845033464357191691">فاذكروني </a></span> &copy; 2022
-            </p>
+    <footer class="py-5 bg-dark">
+        <div class="col-sm">
+            <div class="card-footer">
+                <h1 class="card-title fdraduot text-center h5">جميع الحقوق محفوظة لـ فريق فاذكروني بوت للبرمجة</h1>
+            </div>
         </div>
     </footer>
 
+    <!-- style js -->
+    <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
 
-
-    <script>
-        window.addEventListener('load', (event) => {
-            var preloader = document.getElementById("loading");
-            preloader.style.display = "none";
-        });
-    </script>
-<script src="https://kit.fontawesome.com/e10a7454a4.js" crossorigin="anonymous"></script>
 </body>
 
 </html>

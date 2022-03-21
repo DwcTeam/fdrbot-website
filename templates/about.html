@@ -1,241 +1,142 @@
 {% extends 'base.html' %}
 
-{% block stats_for_login %}
-<li class="nav-item">
-  <a href="/dashboard" class="nav-link">
-    <button class="btn btn-outline-warning text-white c" type="submit">
-      لوحة التحكم
-    </button>
-  </a>
-</li>
-{% endblock %}
-
 {% block content %}
-
-
-<div class="all text first div">
-<div id="stars"></div>
-<div id="stars2"></div>
-<div id="stars3"></div>
-<section class="main text div first">
+<section class="hero py-5">
   <div class="container">
-    <div class="text-center text-light">
-      <h1 class="saqr-color-logo">حول</h1>
-      <p class="saqr-about">
-        بوت <span class="saqr-color-logo">فاذكروني </span>اول بوت عربي اسلامي للاذكار و القران الكريم <span class="saqr-color-logo"></span> <span class="saqr-color-logo"></span>
-      </p>
-      <br><hr><br>
-      <h2>
-       : ما الفائدة من البوت <span class="saqr-color-logo">فاذكروني</span>
-      </h2>
-      <p class="saqr-about">.البوت يذكرك بالله بإرسال الاذكار , الحديث او القران كل ساعة او المدة التي تقوم بتحديدها
-        .يجب عليك بعد دعوة البوت تحديد روم لكي يبدا البوت بإرسال رسائل في الروم المحدد, البوت غير ربحي و اهدافه خالصه لله عز و جل
-        </p>
-    </div>
-  </div>
-</section>
-
-<br><br>
-
-<section class="main text div first">
-  <div class="container">
-    <div class="text-center">
-    <h1 class="text-light display-4 pt-5 developers"><i class="fas fa-code"></i> فريق العمل</h1><br><br>
-    <div class="row text-center row-cols-1 row-cols-md-3 g-5 info-maker">
-      <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-3">
-          <div class="developers-1"></div>
-              <div class="h1 mt-3 icon-1">
-               <img class="img-fluid w-25 saqr-img lds-circle" src id="avatar-1">
-              </div>
-              <div class="card-body text-center">
-                  <h6 class="card-title mb-3"><strong id="username-1"></strong></h6>
-                  <p class="card-title saqr-color-logo mb-3 h3">مؤسس بوت</strong></p>
-                </div>
+      <div class="text-center">
+          <div class="card-body">
+              <h2 class="card-text text-1 about-2">فاذكروني</h2>
           </div>
-      </div>
-      <div class="col-sm">
-        <div class="card text-light mb-3 saqr-5 team-5 card-3">
-          <div class="developers-1"></div>
-            <div class="h1 mt-3 icon-1">
-             <img class="img-fluid w-25 saqr-img" src id="avatar-2">
-            </div>
-            <div class="card-body text-center">
-                <h6 class="card-title mb-3"><strong id="username-2"></strong></h6>
-                <p class="card-title saqr-color-logo mb-3 h3">مطور الموقع</strong></p>
-              </div>
-        </div>
-    </div>
-    <div class="col-sm">
-      <div class="card text-light mb-3 saqr-5 card-3">
-        <div class="developers-1"></div>
-          <div class="h1 mt-3 icon-1">
-           <img class="img-fluid w-25 saqr-img" src id="avatar-3">
-          </div>
-          <div class="card-body text-center">
-              <h6 class="card-title mb-3"><strong id="username-3"></strong></h6>
-              <p class="card-title saqr-color-logo mb-3 h3">مطور بوت</strong></p>
-            </div>
-      </div>
-  </div>
-  <div class="col-sm">
-    <div class="card text-light mb-3 saqr-5 card-3">
-      <div class="developers-1"></div>
-        <div class="h1 mt-3 icon-1">
-         <img class="img-fluid w-25 saqr-img" id="avatar-4">
-        </div>
-        <div class="card-body text-center">
-            <h6 class="card-title mb-3"><strong id="username-4"></strong></h6>
-            <p class="card-title saqr-color-logo mb-3 h3">أداره البوت</strong></p>
-          </div>
-    </div>
-</div>
-<div class="col-sm">
-  <div class="card text-light mb-3 saqr-5 card-3">
-    <div class="developers-1"></div>
-      <div class="h1 mt-3 icon-1">
-       <img class="img-fluid w-25 saqr-img" src id="avatar-5">
-      </div>
-      <div class="card-body text-center">
-          <h6 class="card-title mb-3"><strong id="username-5"></strong></h6>
-          <p class="card-title saqr-color-logo mb-3 h3">العلاقات الخارجيه</strong></p>
-      </div>
-  </div>
-</div>
-<div class="col-sm">
-  <div class="card text-light mb-3 saqr-5 card-3">
-    <div class="developers-1"></div>
-      <div class="h1 mt-3 icon-1">
-       <img class="img-fluid w-25 saqr-img" src id="avatar-6">
-      </div>
-      <div class="card-body text-center">
-          <h6 class="card-title mb-3"><strong id="username-6"></strong></h6>
-          <p class="card-title mb-3 h3 saqr-color-logo">الدعم الفني</strong></p>
-
-      </div>
-  </div>
-</div>
-    </div>
-  </div>
-</section>
-<br>
-<!--  -->
-<section class="main text div first">
-  <div class="container">
-    <div class="text-center">
-      <h1 class="text-light display-4 pt-5 developers"><i class="fas fa-robot"></i> تاريخ برمجة البوت</h1><br><br>
-      <div class="row text-center row-cols-1 row-cols-md-3 g-5 info-maker align-items-center justify-content-center">
-        <div class="col-sm">
-            <div class="card text-light mb-3 saqr-5 card-3">
-            <div class="developers-1"></div>
-                <div class="h1 mt-3 icon-1">
-                 <img class="img-fluid w-25 saqr-img" src id="avatar-7">
-                </div>
-                <div class="card-body text-center">
-                    <h6 class="card-title mb-3"><strong id="username-7"></strong></h6>
-                    <p class="card-title saqr-color-logo mb-3 h3">4/7/2020</strong></p>
-                  <button type="button" class="btn btn-outline-warning text-white">اضافة البوت</button>
+          <div class="about-3">
+              <div class="card about">
+                  <div class="card-body">
+                      <h2 class="card-text text-1">بوت <b class="about-2">فاذكروني</b> اول بوت عربي اسلامي للاذكار و القران الكريم</h2>
                   </div>
-            </div>
-        </div>
+                  </div>
+          </div>
+          <br><br><br>
+      </div>
   </div>
 </section>
-<!--  -->
-</div>
+
+<hr>
+
+<section class="hero py-5">
+  <div class="container">
+      <div class="text-center">
+          <div class="card-body">
+              <h2 class="card-text text-1 about-2-1">: ما الفائدة من البوت <b class="about-2">فاذكروني</b></h2>
+          </div>
+          <div class="about-3">
+              <div class="card about">
+                  <div class="card-body">
+                      <h2 class="card-text text-1">.البوت يذكرك بالله بإرسال الاذكار , الحديث او القران كل ساعة او المدة التي تقوم بتحديدها .يجب عليك بعد دعوة البوت تحديد روم لكي يبدا البوت بإرسال رسائل في الروم المحدد, البوت غير ربحي و اهدافه خالصه لله عز و جل</h2>
+                  </div>
+                  </div>
+          </div>
+          <br><br><br>
+      </div>
+  </div>
+</section>
 
 
+<hr>
+
+<section class="hero py-5">
+  <div class="container">
+      <div class="text-center">
+          <div class="card-body">
+              <h2 class="card-text text-1 about-2-1"><i class="fas fa-code" aria-hidden="true"></i> فريق العمل</h2>
+          </div>
+          <br><br><br>
+          <div class="card-body">
+              <div class="row text-center row-cols-1 row-cols-md-3 g-3">
+                  <div class="col-sm" id="saqr-7">
+                      <div class="card text-light mb-3 card-3">
+                      <div class="developers-1"></div>
+                      <div class="h1 mt-3"><br>
+                          <img class="ims w-50" src id="avatar-1">
+                      </div>
+                      <div class="card-body text-center">
+                          <h4 class="card-title fdraduot"><strong id="username-1"></strong></h4>
+                          <p class="card-text text-light counter"><i class="fa-solid fa-id-card-clip"></i> ID :<strong id="id-1"></strong></p>
+                      </div>
+                      </div>
+                  </div>
+
+                  <div class="col-sm" id="saqr-7">
+                      <div class="card text-light mb-3 card-3">
+                      <div class="developers-1"></div>
+                      <div class="h1 mt-3"><br>
+                          <img class="ims w-50" src id="avatar-2">
+                      </div>
+                      <div class="card-body text-center">
+                          <h4 class="card-title fdraduot"><strong id="username-2"></strong></h4>
+                          <p class="card-text text-light counter"><i class="fa-solid fa-id-card-clip"></i> ID :<strong id="id-2"></strong></p>
+                      </div>
+                      </div>
+                  </div>
+
+                  <div class="col-sm" id="saqr-7">
+                      <div class="card text-light mb-3 card-3">
+                      <div class="developers-1"></div>
+                      <div class="h1 mt-3"><br>
+                          <img class="ims w-50" src id="avatar-3">
+                      </div>
+                      <div class="card-body text-center">
+                          <h4 class="card-title fdraduot"><strong id="username-3"></strong></h4>
+                          <p class="card-text text-light counter"><i class="fa-solid fa-id-card-clip"></i> ID :<strong id="id-3"></strong></p>
+                      </div>
+                      </div>
+                  </div>
+
+                  <div class="col-sm" id="saqr-7">
+                      <div class="card text-light mb-3 card-3">
+                      <div class="developers-1"></div>
+                      <div class="h1 mt-3"><br>
+                          <img class="ims w-50" src id="avatar-4">
+                      </div>
+                      <div class="card-body text-center">
+                          <h4 class="card-title fdraduot"><strong id="username-4"></strong></h4>
+                          <p class="card-text text-light counter"><i class="fa-solid fa-id-card-clip"></i> ID :<strong id="id-4"></strong></p>
+                      </div>
+                      </div>
+                  </div>
+
+                  <div class="col-sm" id="saqr-7">
+                      <div class="card text-light mb-3 card-3">
+                      <div class="developers-1"></div>
+                      <div class="h1 mt-5"><br>
+                          <img class="ims w-50" src id="avatar-4">
+                      </div>
+                      <div class="card-body text-center">
+                          <h4 class="card-title fdraduot"><strong id="username-5"></strong></h4>
+                          <p class="card-text text-light counter"><i class="fa-solid fa-id-card-clip"></i> ID :<strong id="id-5"></strong></p>
+                      </div>
+                      </div>
+                  </div>
+
+                  <div class="col-sm" id="saqr-7">
+                      <div class="card text-light mb-3 card-3">
+                      <div class="developers-1"></div>
+                      <div class="h1 mt-3"><br>
+                          <img class="ims w-50" src id="avatar-6">
+                      </div>
+                      <div class="card-body text-center">
+                          <h4 class="card-title fdraduot"><strong id="username-6"></strong></h4>
+                          <p class="card-text text-light counter"><i class="fa-solid fa-id-card-clip"></i> ID :<strong id="id-6"></strong></p>
+                      </div>
+                      </div>
+                  </div>
 
 
-<script>
-    
-  function closeNav() {
-    document.getElementById("menu-slide").style.width = "0%";
-  }
-  async function user_1() {
-              let user = await DiscordFetcher("277669327602188288", {
-                  dynamic: true,
-                  size: 1024,
-                  format: "gif",
-                  format: "png",
-                  log: false,
-              });
-              document.getElementById("avatar-1").src = user.avatar.url;
-              document.getElementById("username-1").innerHTML = user.tag
-          }
-  async function user_2() {
-              let user = await DiscordFetcher("716783245387235410", {
-                  dynamic: true,
-                  size: 1024,
-                  format: "gif",
-                  format: "png",
-                  log: false,
-              });
-              document.getElementById("avatar-2").src = user.avatar.url;
-              document.getElementById("username-2").innerHTML = user.tag
-          }
-async function user_3() {
-              let user = await DiscordFetcher("750376850768789534", {
-                  dynamic: true,
-                  size: 1024,
-                  format: "gif",
-                  format: "png",
-                  log: false,
-              });
-              document.getElementById("avatar-3").src = user.avatar.url;
-              document.getElementById("username-3").innerHTML = user.tag
-          }
-async function user_4() {
-              let user = await DiscordFetcher("532696546462924820", {
-                  dynamic: true,
-                  size: 1024,
-                  format: "gif",
-                  format: "png",
-                  log: false,
-              });
-              document.getElementById("avatar-4").src = user.avatar.url;
-              document.getElementById("username-4").innerHTML = user.tag
-          }
-async function user_5() {
-              let user = await DiscordFetcher("385701197069418496", {
-                  dynamic: true,
-                  size: 1024,
-                  format: "gif",
-                  format: "png",
-                  log: false,
-              });
-              document.getElementById("avatar-5").src = user.avatar.url;
-              document.getElementById("username-5").innerHTML = user.tag
-          }
-async function user_6() {
-              let user = await DiscordFetcher("713387916054757437", {
-                  dynamic: true,
-                  size: 1024,
-                  format: "gif",
-                  format: "png",
-                  log: false,
-              });
-              document.getElementById("avatar-6").src = user.avatar.url;
-              document.getElementById("username-6").innerHTML = user.tag
-          }
-async function user_7() {
-              let user = await DiscordFetcher("728782652454469662", {
-                  dynamic: true,
-                  size: 1024,
-                  format: "gif",
-                  format: "png",
-                  log: false,
-              });
-              document.getElementById("avatar-7").src = user.avatar.url;
-              document.getElementById("username-7").innerHTML = user.tag
-          }
-  user_1();
-  user_2();
-  user_3();
-  user_4();
-  user_5();
-  user_6();
-  user_7();
-  </script>
+                  </div>
+          </div>
+          <br><br><br>
+      </div>
+  </div>
+</section>
+
 
 
 {% endblock %}

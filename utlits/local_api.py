@@ -21,7 +21,6 @@ def get_guild_roles(guild_id: int):
 
 def get_commands() -> t.List[t.Dict]:
     r = requests.get(f"{current_app.config['BOT_SERVER']}/commands")
-    print(r.json())
     return r.json().get("commands")
 
 def get_bot_info() -> t.Dict:

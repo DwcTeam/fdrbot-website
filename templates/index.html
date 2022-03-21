@@ -1,167 +1,173 @@
 {% extends 'base.html' %}
 
-{% block stats_for_login %}
-<li class="nav-item">
-  <a href="/dashboard" class="nav-link">
-    <button class="btn btn-outline-warning text-white c" type="submit">
-      لوحة التحكم
-    </button>
-  </a>
-</li>
-{% endblock %}
-
 {% block content %}
 
-
-<div class="all text first div">
-  <section class="main">
-    <div class="mid container text-center align-items-center mt-5">
-      <h1 class="text-light display-4 pt-5">عن ماذا يتحدث بوت <span>فاذكروني<span>؟</h1>
-      <p class="py-2 mx-auto">بوت <span class="saqr-color-logo">فاذكروني</span> اول بوت عربي اسلامي للاذكار <span
-          class="saqr-color-logo"> | </span> بوت <span class="saqr-color-logo">فاذكروني</span> للتذكير بذكر الله في
-        الشات</p>
-      <div class="saqr py-2">
-        <a class="nav-link" href="/dashboard"><button type="button" class="btn btn-outline-secondary saqr-y">بدأ الاستخدام</button></a>
-        <a class="nav-link" href="https://discord.gg/EpZJwpSgka"><button type="button" class="btn btn-outline-warning saqr-y">سيرفر الدعم</button></a>
-      </div>
-      <iframe class="mid mx-auto mt-5 t" width="50%" height="315" src="https://www.youtube-nocookie.com/embed/r_NMdT9icWE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+<section class="hero">
+  <div class="container">
+    <div class="text-center">
+      <img id="img1" class="img-respnsive img-fluid mx-auto d-block fdrImage"
+        src="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png"><br>
+      <h1 class="title">فاذكروني</h1>
+      <hr style="border: 1px solid; height: 1px;">
+      <h5 class="text">بوت فاذكروني اول بوت عربي اسلامي للاذكار | بوت فاذكروني للتذكير بذكر الله في الشات</h5><br>
+      <div class="group-buttons">
+        <button class="btn primary btn-lg me-2 mx-2">أضف البوت</button>
+        {% if is_login %}
+          <a href="/login"><button class="btn saqr-1 btn-lg me-2 mx-2">لوحة التحكم</button></a>
+        {% else %}
+          <a href="/login"><button class="btn saqr-1 btn-lg me-2 mx-2">تسجيل الدخول</button></a>
+        {% endif %}
+      </div><br>
     </div>
-  </section>
+  </div>
+</section>
+<br>
 
-  <hr class="container mx-auto">
-
-
-
-  <section class="py-5 main">
-    <div class="container">
-      <h2 class="text-center mb-4 saqr-color-logo title">المميزات</h2>
-      <div class="row text-center row-cols-1 row-cols-md-3 g-5">
-        <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-1">
-            <div class="h1 mt-3 icon-1">
+<!-- <hr class="container mx-auto p-4"> -->
+<section  id="Services"></section>
+<section class="py-5">
+  <div class="container">
+    <div class="text-center">
+      <h2 id="saqr-6" class="text-center h1 text-white title">ما نقدم ؟</h2>
+      <br>
+      <br>
+      <div class="row text-center row-cols-1 row-cols-md-3 g-3">
+        <div class="col-sm" id="saqr-7">
+          <div class="card text-light mb-3 card-3">
+            <div class="developers-1"></div>
+            <div class="h1 mt-3"><br>
               <i class="fa-solid fa-book-quran"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">القرآن الكريم</h4>
+              <h4 class="card-title fdraduot">القرآن الكريم</h4>
             </div>
           </div>
         </div>
-        <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-1">
-            <div class="h1 mt-3 icon-1">
+        <div class="col-sm" id="saqr-7">
+          <div class="card text-light mb-3 card-3">
+            <div class="developers-1"></div>
+            <div class="h1 mt-3"><br>
               <i class="fa-solid fa-mosque"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">الأذكار</h4>
+              <h4 class="card-title fdraduot">الأذكار</h4>
             </div>
           </div>
         </div>
-        <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-1">
-            <div class="h1 mt-3 icon-1">
+        <div class="col-sm" id="saqr-7">
+          <div class="card text-light mb-3 card-3">
+            <div class="developers-1"></div>
+            <div class="h1 mt-3"><br>
               <i class="fa-solid fa-star-and-crescent"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">السنه النبوية</h4>
+              <h4 class="card-title fdraduot">السنه النبوية</h4>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
 
-  <hr class="container mx-auto">
-  <!--  -->
-  <section class="py-5">
-    <div class="card mb-3 py-5" style="max-width: 100%;">
-      <div class="row g-0 flex-row-reverse">
-        <div class="col-md-4">
-          <img id="saqr"
-            src="{{ url_for('static', filename='images/easy_to_use.png') }}"
-            class="img-fluid rounded-start p-5" alt="...">
-        </div>
-        <div class="col-md-8 text-end">
-          <div class="card-body">
-            <h2 class="card-title display-4 pt-5 saqr-color-logo">لوحة تحكم سهلة الاستخدام</h2>
-            <p class="card-text py-2 mx-auto text-white">تمتع بتجربة فريدة, ومميزة وتحكم كامل بسيرفرك</p>
-          </div>
+<hr class="container mx-auto p-4">
+<!--  -->
+<section class="py-5">
+  <div class="card py-5 card-1" style="max-width: 100%;">
+    <div class="row g-0 flex-row-reverse">
+      <div class="col-md-4">
+        <img id="saqr" src="{{ url_for('static', filename='images/easy_to_use.png') }}"
+          class="img-fluid rounded-start p-5" alt="...">
+      </div>
+      <div class="col-md-8 text-end">
+        <div class="card-body">
+          <h2 class="card-title display-4 pt-5 fdraduot">لوحة تحكم سهلة الاستخدام</h2>
+          <p class="card-text py-2 mx-auto text-white">تمتع بتجربة فريدة, ومميزة وتحكم كامل بسيرفرك</p>
         </div>
       </div>
     </div>
-    <div class="card mb-3 py-5" style="max-width: 100%;">
-      <div class="row g-0">
-        <div class="col-md-4">
-          <img id="saqr"
-            src="{{ url_for('static', filename='images/Easy_to_Use_2.png') }}"
-            class="img-fluid rounded-start py-5 p-5" alt="...">
-        </div>
-        <div class="col-md-8 text-end">
-          <div class="card-body">
-            <h2 class="card-title display-4 pt-5 saqr-color-logo">مناسب لجميع الفئات</h2>
-            <p class="card-text py-2 mx-auto text-white">مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات
-              وسيرفرات الاجتماعية</p>
-          </div>
+  </div>
+  
+  <div class="card mb-3 card-1" style="max-width: 100%;">
+    <div class="row g-0">
+      <div class="col-md-4">
+        <img id="saqr" src="{{ url_for('static', filename='images/Easy_to_Use_2.png') }}"
+          class="img-fluid rounded-start py-5 p-5" alt="...">
+      </div>
+      <div class="col-md-8 text-end">
+        <div class="card-body">
+          <h2 class="card-title display-4 pt-5 fdraduot">مناسب لجميع الفئات</h2>
+          <p class="card-text py-2 mx-auto text-white">مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات
+            وسيرفرات الاجتماعية</p>
         </div>
       </div>
     </div>
-  </section>
-  <hr class="container mx-auto">
+  </div>
+</section>
+<hr class="container mx-auto p-4">
 
 
-  <section class="py-5 main">
-    <div class="container">
-      <h2 class="text-center mb-4 saqr-color-logo title">الإحصائيات</h2>
-      <div class="row text-center row-cols-1 row-cols-md-2 g-5">
-        <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-1">
-            <div class="h1 mt-3 icon-1">
+<section class="py-5">
+  <div class="container">
+    <div class="text-center">
+      <h2 id="saqr-6" class="text-center h1 text-white title">الإحصائيات #</h2>
+      <br>
+      <br>
+      <div class="row text-center row-cols-1 row-cols-md-4 g-3">
+        <div class="col-sm" id="saqr-7">
+          <div class="card text-light mb-3 card-3">
+            <div class="developers-1"></div>
+            <div class="h1 mt-3"><br>
               <i class="fa-solid fa-terminal"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">عدد الأوامر</h4>
+              <h4 class="card-title fdraduot">عدد الأوامر</h4>
               <p class="card-text text-light counter">{{ commands_count }}</p>
             </div>
           </div>
         </div>
-        <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-1">
-            <div class="h1 mt-3 icon-1">
+        <div class="col-sm" id="saqr-7">
+          <div class="card text-light mb-3 card-3">
+            <div class="developers-1"></div>
+            <div class="h1 mt-3"><br>
               <i class="fas fa-hashtag"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">عدد الشاتات</h4>
+              <h4 class="card-title fdraduot">عدد الشاتات</h4>
               <p class="card-text text-light counter">{{ channels_count }}</p>
             </div>
           </div>
         </div>
-        <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-1">
-            <div class="h1 mt-3 icon-1">
+        <div class="col-sm" id="saqr-7">
+          <div class="card text-light mb-3 card-3">
+            <div class="developers-1"></div>
+            <div class="h1 mt-3"><br>
               <i class="fas fa-server"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">عدد الخوادم</h4>
+              <h4 class="card-title fdraduot">عدد الخوادم</h4>
               <p class="card-text text-light counter">{{ guilds_count }}</p>
             </div>
           </div>
         </div>
-        <div class="col-sm">
-          <div class="card text-light mb-3 saqr-5 card-1">
-            <div class="h1 mt-3 icon-1">
+        <div class="col-sm" id="saqr-7">
+          <div class="card text-light mb-3 card-3">
+            <div class="developers-1"></div>
+            <div class="h1 mt-3"><br>
               <i class="fas fa-share"></i>
             </div>
             <div class="card-body text-center">
-              <h4 class="card-title saqr-color-logo">عدد الشاردات</h4>
+              <h4 class="card-title fdraduot">عدد الشاردات</h4>
               <p class="card-text text-light counter">{{ shards_count }}</p>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!--  -->
-</div>
+  </div>
+</section>
+
 
 
 {% endblock %}

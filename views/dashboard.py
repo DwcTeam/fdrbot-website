@@ -14,7 +14,10 @@ def index_page():
     guilds = auth.user(session['token']).guilds()
     available_guilds = [i for i in guilds if check_guild(i.id)]
     unavailable_guilds = [i for i in guilds if i not in available_guilds]
-    return render_template('dashboard.html', available_guilds=available_guilds, unavailable_guilds=unavailable_guilds)
+    return render_template(
+        'dashboard.html', available_guilds=available_guilds, unavailable_guilds=unavailable_guilds,
+        title="لوحة التحكم"    
+    )
 
 @dashboard.route('/<int:guild_id>')
 @login_required
@@ -26,5 +29,9 @@ def guild_page(guild_id):
     text_channels = [i for i in channels if i.type == 0]
     voice_channels = [i for i in channels if i.type == 2]
     roles = get_guild_roles(guild_id)
-    return render_template('guild.html', guild=guild, info=info, text_channels=text_channels, voice_channels=voice_channels, roles=roles)
+    return render_template(
+        'guild.html', guild=guild, info=info, text_channels=text_channels, 
+        voice_channels=voice_channels, roles=roles,
+        title=f"{guild.name} | لوحة التحكم"
+    )
 

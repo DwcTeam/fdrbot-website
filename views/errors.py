@@ -1,10 +1,16 @@
-from flask import jsonify, render_template
+from flask import session, render_template
 
 def not_found(error):
-    return render_template("404.html", code=404), 404
+    return render_template(
+        "404.html", code=404, is_login=True if "token" in session else False,
+        title="الصفحة المطلوبة غير موجودة"
+    ), 404
 
 def forbidden(error):
-    return render_template("404.html", code=403), 403
+    return render_template(
+        "404.html", code=403, is_login=True if "token" in session else False,
+        title="غير مسموح لك بالدخول"
+    ), 403
 
 # @errors.errorhandler(405)
 # def method_not_allowed(error):

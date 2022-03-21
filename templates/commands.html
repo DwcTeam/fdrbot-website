@@ -1,59 +1,26 @@
 {% extends 'base.html' %}
 
-{% block stats_for_login %}
-<li class="nav-item">
-  <a href="/dashboard" class="nav-link">
-    <button class="btn btn-outline-warning text-white c" type="submit">
-      لوحة التحكم
-    </button>
-  </a>
-</li>
-{% endblock %}
 
 {% block content %}
 
 <div class="all text first div">  
 
-<section class="text-white py-5 all text first div">
-  <div class="container">
-    <h2 class="text-center mb-5 title">
-      الاوامر بوت <span class="saqr-color-logo">فاذكروني</span>
-    </h2>
 
-    {% for command in commands %}
-
-    <div class="text-center align-items-center justify-content-center">
-      <p>
-        <a class="btn btn-outline-white saqr-y text-white text-1 text-1-1 cmd" data-bs-toggle="collapse" href="#collapseExample-1" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <code>{{ command["name"] }}</code>
-        </a>
-      </p>
-      <div class="collapse" id="collapseExample-1">
-        <div class="card-body text-1 text-1-1 text-white cmd cmd-1">
-          <code>{{ command["name"] }}</code> - {{ command["description"] }}
+  <section class="hero">
+    <div class="container">
+        <div class="text-center">
+            <i class="fa-solid fa-triangle-exclamation fa-7x error-2" aria-hidden="true"></i><br><br>
+            <div class="error-1">
+                <div class="card error">
+                    <div class="card-body">
+                        <h2 class="card-text text-1"><i class="fa-solid fa-triangle-exclamation"></i> يتم العمل على هاذا الصفحه</h2>
+                    </div>
+                    </div>
+            </div>
+            <br><br><br>
         </div>
-      </div>
     </div>
-
-    {% endfor %}
-
-    <!-- <div class="text-center align-items-center justify-content-center">
-      <p>
-        <a class="btn btn-outline-white saqr-y text-white text-1 text-1-1 cmd" data-bs-toggle="collapse" href="#collapseExample-1" role="button" aria-expanded="false" aria-controls="collapseExample">
-          <code>/help</code>
-        </a>
-      </p>
-      <div class="collapse" id="collapseExample-1">
-        <div class="card-body text-1 text-1-1 text-white cmd cmd-1">
-          <code>/help</code> - أرسل هذا الرسالة للحصول على مساعدة
-        </div>
-      </div>
-    </div> -->
-
-
-</div>
 </section>
-</div>
 
 {% endblock %}
 

@@ -1,34 +1,32 @@
 {% extends 'base.html' %}
 
-{% block stats_for_login %}
-<li class="nav-item">
-    <a href="/" class="nav-link">
-      <button class="btn btn-outline-warning text-white c" type="submit">
-        الصفحة الرئيسية
-      </button>
-    </a>
-  </li>
-{% endblock %}
-
 {% block content %}
 
-<div class="all text first div">
-    <section class="main text div first">
-        <div class="container">
-            <div class="text-center text-light">
-                <img class="w-25 saqr-img" id="saqr" src="{{ url_for('static', filename='images/avatar.png') }}" alt="">
-                <p class="saqr-about">
-                    <br>
-                    {% if code == 404 %}
-                        <span class="saqr-color-logo">:-(</span> نعتذر منك يبدو ان الصفحة المطلوبة غير موجوده
-                    {% elif code == 403 %}
-                        <span class="saqr-color-logo">:-(</span> نعتذر منك أنت لا تمتلك صلاحيات للدخول لهذه الصفحة
-                    {% endif %}
-                    </p>
+<section class="hero">
+    <div class="container">
+        <div class="text-center">
+            <i class="fa-solid fa-triangle-exclamation fa-7x error-2" aria-hidden="true"></i><br><br>
+            <div class="error-1">
+                <div class="card error">
+                    <div class="card-body">
+                        {% if code == 404 %}
+                            <h2 class="card-text text-"><i class="fa-solid fa-triangle-exclamation"></i> نعتذر منك يبدو ان الصفحة المطلوبة غير موجوده</h2>
+                        {% elif code == 403 %}
+                            <h2 class="card-text text-1"><i class="fa-solid fa-triangle-exclamation"></i> نعتذر منك أنت لا تمتلك صلاحيات للدخول لهذه الصفحة</h2>
+                        {% endif %}
+                        <a href="/" class="nav-link">
+                            <button class="btn btn-outline-warning text-white c" type="submit">
+                              الصفحة الرئيسية
+                            </button>
+                          </a>
+                    </div>
+                    </div>
             </div>
+            <br><br><br>
         </div>
-    </section>
-</div>
+    </div>
+</section>
+
 
 {% endblock %}
 
