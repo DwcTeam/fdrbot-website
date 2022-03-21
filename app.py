@@ -17,6 +17,7 @@ app.register_blueprint(views.api)
 app.register_blueprint(views.auth)
 app.register_blueprint(views.dashboard)
 app.register_blueprint(views.index)
+app.register_blueprint(views.admin)
 app.register_error_handler(404, views.not_found)
 app.register_error_handler(403, views.forbidden)
 

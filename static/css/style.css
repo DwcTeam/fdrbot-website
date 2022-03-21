@@ -316,7 +316,7 @@ nav ul li a:hover::after {
     background-color: var(--true);
 }
 
-.form-check  {
+.form-check {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
 
 }
@@ -347,6 +347,37 @@ nav ul li a:hover::after {
 .sfsf-1 {
     color: #b68181;
     margin-top: 0px;
+}
+
+/* save menu */
+.save-menu button:first-child {
+    color: var(--color1);
+    border-radius: 5px;
+    font-weight: 700;
+    background: var(--color3);
+    transition: all .5s;
+}
+
+.save-menu button:first-child:hover {
+    background: #34331f;
+    border-radius: 7px;
+    color: var(--color1);
+}
+
+
+.save-menu button:last-child {
+    border: 1px solid #acbbbc;
+    font-weight: 500;
+    color: var(--color1);
+    border-radius: 5px;
+    transition: all .5s;
+}
+
+.save-menu button:last-child:hover {
+    background: #acbbbc;
+    color: var(--color1);
+    border-radius: 7px;
+    color: var(--color1);
 }
 
 /* 404 */
