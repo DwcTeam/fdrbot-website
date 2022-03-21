@@ -13,7 +13,7 @@
     --color3: #FED302;
     --color4: #FED3027a;
     --navbarC: #2a2a2a;
-    --false: red;
+    --false: #888888;
     --true: #008800;
     
     --fontColor1: #eeeeee;
@@ -308,6 +308,12 @@ nav ul li a:hover::after {
 
 /* guild */
 
+.form-select {
+    background-color: var(--color2);
+    color: var(--color1);
+    border: 1px solid var(--false);
+}
+
 .set {
     font-size: 20px;
 }
@@ -343,6 +349,11 @@ nav ul li a:hover::after {
     color: #b68181;
     margin-top: 0px;
 }
+
+.rt {
+    transform: rotate(-90deg);
+}
+
 
 /* 404 */
 .error {

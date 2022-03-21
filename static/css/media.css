@@ -54,20 +54,20 @@
 
 /* webkits */
 ::-webkit-scrollbar {
-	width: 10px;
-	color: #ffffff;
+	width: 6px;
+	color: var(--color1);
 }
 
 ::-webkit-scrollbar-track {
-	background: #110e0f;
+	background: var(--navbarC);
 }
 
 ::-webkit-scrollbar-thumb {
-	background: #222327;
+	background: var(--color3);
 	border-radius: 100px;
 	transition: all 1s ease-in-out;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: gold;
+	background: var(--color4);
 }
