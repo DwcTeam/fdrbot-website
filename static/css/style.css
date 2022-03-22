@@ -13,7 +13,7 @@
     --color3: #FED302;
     --color4: #FED3027a;
     --navbarC: #2a2a2a;
-    --false: red;
+    --false: #888888;
     --true: #008800;
     
     --fontColor1: #eeeeee;
@@ -308,21 +308,27 @@ nav ul li a:hover::after {
 
 /* guild */
 
+.form-select {
+    background-color: var(--color2);
+    color: var(--color1);
+    border: 1px solid var(--false);
+}
+
 .set {
     font-size: 20px;
 }
 
 .form-check-input {
-    background-color: var(--true);
+    background-color: var(--false);
 }
 
-.form-check {
+/* .form-check {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
 
-}
+} */
 
 .form-check-input:checked {
-    background-color: var(--false);
+    background-color: var(--true);
 }
 
 .form-check-input:focus {
@@ -332,11 +338,11 @@ nav ul li a:hover::after {
 }
 
 .form-switch .form-check-input {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e")
 }
 
 .form-switch .form-check-input:focus {
-    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='rgba%280, 0, 0, 0.25%29'/%3e%3c/svg%3e");
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e")
 }
 
 .sfsf {
@@ -378,6 +384,10 @@ nav ul li a:hover::after {
     color: var(--color1);
     border-radius: 7px;
     color: var(--color1);
+}
+
+.rt {
+    transform: rotate(-90deg);
 }
 
 /* 404 */

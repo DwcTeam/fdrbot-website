@@ -83,7 +83,7 @@
                         </div>
                         <div class="card-footer">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" disabled>
-                                <option selected>اختر ..</option>
+                                <option selected>معكل سيتم فتحه قريبن ..</option>
                                 {% for channel in voice_channels %}
                                     {% if channel.id == info.voice %}
                                         <option value="{{ channel.id }}" class="text-start" selected>#{{ channel.name }}</option>
@@ -143,6 +143,7 @@
                         </div>
                         <div class="card-body">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" disabled>
+                                <option selected>معكل سيتم فتحه قريبن ..</option>
                                 {% for channel in text_channels %}
                                     {% if channel.id == info.channel_quran %}
                                         <option value="{{ channel.id }}" class="text-start" selected>#{{ channel.name }}</option>
@@ -152,7 +153,7 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <div class="card-body">
+                        <!-- <div class="card-body">
                             <div class="h3 m-0 p-0 ssss">
                                 <div class="form-check form-switch float-end h3 m-0 p-0 ssss d-inline-flex">
                                     <input class="form-check-input" type="checkbox" role="switch"
@@ -161,7 +162,7 @@
                                 <input type="color" class="form-control form-control-color d-inline-flex float-start"
                                     id="exampleColorInput" value="#000000" title="Choose your color" disabled>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
 
@@ -176,8 +177,8 @@
                     <div class="card bg-dark m-1">
                         <div class="card-body">
                             <h1 class="set text-light d-inline-flex float-end ">تحديد نوع الارسال</h1>
-                            <div class="form-check form-switch text-start h3 d-inline-flex">
-                                <input class="form-check-input" type="checkbox" role="switch"
+                            <div class="form-check form-switch text-start h3 d-inline-flex rt">
+                                <input class="form-check-input rt" type="checkbox" role="switch"
                                     id="flexSwitchCheckChecked" {% if info.ant_spam %}checked{% endif %}>
                             </div>
                             <p class="text-end h6 sfsf"><b class="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال
@@ -193,8 +194,8 @@
                     <div class="card bg-dark m-1">
                         <div class="card-body">
                             <h1 class="set text-light d-inline-flex float-end ">تحديد نوع الامبد</h1>
-                            <div class="form-check form-switch text-start h3 d-inline-flex">
-                                <input class="form-check-input" type="checkbox" role="switch"
+                            <div class="form-check form-switch text-start h3 d-inline-flex rt">
+                                <input class="form-check-input rt" type="checkbox" role="switch"
                                     id="flexSwitchCheckChecked" {% if info.embed %}checked{% endif %}>
                             </div>
                             <p class="text-end h6 sfsf">يضع الاذكار في سندوق مرتب</p>
