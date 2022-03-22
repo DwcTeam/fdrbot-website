@@ -7,3 +7,6 @@ admin = Blueprint('admin', __name__, url_prefix='/admin')
 def index():
     return render_template('admin.html')
 
+@admin.route('/logs')
+def logs():
+    return render_template('logs.html')

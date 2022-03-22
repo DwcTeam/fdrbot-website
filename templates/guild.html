@@ -2,21 +2,21 @@
 
 {% block stats_for_login %}
 <ul class="navbar-nav ml-auto text-center" dir="ltr">
-    <div class="btn-group d-block me-lg-1 mx-lg-1" role="group">
-        <button id="users" type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown"
-            aria-expanded="false">
-            <img src="https://cdn.discordapp.com/avatars/716783245387235410/4e1581b67a4e10269da668db41716590.png?size=1024"
-                width="28" height="28" class="ims"> <b>S A Q R</b>
-        </button>
-        <ul class="dropdown-menu saqrs" aria-labelledby="users">
-            <li class="nav-item"><a class="dropdown-item text-center primary" href="/dashboard">السيرفرات</a></li>
-            {% if is_admin %}
-            <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin.html">لوحة الادمن</a></li>
-            <li class="nav-item"><a class="dropdown-item text-center primary" href="/logs.html">السجلات</a></li>
-            {% endif %}
-            <li class="nav-item"><a class="dropdown-item text-center primary red" href="/login">تسجيل خروج</a></li>
-        </ul>
-    </div>
+  <div class="btn-group d-block me-lg-1 mx-lg-1" role="group">
+    <button id="users" type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown"
+      aria-expanded="false">
+      <img src="https://cdn.discordapp.com/avatars/716783245387235410/4e1581b67a4e10269da668db41716590.png?size=1024"
+        width="28" height="28" class="image"> <b>S A Q R</b>
+    </button>
+    <ul class="dropdown-menu saqrs" aria-labelledby="users">
+      <li class="nav-item"><a class="dropdown-item text-center primary" href="/dashboard">السيرفرات</a></li>
+      {% if is_admin %}
+      <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin">لوحة الادمن</a></li>
+      <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin/logs">السجلات</a></li>
+      {% endif %}
+      <li class="nav-item"><a class="dropdown-item text-center primary red" href="/logout">تسجيل خروج</a></li>
+    </ul>
+  </div>
 </ul>
 {% endblock %}
 
@@ -207,7 +207,7 @@
     </section>
 </div>
 
-<div class="col" dir="ltr">
+<!-- <div class="col" dir="ltr">
     <div class="card bg-dark m-1">
         <div class="card-body">
             <h1 class="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
@@ -217,9 +217,38 @@
                </div>
         </div>
     </div>
+</div> -->
+
+<button type="button" class="btn btn-primary" id="liveToastBtn">404</button>
+
+<div class="position-fixed bottom-0 end-0" style="z-index: 11">
+    <div id="liveToast" class="show" role="alert" aria-live="assertive" aria-atomic="false">
+        <div class="col">
+            <div class="card bg-dark m-1" style="border: 1px solid var(--color1);">
+                <div class="card-body">
+                    <h1 class="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
+                    <div class="group-buttons float-start save-menu">
+                        <button class="btn btn-lg me-2 mx-2">حفظ التغييرات</button>
+                        <button class="btn btn-lg me-2 mx-2">إلغاء</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
+
 <script>
+    var toastTrigger = document.getElementById('liveToastBtn')
+    var toastLiveExample = document.getElementById('liveToast')
+    if (toastTrigger) {
+        toastTrigger.addEventListener('click', function () {
+        var toast = new bootstrap.Toast(toastLiveExample)
+
+        toast.show()
+        })
+    }
+
     var trueSave = document.getElementById('true-save')
     var falseSave = document.getElementById('false-save')
 

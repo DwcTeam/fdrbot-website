@@ -40,8 +40,3 @@ def about_page():
         "about.html", is_login=True if "token" in session else False,
         title="عن البوت"
     )
-
-
-@index.route("/saqr")
-def saqr_page():
-    return render_template("admin.html")

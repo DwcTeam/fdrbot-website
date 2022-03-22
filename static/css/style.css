@@ -36,7 +36,7 @@ body {
     font-family: var(--font1_ar);
 }
 
-.ims {
+.image {
     border-radius: var(--image);
 }
 /* end body */
@@ -74,7 +74,7 @@ body {
     box-shadow: 0 0 0 0.0rem;
 }
 
-#SAQR {
+#phone-navbar {
     color: #FFFFFF;
     display: inline-block;
     width: 1.5em;
@@ -111,12 +111,12 @@ nav ul li a:hover::after {
 }
 
 /* fdrbot */
-.hero {
+.bg-fdr {
     background-color: #1919195d;
     padding: 35px;
 }
 
-.fdrImage {
+.avatar-image {
     height: 200px;
     width: auto;
     margin: 20px;
@@ -139,7 +139,7 @@ nav ul li a:hover::after {
     color: var(--color1);
 }
 
-.saqr-1 {
+.button-fdr {
     color: var(--color1);
     border-radius: 5px;
     background: var(--color3);
@@ -148,7 +148,7 @@ nav ul li a:hover::after {
 
 
 
-.saqr-1:hover {
+.button-fdr:hover {
     background: var(--color4);
     border-radius: 7px;
     color: var(--color1);
@@ -204,17 +204,17 @@ nav ul li a:hover::after {
 }
 
 /* cards */
-.card-3 {
+.card-fdr {
     border-radius: 10px;
     background: #222222;
     transition: all ease .5s; 
 }
 
-.card-3:hover {
+.card-fdr:hover {
     background: #22222288;
 }
 
-.developers-1 {
+.card-outline-fdr {
     width: 60%;
     height: 10px;
     position: absolute;
@@ -229,16 +229,16 @@ nav ul li a:hover::after {
     color: var(--color3);
 }
 
-#saqr-7 {
+#card-animation {
     transition: all ease .5s; 
     
 }
-#saqr-7:hover {
+#card-animation:hover {
     transform: scale(1.02);
 }
 
 /* title */
-.fdraduot, .fdraduot:hover {
+.about-fdr, .fdr-about:hover {
     color: var(--color3);
 }
 
@@ -281,13 +281,11 @@ nav ul li a:hover::after {
     opacity: 0.5;
 }
 
-.avatar-server-1 {
+.avatar-server {
     position: relative;
     z-index: 2;
     border: 2px solid rgb(242, 244, 251);
     filter: drop-shadow(rgba(0, 0, 0, 0.16) 0px 32px 72px);
-}
-.avatar-server {
     border-radius: 100px;
     flex-shrink: 0;
 }
@@ -476,6 +474,11 @@ nav ul li a:hover::after {
 /* admin */
 .verify {
     color: var(--color3);
+}
+
+.not-found {
+    background-color: var(--dark-section-bg-1);
+    padding: 35px;
 }
 
 /* admin */
