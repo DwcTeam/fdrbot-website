@@ -42,6 +42,13 @@ body {
 /* end body */
 
 
+.form-control:disabled, .form-control[readonly] {
+    background-color: rgba(0, 0, 0, 0.767);
+    color: rgba(255,255,255,.55);
+    opacity: 1;
+}
+
+
 /* navbar */
 .navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-nav .nav-link {
     color: var(--color1);
@@ -352,6 +359,28 @@ nav ul li a:hover::after {
 
 .rt {
     transform: rotate(-90deg);
+}
+
+
+.online {
+    background-color: #3ba55d;
+}.online:checked {
+    background-color: #3ba55d;
+}
+.idle {
+    background-color: #faa81a;
+}.idle:checked {
+    background-color: #faa81a;
+}
+.dnd {
+    background-color: #ed4245;
+}.dnd:checked {
+    background-color: #ed4245;
+}
+.offline {
+    background-color: #747f8d;
+}.offline:checked {
+    background-color: #747f8d;
 }
 
 

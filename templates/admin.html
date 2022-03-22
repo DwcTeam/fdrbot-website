@@ -40,6 +40,88 @@
 </div>
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<section class="bot_4">
+    <div id="error"
+        style="border: none!important; background-color: var(--dark-section-bg-1); color: var(--color1);"
+        class="card bot_8">
+        <div style="background-color: var(--color3); border-radius: 7px 7px 0px 0px;"
+            class="card-header text-center">
+            <h1>معلومات البوت</h1>
+        </div>
+        <div class="card-body bot_5">
+            <br>
+            <section id="fdrbot">
+                <input type="file" id="imguploawd" style="display:none">
+                <div class="card bot_6" style="width: 11rem; margin-right: 35px; margin-top: -20px;">
+                    <img id="photoPreview"
+                        src="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png"
+                        class="card-img-top" style="width: auto; height: auto;" alt="صورة البوت">
+                </div>
+                <div class="card bot_7" style="margin-right: 35px; margin-top: -20px; width: auto;">
+                    <div class="card-body">
+                        <div class="mb-3" disabled>
+                            <label class="form-label" disabled>اسم البوت</label>
+                            <input type="text" placeholder="اسم البوت" value="فاذكروني" class="form-control "
+                                id="botId" maxlength="18" disabled>
+                            <div class="form-text">اسم البوت لايجب ان يكون اطول من 30 حرف!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">حالة البوت</label>
+                            <input type="text" placeholder="حالة البوت" value="/help - fdrbot.xyz"
+                                class="form-control bot_2" id="botId" maxlength="18">
+                            <div class="form-text">حالة البوت لايجب ان يكون اطول من 20 حرف!</div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">حالة البوت</label><br>
+
+                            <div class="form-check form-check-inline h5">
+                                <input class="form-check-input online" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                                <label class="form-check-label form-text" for="inlineRadio1">Online</label>
+                            </div>
+                            <div class="form-check form-check-inline h5">
+                                <input class="form-check-input idle" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                                <label class="form-check-label form-text" for="inlineRadio2">Idle</label>
+                            </div>
+                            <div class="form-check form-check-inline h5">
+                                <input class="form-check-input dnd" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3" checked>
+                                <label class="form-check-label form-text" for="inlineRadio3">Do Not Disturb</label>
+                            </div>
+                            <div class="form-check form-check-inline h5">
+                                <input class="form-check-input offline" type="radio" name="inlineRadioOptions" id="inlineRadio4" value="option4">
+                                <label class="form-check-label form-text" for="inlineRadio4">Offline</label>
+                            </div>
+                            <div class="form-text">قم اختيار الحاله المناسبه</div>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <button class="bot_1 btn text-white w-100"> <i class="fas fa-save"></i>حفظ</button><br><br>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+
+
+
 {% endblock %}
 
 {% block footer %}
