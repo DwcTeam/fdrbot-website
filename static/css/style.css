@@ -48,7 +48,9 @@ body {
     opacity: 1;
 }
 
-
+.toast {
+    background-color: transparent;
+}
 /* navbar */
 .navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-nav .nav-link {
     color: var(--color1);
