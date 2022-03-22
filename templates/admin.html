@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<section class="py-5 text-center">
+    <div class="container">
+        <div class="card">
+            <div class="card-header" style="border-radius: 7px 7px 0px 0px; background-color: var(--color3); color: var(--color1);">
+                <h1>إستعلام عن سيرفر</h1>
+            </div>
+            <div class="card-body" style="background-color: var(--dark-section-bg-1); color: var(--color1);">
+                <div class="mb-3 row">
+                    <label for="botId" class="col-sm-2 col-form-label">ايدي سيرفر</label>
+                    <div class="col-sm-10">
+                        <input type="text" placeholder="الايدي من 18 رقم !" class="form-control bot_2" id="botId" maxlength="18">
+                    </div>
+                    <br>
+                </div>
+                <div class="text-center">
+                    <button class="bot_1 btn btn-danger btn-lg info"> <svg class="svg-inline--fa fa-info" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" data-fa-i2svg=""><path fill="currentColor" d="M160 448h-32V224c0-17.69-14.33-32-32-32L32 192c-17.67 0-32 14.31-32 32s14.33 31.1 32 31.1h32v192H32c-17.67 0-32 14.31-32 32s14.33 32 32 32h128c17.67 0 32-14.31 32-32S177.7 448 160 448zM96 128c26.51 0 48-21.49 48-48S122.5 32.01 96 32.01s-48 21.49-48 48S69.49 128 96 128z"></path></svg><!-- <i class="fas fa-info"></i> Font Awesome fontawesome.com --> إستعلام عن سيرفر</button>
+                </div>
+            </div>
+
+
+            <div class="card-body guild-info d-none" style="background-color: var(--dark-section-bg-1); color: var(--color1);" >
+                <div class="row text-center row-cols-1 row-cols-md-1 g-3">
+
+                    <div class="col-sm">
+                        <div class="card text-light mb-3 card-3">
+                            <div class="developers-1"></div>
+                            <div class="d-flex text-start p-3 text-light">
+                                <i class="fa-solid fa-server h1 verify"></i>
+                            </div>
+                            <div class="card-body">
+                                <div class="text-center">
+                                    <img style="width: 200px; height: 200px; border-radius: 50%; border: 1px solid;" src="https://cdn.discordapp.com/icons/547436115741900801/a_90d8c6373b0d8637bcd743239f00e90e.gif?size=1024">
+                                </div>
+                                <h1 class="card-title text-center"><strong class="strtt" id="username-1">oCMz</strong></h1>
+                                <div dir="ltr" class="form-floating">
+                                    <textarea dir="ltr" class="form-control bot_2" id="floatingTextarea2" style="height: 100px; background-color: #10131e; border: 1px solid #437baf;" readonly="">
+
+                                    </textarea>
+                                    <label for="floatingTextarea2">SERVER INFO</label>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button class="btn primary btn-lg me-2 mx-2">تعديل البوت كمساول</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+<section class="bot_4">
+    <div id="error" style="border: none!important; background-color: var(--dark-section-bg-1); color: var(--color1);" class="card bot_8" >
+    <div style="background-color: var(--color3); border-radius: 7px 7px 0px 0px;" class="card-header text-center">
+        <h1>معلومات البوت</h1>
+    </div>
+    <div class="card-body bot_5">
+<br>
+<section id="fdrbot">
+    <input type="file" id="imguploawd" style="display:none">
+    <div class="card bot_6" style="width: 11rem; margin-right: 35px; margin-top: -20px;">
+        <img id="photoPreview" src="https://cdn.discordapp.com/attachments/854381955511746600/938683781504708658/Picsart_22-02-03_09-33-52-784.png" class="card-img-top" style="width: auto; height: auto;" alt="صورة البوت">
+    </div>
+    <div class="card bot_7" style="margin-right: 35px; margin-top: -20px; width: auto;">
+        <div class="card-body">
+            <div class="mb-3">
+                <label for="bot_3" class="form-label">اسم البوت</label>
+                <input type="text" placeholder="اسم البوت" value="فاذكروني" class="form-control bot_2" id="botId" maxlength="18">
+                <div id="botEx" class="form-text">اسم البوت لايجب ان يكون اطول من 30 حرف!</div>
+            </div>
+            <div class="mb-3">
+                <label for="bot_3" class="form-label">حالة البوت</label>
+                <input type="text" placeholder="حالة البوت" value="/help - fdrbot.xyz" class="form-control bot_2" id="botId" maxlength="18">
+                <div id="botEx" class="form-text">حالة البوت لايجب ان يكون اطول من 20 حرف!</div>
+            </div>
+            <form id="uploadForm">
+                <input style="display: none;" id="inputAvatar" class="file-input" type="file" name="botAvatar">
+            </form>
+            <button class="bot_1 btn btn-danger saveDiscord">
+                <i class="fas fa-save"></i>حفظ</button>
+                <button class="bot_1 btn btn-danger btnStart">
+                    <i class="fas fa-play-circle"></i> تشغيل البوت</button>
+                    <button class="bot_1 btn btn-danger restart"><i class="fas fa-history"></i> إعادة التشغيل</button>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+</section>
+
+<script>
+    function show_guild_info() {
+        $.ajax({
+            method: "GET",
+            url: "https://api.fdrbot.xyz/guild/info",
+            data: {
+                guild_id: $("#guild_id").val()
+            },
+            success: function (data) {
+                if (data.status == "success") {
+                    $(".guild-info").removeClass("d-none");
+                    $(".guild-info").addClass("d-block");
+                    $(".guild-info").html(data.html);
+                } else {
+                    $(".guild-info").removeClass("d-block");
+                    $(".guild-info").addClass("d-none");
+                }
+            }
+        })
+        document.getElementsByClassName("guild-info")[0].classList.toggle("d-none");
+    }
+
+    document.querySelector("button.info").addEventListener("click", show_guild_info);
+</script>
+
+{% endblock %}
+
+
+{% block footer %}
+{{ super() }}
+{% endblock %}
