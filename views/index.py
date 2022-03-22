@@ -17,6 +17,11 @@ def index_page():
 def invite_page():
     return redirect(f"https://discord.com/api/oauth2/authorize?client_id={current_app.config['CLIENT_ID']}&permissions=8&scope=bot%20applications.commands")
 
+@index.route('/vote')
+def vote_page():
+    return redirect(f"https://top.gg/bot/{current_app.config['CLIENT_ID']}/vote")
+
+
 @index.route('/support')
 def support_page():
     return redirect("https://discord.com/invite/EpZJwpSgka")
@@ -35,3 +40,8 @@ def about_page():
         "about.html", is_login=True if "token" in session else False,
         title="عن البوت"
     )
+
+
+@index.route("/saqr")
+def saqr_page():
+    return render_template("admin.html")
