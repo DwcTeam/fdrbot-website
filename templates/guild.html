@@ -31,14 +31,14 @@
             <div class="row row-cols-1 row-cols-md-3 g-1">
 
                 <!-- Setup channel -->
-                <div class="col">
+                <div class="col update">
                     <div class="card bg-dark m-1">
                         <div class="card-body">
                             <h1 class="set text-light text-center">تحديد روم للاذكار</h1>
                         </div>
                         <div class="card-footer">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                <option selected>اختر ..</option>
+                            <select class="form-select form-select-sm channel_id" aria-label=".form-select-sm example">
+                                <option selected value="0">اختر ..</option>
                                 {% for channel in text_channels %}
                                     {% if channel.id == info.channel %}
                                         <option value="{{ channel.id }}" class="text-start" selected>#{{ channel.name }}
@@ -53,14 +53,14 @@
                 </div>
 
                 <!-- Setup qurau role channel -->
-                <div class="col">
+                <div class="col update">
                     <div class="card bg-dark m-1 mb-3">
                         <div class="card-body">
                             <h1 class="set text-light text-center">تحديد رتبه للقران الكربم</h1>
                         </div>
                         <div class="card-body">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                <option selected>اختر ..</option>
+                            <select class="form-select form-select-sm role_id" aria-label=".form-select-sm example">
+                                <option selected value="0">اختر ..</option>
                                 {% for role in roles %}
                                     {% if role.name == '@everyone' %}
                                     {% else %}
@@ -76,14 +76,14 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col update">
                     <div class="card bg-dark m-1 maintenance">
                         <div class="card-body">
-                            <h1 class="set text-light text-center">تحديد روم صوتي</h1>
+                            <h1 class="set text-light text-center voice_channel">تحديد روم صوتي</h1>
                         </div>
                         <div class="card-footer">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" disabled>
-                                <option selected>معكل سيتم فتحه قريبن ..</option>
+                                <option selected value="0">معكل سيتم فتحه قريبن ..</option>
                                 {% for channel in voice_channels %}
                                     {% if channel.id == info.voice %}
                                         <option value="{{ channel.id }}" class="text-start" selected>#{{ channel.name }}</option>
@@ -100,13 +100,13 @@
 
             <div class="row row-cols-1 row-cols-md-3 g-3">
 
-                <div class="col">
+                <div class="col update">
                     <div class="card bg-dark m-1">
                         <div class="card-body">
                             <h1 class="set text-light text-center">تغير الوقت</h1>
                         </div>
                         <div class="card-footer">
-                            <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                            <select class="form-select form-select-sm time" aria-label=".form-select-sm example">
                                 <option value="1800" class="text-end" {% if 1800==info.time %} selected {% endif %}>
                                     دقيقه 30</option>
                                 <option value="3600" class="text-end" {% if 3600==info.time %} selected {% endif %}>ساعة
@@ -124,7 +124,7 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col update">
                     <div class="card bg-dark">
                         <div class="card-body">
                             <h1 class="set text-light text-center">علبة الوان</h1>
@@ -136,14 +136,14 @@
                     </div>
                 </div>
 
-                <div class="col">
+                <div class="col update">
                     <div class="card bg-dark m-1 maintenance ">
                         <div class="card-body">
                             <h1 class="set text-light text-center">تحديد روم الخاتمه</h1>
                         </div>
                         <div class="card-body">
                             <select class="form-select form-select-sm" aria-label=".form-select-sm example" disabled>
-                                <option selected>معكل سيتم فتحه قريبن ..</option>
+                                <option selected value="0">معكل سيتم فتحه قريبن ..</option>
                                 {% for channel in text_channels %}
                                     {% if channel.id == info.channel_quran %}
                                         <option value="{{ channel.id }}" class="text-start" selected>#{{ channel.name }}</option>
@@ -153,32 +153,19 @@
                                 {% endfor %}
                             </select>
                         </div>
-                        <!-- <div class="card-body">
-                            <div class="h3 m-0 p-0 ssss">
-                                <div class="form-check form-switch float-end h3 m-0 p-0 ssss d-inline-flex">
-                                    <input class="form-check-input" type="checkbox" role="switch"
-                                        id="flexSwitchCheckChecked" checked disabled>
-                                </div>
-                                <input type="color" class="form-control form-control-color d-inline-flex float-start"
-                                    id="exampleColorInput" value="#000000" title="Choose your color" disabled>
-                            </div>
-                        </div> -->
                     </div>
                 </div>
-
             </div>
-
 
             <br>
             <div class="row row-cols-1 row-cols-md-1 g-4">
 
-
-                <div class="col" dir="ltr">
+                <div class="col update" dir="ltr">
                     <div class="card bg-dark m-1">
                         <div class="card-body">
-                            <h1 class="set text-light d-inline-flex float-end ">تحديد نوع الارسال</h1>
+                            <h1 class="set text-light d-inline-flex float-end anti_spam">تحديد نوع الارسال</h1>
                             <div class="form-check form-switch text-start h3 d-inline-flex rt">
-                                <input class="form-check-input rt" type="checkbox" role="switch"
+                                <input class="form-check-input rt" type="checkbox" role="switch" name="anti_spam"
                                     id="flexSwitchCheckChecked" {% if info.ant_spam %}checked{% endif %}>
                             </div>
                             <p class="text-end h6 sfsf"><b class="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال
@@ -189,13 +176,12 @@
                     </div>
                 </div>
 
-
-                <div class="col" dir="ltr">
+                <div class="col update" dir="ltr">
                     <div class="card bg-dark m-1">
                         <div class="card-body">
-                            <h1 class="set text-light d-inline-flex float-end ">تحديد نوع الامبد</h1>
+                            <h1 class="set text-light d-inline-flex float-end embed">تحديد نوع الامبد</h1>
                             <div class="form-check form-switch text-start h3 d-inline-flex rt">
-                                <input class="form-check-input rt" type="checkbox" role="switch"
+                                <input class="form-check-input rt embed" type="checkbox" role="switch"
                                     id="flexSwitchCheckChecked" {% if info.embed %}checked{% endif %}>
                             </div>
                             <p class="text-end h6 sfsf">يضع الاذكار في سندوق مرتب</p>
@@ -209,25 +195,20 @@
 </div>
 
 
+<!-- <button type="button" class="btn btn-primary" id="liveToastBtn">404</button> -->
 
-
-
-
-<button type="button" class="btn btn-primary" id="liveToastBtn">404</button>
-
-    <div class="container">
-        <div class="row row-cols-1 row-cols-md-1 g-3">
-            <div class="position-fixed bottom-0 end-0" style="z-index: 11">
-                <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
-                    <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-                        <div class="col" dir="ltr">
-                            <div class="card bg-dark m-2" style="border: 1px solid var(--color1);">
-                                <div class="card-body">
-                                    <h1 class="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
-                                    <div class="group-buttons float-start save-menu">
-                                        <button class="btn btn-lg me-2 mx-2">حفظ التغييرات</button>
-                                        <button class="btn btn-lg me-2 mx-2">إلغاء</button>
-                                    </div>
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-1 g-3">
+        <div class="position-fixed bottom-0 end-0" style="z-index: 11">
+            <div aria-live="polite" aria-atomic="true" class="d-flex justify-content-center align-items-center w-100">
+                <div id="liveToast" class="toast w-50" role="alert" aria-live="assertive" aria-atomic="true">
+                    <div class="col" dir="ltr">
+                        <div class="card bg-dark m-2" style="border: 1px solid var(--color1);">
+                            <div class="card-body">
+                                <h1 class="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
+                                <div class="group-buttons float-start save-menu">
+                                    <button class="btn btn-lg me-2 mx-2">حفظ التغييرات</button>
+                                    <button class="btn btn-lg me-2 mx-2">إلغاء</button>
                                 </div>
                             </div>
                         </div>
@@ -236,100 +217,48 @@
             </div>
         </div>
     </div>
+</div>
 
 
 
 
+{% endblock %}
 
-
+    
+{% block js %}
 <script>
-    var toastTrigger = document.getElementById('liveToastBtn')
-    var toastLiveExample = document.getElementById('liveToast')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-        var toast = new bootstrap.Toast(toastLiveExample)
-
-        toast.show()
-        })
-    }
-
-    var trueSave = document.getElementById('true-save')
-    var falseSave = document.getElementById('false-save')
-
-    document.getElementById('setroom-save-button').addEventListener('click', function () {
-        $.ajax({
-            url: `/api/guilds/{{ guild.id }}/channel`,
-            type: "post",
-            data: {
-                "channel_id": "lol",
-            },
-            success: function (data, status, xhr) {
-                console.log(data)
-                if (!data.error) {
-                    var toast = new bootstrap.Toast(trueSave)
-                    toast.show()
-                } else {
-                    var toast = new bootstrap.Toast(falseSave)
-                    toast.show()
-                }
-            },
-            error: function (data, status) {
-                var toast = new bootstrap.Toast(falseSave)
-                toast.show()
-            }
-        });
+    var r = {};
+    $.ajax({
+        method: "GET",
+        url: "/api/guilds/{{ guild.id }}/info",
+        success: function(data){
+            r = data;
+        }
     })
-
-
-    // if (toastTrigger) {
-    // 	toastTrigger.addEventListener('click', function () {
-    // 		var toast = new bootstrap.Toast(toastLiveExample)
-
-    // 		toast.show()
-    // 	})
-    // }
-
-    var toastTrigger = document.getElementById('quran-play-true')
-    var toastLiveExample = document.getElementById('quran-play-true-1')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-            var toast = new bootstrap.Toast(falseSave)
-            toast.show()
-        })
+    var data = {
+        channel: parseInt($(".channel_id").val()),
+        time: parseInt($(".time").val()),
+        anti_spam: $(".embed").is(":checked"),
+        embed: $(".anti_spam").is(":checked"),
+        role_id: parseInt($(".role_id").val()),
     }
-    var toastTrigger = document.getElementById('quran-role-true')
-    var toastLiveExample = document.getElementById('quran-role-true-1')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-            var toast = new bootstrap.Toast(trueSave)
-            toast.show()
-        })
-    }
-    var toastTrigger = document.getElementById('embed-true')
-    var toastLiveExample = document.getElementById('embed-true-1')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-            var toast = new bootstrap.Toast(trueSave)
-            toast.show()
-        })
-    }
-    var toastTrigger = document.getElementById('spam-true')
-    var toastLiveExample = document.getElementById('spam-true-1')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-            var toast = new bootstrap.Toast(trueSave)
-            toast.show()
-        })
-    }
-    var toastTrigger = document.getElementById('embed-1-true')
-    var toastLiveExample = document.getElementById('embed-1-true-1')
-    if (toastTrigger) {
-        toastTrigger.addEventListener('click', function () {
-            var toast = new bootstrap.Toast(trueSave)
-            toast.show()
-        })
-    }
-
+    // console.log(data);
+    console.log(r)
+    $('.update').change(function () {
+        data = {
+            channel: parseInt($(".channel_id").val()),
+            time: parseInt($(".time").val()),
+            anti_spam: $(".embed").is(":checked"),
+            embed: $(".anti_spam").is(":checked"),
+            role_id: parseInt($(".role_id").val()),
+        }   
+        console.log(JSON.stringify(data) === JSON.stringify(req))
+        if (JSON.stringify(data) === JSON.stringify(req)) {
+            $('#liveToast').removeClass('show');
+        } else {
+            $('#liveToast').addClass('show');
+        }
+    });
 </script>
 
 

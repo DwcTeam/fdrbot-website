@@ -34,7 +34,7 @@
                 <div class="mb-3 row">
                     <label for="botId" class="col-sm-2 col-form-label">ايدي سيرفر</label>
                     <div class="col-sm-10">
-                        <input type="text" placeholder="الايدي من 18 رقم !" class="form-control bot_2" id="botId" maxlength="18">
+                        <input type="text" placeholder="الايدي من 18 رقم !" class="form-control bot_2 guild_id" id="botId" maxlength="18" value="">
                     </div>
                     <br>
                 </div>
@@ -186,29 +186,34 @@ SERVER Owner: oCMz#1111
 
 <div class="container py-5"></div>
 
+{% endblock %}
 
+{% block scripts %}
 
 <script>
     function show_guild_info() {
-        console.log("show_guild_info");
-        // $.ajax({
-        //     method: "GET",
-        //     url: "https://api.fdrbot.xyz/guild/info",
-        //     data: {
-        //         guild_id: $("#guild_id").val()
-        //     },
-        //     success: function (data) {
-        //         if (data.status == "success") {
-        //             $(".guild-info").removeClass("d-none");
-        //             $(".guild-info").addClass("d-block");
-        //             $(".guild-info").html(data.html);
-        //         } else {
-        //             $(".guild-info").removeClass("d-block");
-        //             $(".guild-info").addClass("d-none");
-        //         }
-        //     }
-        // })
-        // document.getElementsByClassName("guild-info")[0].classList.toggle("d-none");
+        console.log($("guild_id"));
+        var guild_id = parseInt(document.getElementsByClassName("guild_id")[0].value);
+        $.ajax({
+            method: "GET",
+            url: `http://127.0.0.1:8080/get_guild/${guild_id}/info`,
+            success: function (data) {
+                console.log(data)
+                if (data.guild) {
+                    console.log("ss")
+                    $(".guild-info").removeClass("d-none");
+                    const guild = data.guild;
+                    document.getElementById("floatingTextarea2").innerHTML = `
+SERVER ID: ${guild._id}
+SERVER NAME: ${guild.anti_spam}
+                    `;
+                } else {
+                    // $(".guild-info").removeClass("d-block");
+                    // $(".guild-info").addClass("d-none");
+                }
+            }
+        })
+        document.getElementsByClassName("guild-info")[0].classList.toggle("d-none");
         document.getElementsByClassName("not-found")[0].classList.toggle("d-none");
     }
 

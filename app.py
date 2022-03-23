@@ -1,5 +1,6 @@
 from flask import Flask, render_template
 from flask_cors import CORS
+from pymongo import MongoClient
 
 app = Flask(__name__, instance_relative_config=True)
 
@@ -10,6 +11,7 @@ app_ctx.push()
 
 app.config.from_pyfile('config.py')
 app.secret_key = app.config["SECRET_KEY"]
+app.db = MongoClient(app.config["MONGO_URI"]).get_database("fa-azcrone").get_collection("guilds")
 
 import views
 

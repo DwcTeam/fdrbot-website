@@ -70,6 +70,9 @@
     <!-- style js -->
     <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+
+    {% block js %}{% endblock %}
 
 </body>
 

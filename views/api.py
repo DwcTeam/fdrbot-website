@@ -77,10 +77,25 @@ def anti_spam(guild_id):
     res = post(f"{current_app.config['BOT_SERVER']}/update_anti_spam/{guild_id}", json={'anti_spam': data['anti_spam']})
     return jsonify({"anti_spam": res.json()["anti_spam"]})
 
-@api.route("/guilds/<guild_id>/embed", methods=['POST'])
+@api.route("/guilds/<int:guild_id>/embed", methods=['POST'])
 @login_required
 @check_permission
 def embed(guild_id):
     data = request.get_json()
     res = post(f"{current_app.config['BOT_SERVER']}/update_embed/{guild_id}", json={'embed': data['embed']})
     return jsonify({"embed": res.json()["embed"]})
+
+
+@api.route("/guilds/<int:guild_id>/info", methods=["GET"])
+def get_guild(guild_id: int):
+    guild = current_app.db.find_one({'_id': guild_id})
+    print(guild)
+    if not guild:
+        return jsonify({"error": "Guild not found"}), 404
+    del guild["_id"]
+    del guild["prefix"]
+    data = {
+        "status": True if guild else False,
+        "guild": guild
+    }
+    return jsonify(data)
