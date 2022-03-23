@@ -1,9 +1,10 @@
-from flask import Blueprint, request, jsonify, current_app
-from utlits import login_required, send_ping, check_permission
-from requests import post
-import typing as t
+from flask import Blueprint, request, jsonify, current_app as app, session
+from utlits import login_required, send_ping, Auth, AccessToken, check_permission, get_guild as get_guild_api
+
 
 api = Blueprint("api", __name__, url_prefix="/api")
+
+auth = Auth(app.config['CLIENT_ID'], app.config['CLIENT_SECRET'], app.config['REDIRECT_URI'])
 
 @api.route("/")
 def index():
@@ -13,86 +14,61 @@ def index():
 def ping():
     return jsonify({"stats": send_ping()})
 
-@api.route("/guilds/<int:guild_id>/update")
+@api.route("/guilds/<int:guild_id>/update", methods=["POST"])
 @login_required
-@check_permission
 def update_guild(guild_id: int):
+    user = auth.user(AccessToken(**app.logins.find_one({"token.access_token": session["token"]}).get("token")))
+    guild = user.get_guild(guild_id)
+    
+    if not guild:
+        return jsonify({"message": "You are not hava access to this guild!"}), 403
+
     data = request.get_json()
+
+    if not data:
+        return jsonify({"message": "No data sent"}), 400
+
     print(data)
+    # cehck values
+    if (not data.get("anti_spam") or not data.get("embed") or \
+        not data.get("role_id") or not data.get("channel") or not data.get("time")):
+        return jsonify({"message": "Missing values"}), 400
+    
+    # chcek values type
+    if not isinstance(data.get("anti_spam"), bool) or not isinstance(data.get("embed"), bool) or \
+        not isinstance(data.get("role_id"), int) or not isinstance(data.get("channel"), int) or not isinstance(data.get("time"), int):
+        return jsonify({"message": "Invalid values"}), 400
+    
+    # check values range
+    if data.get("time") not in [1800, 3600, 7200, 21600, 28800, 43200, 86400]:
+        return jsonify({"message": "Invalid time"}), 400
+
+    info = app.db.find_one({"_id": guild_id})
+    del info["_id"]
+    del info["prefix"]
+
+    # check if not make updates
+    if info == data:
+        return jsonify({"message": "No updates"}), 400
+
+    guild = get_guild_api(guild_id)
+
+    # check if channel is valid
+    if data.get("channel_id") not in [i.id for i in guild.channels]:
+        return jsonify({"message": "Invalid channel"}), 400
+    
+    # check if role is valid
+    if data.get("role_id") not in [i.id for i in guild.roles]:
+        return jsonify({"message": "Invalid role"}), 400
+
+    app.db.update_one({"_id": guild_id}, {"$set": data}, upsert=True)
     return jsonify({"message": "Success!"})
 
-# @api.route("/guilds/<int:guild_id>/channel", methods=["POST"])
-# @login_required
-# @check_permission
-# def guild_channel(guild_id: int):
-#     channel_id = request.form.get("channel_id", None)
-#     try:
-#         channel_id = int(channel_id) if channel_id else None
-#         channels = get_guild_channels(guild_id)
-
-#         # search to see if the channel is in the guild
-#         if channel_id and channel_id not in [i.id for i in channels]:
-#             return jsonify({"error": "Channel not found"}), 404
-#     except ValueError:
-#         return jsonify({"error": "Invalid object type"}), 400
-        
-
-#     channel_id = int(request.form.get("channel_id")) if request.form.get("channel_id") else None
-#     res = post(f"{current_app.config['BOT_SERVER']}/update_channel/{guild_id}", json={"channel_id": channel_id})
-#     return jsonify({"channel_id": res.json()["channel_id"]})
-
-# @api.route("/guilds/<int:guild_id>/quran/channel", methods=['POST'])
-# @login_required
-# @check_permission
-# def quran_channel(guild_id):
-#     data = request.get_json()
-#     res = post(f"{current_app.config['BOT_SERVER']}/quran_channel/{guild_id}", json={'channel_id': data['channel_id']})
-#     return jsonify({"channel_id": res.json()["channel_id"]})
-
-# @api.route("/guilds/<guild_id>/quran/role", methods=['POST'])
-# @login_required
-# @check_permission
-# def quran_role(guild_id):
-#     data = request.get_json()
-#     res = post(f"{current_app.config['BOT_SERVER']}/update_role/{guild_id}", json={'role_id': data['role_id']})
-#     return jsonify({"role_id": res.json()["role_id"]})
-
-# @api.route("/guilds/<guild_id>/time", methods=['POST'])
-# @login_required
-# @check_permission
-# def time(guild_id):
-#     data = request.get_json()
-#     res = post(f"{current_app.config['BOT_SERVER']}/update_time/{guild_id}", json={'time': data['time']})
-#     return jsonify({"time": res.json()["time"]})
-
-# @api.route("/guilds/<guild_id>/color", methods=['POST'])
-# @login_required
-# @check_permission
-# def color(guild_id):
-#     data = request.get_json()
-#     res = post(f"{current_app.config['BOT_SERVER']}/update_color/{guild_id}", json={'color': data['color']})
-#     return jsonify({"color": res.json()["color"]})
-
-# @api.route("/guilds/<guild_id>/anti_spam", methods=['POST'])
-# @login_required
-# @check_permission
-# def anti_spam(guild_id):
-#     data = request.get_json()
-#     res = post(f"{current_app.config['BOT_SERVER']}/update_anti_spam/{guild_id}", json={'anti_spam': data['anti_spam']})
-#     return jsonify({"anti_spam": res.json()["anti_spam"]})
-
-# @api.route("/guilds/<int:guild_id>/embed", methods=['POST'])
-# @login_required
-# @check_permission
-# def embed(guild_id):
-#     data = request.get_json()
-#     res = post(f"{current_app.config['BOT_SERVER']}/update_embed/{guild_id}", json={'embed': data['embed']})
-#     return jsonify({"embed": res.json()["embed"]})
-
-
 @api.route("/guilds/<int:guild_id>/info", methods=["GET"])
+@login_required
+@check_permission
 def get_guild(guild_id: int):
-    guild = current_app.db.find_one({'_id': guild_id})
+    guild = app.db.find_one({'_id': guild_id})
     if not guild:
         return jsonify({"error": "Guild not found"}), 404
     del guild["_id"]

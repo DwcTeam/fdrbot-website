@@ -23,7 +23,7 @@ def check_permission(function_to_protect):
     @wraps(function_to_protect)
     def deco(*args, **kwargs):
         user = auth.user(AccessToken(**app.logins.find_one({"token.access_token": session["token"]}).get("token")))
-        guild = user.get_guild(int(request.args.get("guild_id")))
+        guild = user.get_guild(kwargs.get("guild_id"))
         if not guild:
             return abort(403)
             # Success!
