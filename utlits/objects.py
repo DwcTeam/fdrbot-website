@@ -3,9 +3,32 @@ from requests import request
 from dataclasses import dataclass
 import typing as t
 
-
 BASE = "https://discord.com/api/v9"
 IMAGE_BASE = "https://cdn.discordapp.com"
+
+def convert_icon_hash(data: dict) -> str:
+    icon_hash: str = data.get("icon")
+    if not icon_hash:
+        return f"https://via.placeholder.com/1024/2c2f33/ffffff?text={data['name'][0]}"
+    return f"{IMAGE_BASE}/icons/{data['id']}/{icon_hash}.{'gif' if icon_hash.startswith('a_') else 'png'}"
+
+def convert_guild(data: dict) -> Guild:
+    return Guild(
+        id=int(data.get("id")),
+        name=data.get("name"),
+        icon=convert_icon_hash(data),
+        is_icon=True if data.get("icon") else False,
+        is_owner=data.get("owner"),
+        permissions=int(data.get("permissions")),
+        features=data.get("features"),
+        as_dict=data
+    )
+
+def convert_channels(channels: t.List[t.Dict]) -> t.List[Channel]:
+    return [Channel(**channel) for channel in channels]
+
+def convert_roles(roles: t.List[t.Dict]) -> t.List[Role]:
+    return [Role(**role) for role in roles]
 
 class Permissions:
     CREATE_INSTANT_INVITE =        1 << 0
@@ -84,6 +107,12 @@ class GuildInfo:
 
 
 @dataclass
+class BotGuild:
+    channels: t.List[Channel]
+    roles: t.List[Role]
+
+
+@dataclass
 class Channel:
     id: int
     name: str
@@ -109,50 +138,45 @@ class User:
     accent_color: t.Any
     locale: str
     mfa_enabled: bool
-    token: str
     email: str
     verified: bool
+    token: str
+    token_type: str
+    expires_in: int
+    refresh_token: str
+    scope: t.List[str]
 
     @property
     def as_dict(self) -> dict:
         return {
             "_id": self.id,
-            "username": self.username,
-            "avatar": self.avatar,
-            "discriminator": self.discriminator,
-            "public_flags": self.public_flags,
-            "flags": self.flags,
-            "banner": self.banner,
-            "banner_color": self.banner_color,
-            "accent_color": self.accent_color,
-            "locale": self.locale,
-            "mfa_enabled": self.mfa_enabled,
-            "token": self.token,
-            "email": self.email,
-            "verified": self.verified
+            "user": {
+                "username": self.username,
+                "avatar": self.avatar,
+                "discriminator": self.discriminator,
+                "public_flags": self.public_flags,
+                "flags": self.flags,
+                "banner": self.banner,
+                "banner_color": self.banner_color,
+                "accent_color": self.accent_color,
+                "locale": self.locale,
+                "mfa_enabled": self.mfa_enabled,
+                "email": self.email,
+                "verified": self.verified
+            },
+            "token": {
+                "access_token": self.token,
+                "token_type": self.token_type,
+                "expires_in": self.expires_in,
+                "refresh_token": self.refresh_token,
+                "scope": self.scope
+            },
+
         }
 
     @staticmethod
     def _convert_avatar(id: int, avatar_hash: str) -> str:
         return f"{IMAGE_BASE}/avatars/{id}/{avatar_hash}.{'gif' if avatar_hash.startswith('a_') else 'png'}" 
-
-    def _convert_icon_hash(self, data: dict) -> str:
-        icon_hash: str = data.get("icon")
-        if not icon_hash:
-            return f"https://via.placeholder.com/1024/2c2f33/ffffff?text={data['name'][0]}"
-        return f"{IMAGE_BASE}/icons/{data['id']}/{icon_hash}.{'gif' if icon_hash.startswith('a_') else 'png'}"
-
-    def _convert_guild(self, data: dict) -> Guild:
-        return Guild(
-            id=int(data.get("id")),
-            name=data.get("name"),
-            icon=self._convert_icon_hash(data),
-            is_icon=True if data.get("icon") else False,
-            is_owner=data.get("owner"),
-            permissions=int(data.get("permissions")),
-            features=data.get("features"),
-            as_dict=data
-        )
 
     def get_guild(self, guild_id) -> Guild | None | dict:
         r = request(
@@ -167,7 +191,7 @@ class User:
         guild: dict = guild[0]
         # check if user owner or admin
         if guild["owner"] or Permissions.any(int(guild["permissions"]), Permissions.MANAGE_GUILD):
-            return self._convert_guild(guild)
+            return convert_guild(guild)
         return {"code": 1, "Error": "Missing Permissions"}  # missing permissions
 
     def guilds(self) -> list[Guild]:
@@ -177,4 +201,4 @@ class User:
             headers={"Authorization": f"Bearer {self.token}"}
         )
         x = [guild for guild in r.json() if guild["owner"] or Permissions.any(int(guild["permissions"]), Permissions.ADMINISTRATOR)]
-        return [self._convert_guild(guild) for guild in x]
+        return [convert_guild(guild) for guild in x]

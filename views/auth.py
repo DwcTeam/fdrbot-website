@@ -16,7 +16,7 @@ def outh():
     auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URI'])
     access_token = auth.access_token(request.args.get('code'))
     session['token'] = access_token.access_token
-    user = auth.user(session['token'])
+    user = auth.user(access_token)
     data = current_app.logins.find_one({"_id": user.id})
     if not data:
         current_app.logins.insert_one(user.as_dict)

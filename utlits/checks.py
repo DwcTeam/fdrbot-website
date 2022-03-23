@@ -1,14 +1,18 @@
 from __future__ import annotations
-from flask import session, redirect, current_app, abort, request, jsonify
+from flask import session, redirect, current_app as app, abort, request
 from functools import wraps
 from .auth import Auth
-from .local_api import get_guild_channels
+from .objects import AccessToken
 
-auth = Auth(current_app.config['CLIENT_ID'], current_app.config['CLIENT_SECRET'], current_app.config['REDIRECT_URI'])
+auth = Auth(app.config['CLIENT_ID'], app.config['CLIENT_SECRET'], app.config['REDIRECT_URI'])
 
 def login_required(function_to_protect):
     @wraps(function_to_protect)
     def wrapper(*args, **kwargs):
+        token = session.get("token", None)
+
+        if token:
+            user = app.logins.find_one({"token": token})
         if "token" in session:
             # Success!
             return function_to_protect(*args, **kwargs)
@@ -18,7 +22,8 @@ def login_required(function_to_protect):
 def check_permission(function_to_protect):
     @wraps(function_to_protect)
     def deco(*args, **kwargs):
-        guild = auth.user(session['token']).get_guild(kwargs.get("guild_id"))
+        user = auth.user(AccessToken(**app.logins.find_one({"token.access_token": session["token"]}).get("token")))
+        guild = user.get_guild(int(request.args.get("guild_id")))
         if not guild:
             return abort(403)
             # Success!

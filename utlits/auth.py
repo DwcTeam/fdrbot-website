@@ -42,11 +42,11 @@ class Auth(object):
             scope=data["scope"],
         )
 
-    def user(self, token: str) -> User:
+    def user(self, token: AccessToken) -> User:
         r = request(
             method="GET", 
             url=f"{BASE}/users/@me",
-            headers={"Authorization": f"Bearer {token}"}
+            headers={"Authorization": f"Bearer {token.access_token}"}
         )
         data = r.json()
         return User(
@@ -63,6 +63,10 @@ class Auth(object):
             mfa_enabled=data["mfa_enabled"],
             email=data["email"],
             verified=data["verified"],
-            token=token,
+            token=token.access_token,
+            token_type=token.token_type,
+            expires_in=token.expires_in,
+            refresh_token=token.refresh_token,
+            scope=token.scope,
         )
 
