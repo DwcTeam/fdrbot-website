@@ -1,5 +1,5 @@
 from requests import request
-from .objects import AccessToken, RefreshToken, Token, User, Bot
+from .objects import AccessToken, User
 
 BASE = "https://discord.com/api/v9"
 headers = {
@@ -26,39 +26,43 @@ class Auth(object):
             "code": code,
             "redirect_uri": self.REDIRECT_URI.replace("%3A", ":").replace("%2F", "/")
         }
-        r = request("POST", f"{BASE}/oauth2/token", data=data, headers=headers)
-        print(r.json())
+        r = request(
+            method="POST", 
+            url=f"{BASE}/oauth2/token", 
+            data=data, 
+            headers=headers
+        )
         r.raise_for_status()
-        return AccessToken(r.json())
-
-    def refresh_token(self, refresh_token: str) -> RefreshToken:
-        data = {
-            "client_id": self.CLIENT_ID,
-            "client_secret": self.CLIENT_SECRET,
-            "grant_type": "refresh_token",
-            "refresh_token": refresh_token
-        }
-        r = request("POST", f"{BASE}/oauth2/token", data=data, headers=headers)
-        r.raise_for_status()
-        return RefreshToken(r.json())
-
-    def get_token(self) -> Token:
-        data = {
-            "grant_type": "client_credentials",
-            "scope": "identify connections"
-        }
-        r = request("POST", f"{BASE}/oauth2/token", data=data,
-                    headers=headers, auth=(self.CLIENT_ID, self.CLIENT_SECRET))
-        r.raise_for_status()
-        return Token(r.json())
+        data = r.json()
+        return AccessToken(
+            access_token=data["access_token"],
+            token_type=data["token_type"],
+            expires_in=data["expires_in"],
+            refresh_token=data["refresh_token"],
+            scope=data["scope"],
+        )
 
     def user(self, token: str) -> User:
-        r = request("GET", f"{BASE}/users/@me",
-                    headers={"Authorization": f"Bearer {token}"})
-        return User(r.json(), token)
+        r = request(
+            method="GET", 
+            url=f"{BASE}/users/@me",
+            headers={"Authorization": f"Bearer {token}"}
+        )
+        data = r.json()
+        return User(
+            id=int(data["id"]),
+            username=data["username"],
+            avatar=User._convert_avatar(data["id"], data["avatar"]),
+            discriminator=int(data["discriminator"]),
+            public_flags=data["public_flags"],
+            flags=data["flags"],
+            banner=data["banner"],
+            banner_color=data["banner_color"],
+            accent_color=data["accent_color"],
+            locale=data["locale"],
+            mfa_enabled=data["mfa_enabled"],
+            email=data["email"],
+            verified=data["verified"],
+            token=token,
+        )
 
-    def bot(self, bot_token: str) -> Bot:
-        r = request("GET", f"{BASE}/users/@me",
-                    headers={"Authorization": f"Bot {bot_token}"})
-        r.raise_for_status()
-        return Bot(r.json(), bot_token)

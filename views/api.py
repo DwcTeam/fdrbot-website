@@ -89,7 +89,6 @@ def embed(guild_id):
 @api.route("/guilds/<int:guild_id>/info", methods=["GET"])
 def get_guild(guild_id: int):
     guild = current_app.db.find_one({'_id': guild_id})
-    print(guild)
     if not guild:
         return jsonify({"error": "Guild not found"}), 404
     del guild["_id"]

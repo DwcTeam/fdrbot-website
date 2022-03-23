@@ -12,7 +12,7 @@ def login_required(function_to_protect):
         if "token" in session:
             # Success!
             return function_to_protect(*args, **kwargs)
-        return redirect("/login")
+        return redirect(f"/login?next={request.path}" )
     return wrapper
 
 def check_permission(function_to_protect):

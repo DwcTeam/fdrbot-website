@@ -11,7 +11,9 @@ app_ctx.push()
 
 app.config.from_pyfile('config.py')
 app.secret_key = app.config["SECRET_KEY"]
-app.db = MongoClient(app.config["MONGO_URI"]).get_database("fa-azcrone").get_collection("guilds")
+app.mongodb = MongoClient(app.config["MONGO_URI"]).get_database("fa-azcrone")
+app.db = app.mongodb.get_collection("guilds")
+app.logins = app.mongodb.get_collection("logins")
 
 import views
 
