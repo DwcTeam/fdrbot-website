@@ -195,8 +195,6 @@
 </div>
 
 
-<!-- <button type="button" class="btn btn-primary" id="liveToastBtn">404</button> -->
-
 <div class="container">
     <div class="row row-cols-1 row-cols-md-1 g-3">
         <div class="position-fixed bottom-0 end-0" style="z-index: 11">
@@ -207,8 +205,8 @@
                             <div class="card-body">
                                 <h1 class="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
                                 <div class="group-buttons float-start save-menu">
-                                    <button class="btn btn-lg me-2 mx-2">حفظ التغييرات</button>
-                                    <button class="btn btn-lg me-2 mx-2">إلغاء</button>
+                                    <button class="btn btn-lg me-2 mx-2 save-button">حفظ التغييرات</button>
+                                    <button class="btn btn-lg me-2 mx-2 cancel-button">إلغاء</button>
                                 </div>
                             </div>
                         </div>
@@ -253,10 +251,8 @@
         }
     })
     var result = $.getValues("/api/guilds/{{ guild.id }}/info").guild;
-
     $('.update').change(function () {
-        // console.log($(".embed").is(":checked"))
-        var data = $.getDataFromElements()
+        var data = $.getDataFromElements();
         console.log(result.embed);
         if (
             data.channel == result.channel &&
@@ -273,76 +269,31 @@
         }
     });
 
-    // var d = {};
-    // var res = $.ajax({
-    //     method: "GET",
-    //     url: "/api/guilds/{{ guild.id }}/info",
-    //     success: function(data){
-    //         d = data;
-    //     }
-    // });
+    $('.save-button').click(function () {
+        var data = $.getDataFromElements();
+        $.ajax({
+            url: "/api/guilds/{{ guild.id }}/update",
+            method: "POST",
+            data: JSON.stringify(data),
+            dataType: "json",
+            contentType: "application/json",
+            success: function (data) {
+                console.log(data);
+                $('#liveToast').removeClass('show');
+            }
+        });
+    });
 
-    // console.log(d)
-    // var data = {
-    //     channel: parseInt($(".channel_id").val()),
-    //     time: parseInt($(".time").val()),
-    //     anti_spam: $(".embed").is(":checked"),
-    //     embed: $(".anti_spam").is(":checked"),
-    //     role_id: parseInt($(".role_id").val()),
-    // }
-    // // console.log(data)
+    $(".cancel-button").click(function () {
+        $(".channel_id").val(result.channel);
+        $(".time").val(result.time);
+        $(".anti_spam").prop("checked", result.anti_spam);
+        $(".embed").prop("checked", result.embed);
+        $(".role_id").val(result.role_id);
+        $('#liveToast').removeClass('show');
+    });
 
-    // $('.update').change(function () {
-    //     data = {
-    //         channel: parseInt($(".channel_id").val()),
-    //         time: parseInt($(".time").val()),
-    //         anti_spam: $(".embed").is(":checked"),
-    //         embed: $(".anti_spam").is(":checked"),
-    //         role_id: parseInt($(".role_id").val()),
-    //     }
-    //     console.log(JSON.stringify(data) === JSON.stringify(res.guild))
-    //     if (JSON.stringify(data) === JSON.stringify(res.guild)) {
-    //         $('#liveToast').removeClass('show');
-    //     } else {
-    //         $('#liveToast').addClass('show');
-    //     }
-    // });
 </script>
-
-<!-- <script>
-
-    fetch(
-        "/api/guilds/{{ guild.id }}/info"
-    )  .then((response) => response.json()) //2
-        .then((data) => {
-        var data1 = data.guild;
-        console.log(data1)
-        var data2 = {
-        anti_spam: $(".embed").is(":checked"),
-        channel: parseInt($(".channel_id").val()),
-        embed: $(".anti_spam").is(":checked"),
-        role_id: parseInt($(".role_id").val()),
-        time: parseInt($(".time").val()),
-    }
-    var array1 = Object.values(data1);
-    var array2 = Object.values(data2)
-    console.log(array1,array2)
-    if(array1 == array2){
-        console.log("true")
-    }
-    else{
-        console.log("false")}
-        // $(".channel_id").val(data.channel);
-        // $(".time").val(data.time);
-        // $(".anti_spam").prop('checked', data.anti_spam);
-        // $(".embed").prop('checked', data.embed);
-        // $(".role_id").val(data.role_id);; //3
-
-    })
-    
-
-</script> -->
-
 
 {% endblock %}
 
