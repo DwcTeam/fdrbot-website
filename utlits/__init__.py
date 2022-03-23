@@ -1,5 +1,5 @@
 from .auth import Auth
-from .checks import login_required, check_permission
+from .checks import *
 from .local_api import *
 from .objects import *
 

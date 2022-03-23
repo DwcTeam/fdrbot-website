@@ -5,8 +5,8 @@
   <div class="btn-group d-block me-lg-1 mx-lg-1" role="group">
     <button id="users" type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown"
       aria-expanded="false">
-      <img src="https://cdn.discordapp.com/avatars/716783245387235410/4e1581b67a4e10269da668db41716590.png?size=1024"
-        width="28" height="28" class="image"> <b>S A Q R</b>
+      <img src="{{ user.avatar }}"
+        width="28" height="28" class="image"> <b>{{ user.username }}</b>
     </button>
     <ul class="dropdown-menu saqrs" aria-labelledby="users">
       <li class="nav-item"><a class="dropdown-item text-center primary" href="/dashboard">السيرفرات</a></li>
@@ -26,7 +26,7 @@
   <div class="container">
     <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
       <!-- dont forget name for user -->
-      <h1 class="text-white text-center title">يا هلا والله فيك, S A Q R</h1>
+      <h1 class="text-white text-center title">يا هلا والله فيك, {{ user.username }}</h1>
     </div>
 
     <div class="row row-cols-1 row-cols-md-3 g-5">

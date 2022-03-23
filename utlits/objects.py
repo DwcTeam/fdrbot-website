@@ -175,8 +175,11 @@ class User:
         }
 
     @staticmethod
-    def _convert_avatar(id: int, avatar_hash: str) -> str:
-        return f"{IMAGE_BASE}/avatars/{id}/{avatar_hash}.{'gif' if avatar_hash.startswith('a_') else 'png'}" 
+    def _convert_avatar(data: dict) -> str:
+        avatar_hash = data.get("avatar", None)
+        if not avatar_hash:
+            return f"{IMAGE_BASE}/embed/avatars/{int(data.get('discriminator')) % 5}.png"
+        return f"{IMAGE_BASE}/avatars/{data.get('id')}/{avatar_hash}.{'gif' if avatar_hash.startswith('a_') else 'png'}" 
 
     def get_guild(self, guild_id) -> Guild | None | dict:
         r = request(

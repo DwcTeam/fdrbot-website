@@ -29,3 +29,6 @@ def check_permission(function_to_protect):
             # Success!
         return function_to_protect(*args, **kwargs)
     return deco
+
+def is_admin(user_id: int):
+    return True if user_id in app.config["ADMINS"] else False

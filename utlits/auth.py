@@ -51,8 +51,8 @@ class Auth(object):
         data = r.json()
         return User(
             id=int(data["id"]),
-            username=data["username"],
-            avatar=User._convert_avatar(data["id"], data["avatar"]),
+            username=data["username"] if len(data["username"]) < 15 else data["username"][:10] + "...",
+            avatar=User._convert_avatar(data),
             discriminator=int(data["discriminator"]),
             public_flags=data["public_flags"],
             flags=data["flags"],

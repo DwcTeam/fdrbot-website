@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, current_app as app, session, abort
 from utlits import (
-    login_required, Auth, get_guild, check_permission, AccessToken, check_guild
+    login_required, Auth, get_guild, is_admin, AccessToken, check_guild
 )
 
 dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
@@ -16,7 +16,7 @@ def index_page():
     unavailable_guilds = [i for i in guilds if i not in available_guilds]
     return render_template(
         'dashboard.html', available_guilds=available_guilds, unavailable_guilds=unavailable_guilds,
-        title="لوحة التحكم", user=user
+        title="لوحة التحكم", user=user, is_admin=is_admin(user.id)
     )
 
 @dashboard.route('/<int:guild_id>')
@@ -46,6 +46,6 @@ def guild_page(guild_id):
     return render_template(
         'guild.html', guild=user_guild, info=info, text_channels=text_channels, 
         voice_channels=voice_channels, roles=guild.roles,
-        title=f"{user_guild.name} | لوحة التحكم"
+        title=f"{user_guild.name} | لوحة التحكم", user=user, is_admin=is_admin(user.id)
     )
 
