@@ -29,7 +29,7 @@
       <h1 class="text-white text-center title">يا هلا والله فيك, {{ user.username }}</h1>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-5">
+    <div class="row text-center row-cols-1 row-cols-md-3 g-3">
       {% for guild in available_guilds %}
 
       <div class="col  text-center">
@@ -66,7 +66,7 @@
       <h1 class="text-white text-center title">الخوادم غير المتاحه</h1>
     </div>
 
-    <div class="row row-cols-1 row-cols-md-3 g-5">
+    <div class="row text-center row-cols-1 row-cols-md-3 g-3">
       {% for guild in unavailable_guilds %}
       <div class="col  text-center">
         <div class="card h-75 card-1">

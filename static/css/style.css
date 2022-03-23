@@ -365,6 +365,28 @@ nav ul li a:hover::after {
     margin-top: 0px;
 }
 
+.form-select:disabled {
+    background-color: transparent;
+}
+
+.form-control-color {
+    display: block;
+    width: 100%;
+    padding: 0;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: var(--color2);
+    background-color: transparent;
+    background-clip: padding-box;
+    border: 2px solid var(--false);
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
 /* save menu */
 .save-menu button:first-child {
     color: var(--color1);
@@ -518,9 +540,9 @@ section#fdrbot {
 .form-control:focus {
     color: #212529;
     background-color: #171b28 !important;
-    border-color: var(--color3);
+    border-color: transparent;
     outline: 0;
-    box-shadow: 0 0 0 0.25rem var(--color3);
+    box-shadow: 0 0 0 0.25rem transparent;
 }
 
 .bot_2 {
