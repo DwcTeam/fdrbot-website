@@ -50,8 +50,11 @@ body {
 
 .toast {
     background-color: transparent;
-    width: 80%;
+    width: 100%;
 }
+
+.toast::
+
 /* navbar */
 .navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-nav .nav-link {
     color: var(--color1);

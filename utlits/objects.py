@@ -178,5 +178,3 @@ class User:
         )
         x = [guild for guild in r.json() if guild["owner"] or Permissions.any(int(guild["permissions"]), Permissions.ADMINISTRATOR)]
         return [self._convert_guild(guild) for guild in x]
-
-
