@@ -2,6 +2,7 @@ from flask import Blueprint, render_template, current_app as app, session, abort
 from utlits import (
     login_required, Auth, get_guild, is_admin, AccessToken, check_guild
 )
+from utlits.objects import convert_data_user
 
 dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
@@ -11,7 +12,7 @@ auth: Auth = app.auth
 @dashboard.route('/')
 @login_required
 def index_page():
-    user = auth.user(AccessToken(**app.logins.find_one({"token.access_token": session["token"]}).get("token")))
+    user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
     guilds = user.guilds()
     available_guilds = [i for i in guilds if check_guild(i.id)]
     unavailable_guilds = [i for i in guilds if i not in available_guilds]
@@ -23,7 +24,7 @@ def index_page():
 @dashboard.route('/<int:guild_id>')
 @login_required
 def guild_page(guild_id):
-    user = auth.user(AccessToken(**app.logins.find_one({"token.access_token": session["token"]}).get("token")))
+    user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
     user_guild = user.get_guild(guild_id)
     # if guild is missing
     if not user_guild :

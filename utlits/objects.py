@@ -38,6 +38,7 @@ def convert_roles(roles: t.List[t.Dict]) -> t.List[Role]:
     return [Role(**role) for role in roles]
 
 def convert_user(token: AccessToken, data: dict, user_id: int) -> User:
+    print(token)
     return User(            
         id=user_id,
         username=data["username"] if len(data["username"]) < 15 else data["username"][:10] + "...",
@@ -54,7 +55,7 @@ def convert_user(token: AccessToken, data: dict, user_id: int) -> User:
         verified=data["verified"],
         token=token.access_token,
         token_type=token.token_type,
-        expires_in=token.expires_in if isinstance(token.expires_in, datetime) else datetime.now() + datetime.fromtimestamp(token.expires_in),
+        expires_in=token.expires_in if isinstance(token.expires_in, datetime) else datetime.fromtimestamp(datetime.now().timestamp() + token.expires_in),
         refresh_token=token.refresh_token,
         scope=token.scope
     )
