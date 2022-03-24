@@ -25,6 +25,19 @@
 </head>
 
 <body dir="rtl">
+
+<div id="loading" dir="ltr">
+    <div class="load">
+        <div class="load-one"></div>
+        <div class="load-two"></div>
+        <div class="load-three"></div>
+    </div>
+</div>
+
+
+
+
+
     <!--  -->
     <nav class="py-4">
         <div class="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
@@ -46,7 +59,7 @@
                             src="{{ url_for('static', filename='images/forever.ico') }}"
                             alt="" width="50" height="50"></a>
                     <ul class="navbar-nav nav-pillsnav navbar-nav ml-auto w-100 justify-content-center nav-pills">
-                        <li class="nav-item me-2 pe-3"><a href="/vote" class="nav-link">تصويت للبوت</a></li>
+                        <li class="nav-item me-2"><a href="/vote" target="_blank" class="nav-link">تصويت للبوت</a></li>
                         <li class="nav-item me-2"><a href="/invite" target="_blank" class="nav-link">أضف البوت</a></li>
                         <li class="nav-item me-2"><a href="/support" target="_blank" class="nav-link">سيرفر الدعم</a></li>
 
@@ -66,6 +79,21 @@
             </div>
         </div>
     </footer>
+
+
+
+
+<script>
+window.addEventListener('load', (event) => {
+    var preloader = document.getElementById("loading");
+    preloader.style.display = "none";
+});
+</script>
+
+
+
+
+
 
     <!-- style js -->
     <script src="{{ url_for('static', filename='js/all.min.js') }}"></script>

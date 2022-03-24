@@ -1,5 +1,4 @@
 /* responsive */
-
 @media only screen and (max-width: 1029.33px) {
     .title::before {
         transform: translateY(60px);
@@ -29,12 +28,6 @@
         transform: translateY(54px);
     }
 }
-
-/* @media only screen and (max-width: 574px) {
-    .w-50 {
-        width: 10%;
-    }
-} */
 /* 3 */
 @media only screen and (max-width: 500px) {
     .title::before {
@@ -73,7 +66,7 @@
 }
 
 /* 6 */
-@media only screen and (max-width: 378px) {
+@media only screen and (max-width: 375px) {
     .title::before {
         transform: translateY(48px);
     }
@@ -116,6 +109,8 @@
         font-weight: 100;
     }
 }
+
+
 
 /* animation  */
 #saqr {
