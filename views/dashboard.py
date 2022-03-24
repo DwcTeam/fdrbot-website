@@ -5,7 +5,8 @@ from utlits import (
 
 dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
 
-auth = Auth(app.config['CLIENT_ID'], app.config['CLIENT_SECRET'], app.config['REDIRECT_URI'])
+auth: Auth = app.auth
+
 
 @dashboard.route('/')
 @login_required

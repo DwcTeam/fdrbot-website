@@ -1,6 +1,7 @@
-from flask import Flask, render_template
+from flask import Flask
 from flask_cors import CORS
 from pymongo import MongoClient
+from utlits import Auth
 
 app = Flask(__name__, instance_relative_config=True)
 
@@ -14,6 +15,7 @@ app.secret_key = app.config["SECRET_KEY"]
 app.mongodb = MongoClient(app.config["MONGO_URI"]).get_database("fa-azcrone")
 app.db = app.mongodb.get_collection("guilds")
 app.logins = app.mongodb.get_collection("logins")
+app.auth = Auth(app.config['CLIENT_ID'], app.config['CLIENT_SECRET'], app.config['REDIRECT_URI'])
 
 import views
 

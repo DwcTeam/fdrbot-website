@@ -1,7 +1,8 @@
 from __future__ import annotations
-from requests import request
 from dataclasses import dataclass
 import typing as t
+from flask import current_app as app
+from datetime import datetime
 
 BASE = "https://discord.com/api/v9"
 IMAGE_BASE = "https://cdn.discordapp.com"
@@ -24,11 +25,45 @@ def convert_guild(data: dict) -> Guild:
         as_dict=data
     )
 
+def convert_avatar(data: dict) -> str:
+    avatar_hash = data.get("avatar", None)
+    if not avatar_hash:
+        return f"{IMAGE_BASE}/embed/avatars/{int(data.get('discriminator')) % 5}.png"
+    return f"{IMAGE_BASE}/avatars/{data.get('id')}/{avatar_hash}.{'gif' if avatar_hash.startswith('a_') else 'png'}"
+
 def convert_channels(channels: t.List[t.Dict]) -> t.List[Channel]:
     return [Channel(**channel) for channel in channels]
 
 def convert_roles(roles: t.List[t.Dict]) -> t.List[Role]:
     return [Role(**role) for role in roles]
+
+def convert_user(token: AccessToken, data: dict, user_id: int) -> User:
+    return User(            
+        id=user_id,
+        username=data["username"] if len(data["username"]) < 15 else data["username"][:10] + "...",
+        avatar=convert_avatar(data),
+        discriminator=int(data["discriminator"]),
+        public_flags=data["public_flags"],
+        flags=data["flags"],
+        banner=data["banner"],
+        banner_color=data["banner_color"],
+        accent_color=data["accent_color"],
+        locale=data["locale"],
+        mfa_enabled=data["mfa_enabled"],
+        email=data["email"],
+        verified=data["verified"],
+        token=token.access_token,
+        token_type=token.token_type,
+        expires_in=token.expires_in if isinstance(token.expires_in, datetime) else datetime.now() + datetime.fromtimestamp(token.expires_in),
+        refresh_token=token.refresh_token,
+        scope=token.scope
+    )
+
+def convert_token(data: dict) -> AccessToken:
+    return AccessToken(**data["token"])
+
+def convert_data_user(data: dict) -> User:
+    return convert_user(convert_token(data), data.get("user"), data.get("_id"))
 
 class Permissions:
     CREATE_INSTANT_INVITE =        1 << 0
@@ -78,7 +113,7 @@ class Permissions:
 class AccessToken:
     access_token: str
     token_type: str
-    expires_in: int
+    expires_in: t.Union[int, datetime]
     refresh_token: str
     scope: str
 
@@ -142,7 +177,7 @@ class User:
     verified: bool
     token: str
     token_type: str
-    expires_in: int
+    expires_in: datetime
     refresh_token: str
     scope: t.List[str]
 
@@ -171,37 +206,14 @@ class User:
                 "refresh_token": self.refresh_token,
                 "scope": self.scope
             },
+        } 
 
-        }
+    @property
+    def access_token(self) -> AccessToken:
+        return convert_token(self.as_dict)
 
-    @staticmethod
-    def _convert_avatar(data: dict) -> str:
-        avatar_hash = data.get("avatar", None)
-        if not avatar_hash:
-            return f"{IMAGE_BASE}/embed/avatars/{int(data.get('discriminator')) % 5}.png"
-        return f"{IMAGE_BASE}/avatars/{data.get('id')}/{avatar_hash}.{'gif' if avatar_hash.startswith('a_') else 'png'}" 
-
-    def get_guild(self, guild_id) -> Guild | None | dict:
-        r = request(
-            method="GET", 
-            url=f"{BASE}/users/@me/guilds",
-            headers={"Authorization": f"Bearer {self.token}"}
-        )
-        guild = [i for i in r.json() if i["id"] == str(guild_id)]
-        # check if guild is found
-        if not guild:
-            return None
-        guild: dict = guild[0]
-        # check if user owner or admin
-        if guild["owner"] or Permissions.any(int(guild["permissions"]), Permissions.MANAGE_GUILD):
-            return convert_guild(guild)
-        return {"code": 1, "Error": "Missing Permissions"}  # missing permissions
-
-    def guilds(self) -> list[Guild]:
-        r = request(
-            method="GET", 
-            url=f"{BASE}/users/@me/guilds",
-            headers={"Authorization": f"Bearer {self.token}"}
-        )
-        x = [guild for guild in r.json() if guild["owner"] or Permissions.any(int(guild["permissions"]), Permissions.ADMINISTRATOR)]
-        return [convert_guild(guild) for guild in x]
+    def guilds(self) -> t.List[Guild]:
+        return app.auth.guilds(self.access_token)
+    
+    def get_guild(self, guild_id: int) -> Guild:
+        return app.auth.get_guild(self.access_token, guild_id)

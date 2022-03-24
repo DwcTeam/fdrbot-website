@@ -1,19 +1,27 @@
 from __future__ import annotations
 from flask import session, redirect, current_app as app, abort, request
 from functools import wraps
-from .auth import Auth
-from .objects import AccessToken
+from .objects import convert_data_user
+from datetime import datetime
 
-auth = Auth(app.config['CLIENT_ID'], app.config['CLIENT_SECRET'], app.config['REDIRECT_URI'])
 
 def login_required(function_to_protect):
     @wraps(function_to_protect)
     def wrapper(*args, **kwargs):
         token = session.get("token", None)
-
         if token:
-            user = app.logins.find_one({"token": token})
-        if "token" in session:
+            user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+            
+            # If access_token is expired
+            if datetime.now() >= user.expires_in:
+                token = app.auth.refresh_token(user.access_token)
+                user = app.auth.user(token)
+                data = app.logins.find_one({"_id": user.id})
+                if not data:
+                    app.logins.insert_one(user.as_dict)
+                else :
+                    app.logins.update_one({"_id": user.id}, {"$set": user.as_dict})
+            
             # Success!
             return function_to_protect(*args, **kwargs)
         return redirect(f"/login?next={request.path}" )
@@ -22,8 +30,9 @@ def login_required(function_to_protect):
 def check_permission(function_to_protect):
     @wraps(function_to_protect)
     def deco(*args, **kwargs):
-        user = auth.user(AccessToken(**app.logins.find_one({"token.access_token": session["token"]}).get("token")))
-        guild = user.get_guild(kwargs.get("guild_id"))
+        user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+        guild = app.auth.get_guild(user.access_token ,kwargs.get("guild_id"))
+        print(guild)
         if not guild:
             return abort(403)
             # Success!
