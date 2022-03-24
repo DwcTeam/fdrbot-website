@@ -1,7 +1,5 @@
 from flask import Blueprint, render_template, current_app as app, session, abort
-from utlits import (
-    login_required, Auth, get_guild, is_admin, AccessToken, check_guild
-)
+from utlits import login_required, Auth, get_guild, is_admin, check_guilds
 from utlits.objects import convert_data_user
 
 dashboard = Blueprint('dashboard', __name__, url_prefix='/dashboard')
@@ -14,8 +12,9 @@ auth: Auth = app.auth
 def index_page():
     user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
     guilds = user.guilds()
-    available_guilds = [i for i in guilds if check_guild(i.id)]
-    unavailable_guilds = [i for i in guilds if i not in available_guilds]
+    alive_guilds = check_guilds(guilds)  # send to cache bot to know if guild is alive
+    available_guilds = [i for i in guilds if i.id in alive_guilds]
+    unavailable_guilds = [i for i in guilds if i.id not in alive_guilds]
     return render_template(
         'dashboard.html', available_guilds=available_guilds, unavailable_guilds=unavailable_guilds,
         title="لوحة التحكم", user=user, is_admin=is_admin(user.id)
@@ -27,10 +26,9 @@ def guild_page(guild_id):
     user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
     user_guild = user.get_guild(guild_id)
     # if guild is missing
-    if not user_guild :
+    if not user_guild:
         return abort(403)
-    # get guild info form database
-    info = app.db.find_one({"_id": guild_id})
+    info = app.db.find_one({"_id": guild_id})  # get guild info form database
     if not info:
         info = {
             "_id": guild_id,

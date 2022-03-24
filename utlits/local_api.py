@@ -1,6 +1,7 @@
+import json
 import typing as t
 import requests
-from utlits.objects import Channel, Role, convert_channels, convert_roles, BotGuild
+from utlits.objects import Channel, Guild, Role, convert_channels, convert_roles, BotGuild
 from flask import current_app as app
 
 def get_guild(guild_id: int) -> BotGuild:
@@ -21,6 +22,10 @@ def get_bot_info() -> t.Dict:
 def check_guild(guild_id: int) -> bool:
     r = requests.get(f"{app.config['BOT_SERVER']}/guild/{guild_id}/check")
     return r.json()["check"]
+
+def check_guilds(guilds: t.List[Guild]) -> t.List[t.Dict]:
+    r = requests.get(f"{app.config['BOT_SERVER']}/guilds/check", json={"guilds": [i.id for i in guilds]})
+    return r.json()["guilds"]
 
 def send_ping():
     try:
