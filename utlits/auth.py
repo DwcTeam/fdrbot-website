@@ -87,7 +87,7 @@ class Auth(object):
             return convert_guild(guild)
         return {"code": 1, "Error": "Missing Permissions"}  # missing permissions
 
-    def guilds(self, token: AccessToken) -> list[Guild]:
+    def guilds(self, token: AccessToken) -> t.List[Guild]:
         r = request(
             method="GET", 
             url=f"{BASE}/users/@me/guilds",
