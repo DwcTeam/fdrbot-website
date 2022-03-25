@@ -51,6 +51,8 @@ def update_guild(guild_id: int):
     del info["_id"]
     del info["prefix"]
 
+    data["channel"] = int(data.get("channel")) if data.get("channel") else None
+    data["role_id"] = int(data.get("role_id")) if data.get("role_id") else None
     # check if not make updates
     if info == data:
         return jsonify({"message": "No updates"}), 400
@@ -58,15 +60,12 @@ def update_guild(guild_id: int):
     guild = get_guild_api(guild_id)
 
     # check if channel is valid
-    if data.get("channel") and data.get("channel") not in [i.id for i in guild.channels]:
+    if data.get("channel") and int(data.get("channel")) not in [i.id for i in guild.channels]:
         return jsonify({"message": "Invalid channel"}), 400
     
     # check if role is valid
-    if data.get("role_id") and data.get("role_id") not in [i.id for i in guild.roles]:
+    if data.get("role_id") and int(data.get("role_id")) not in [i.id for i in guild.roles]:
         return jsonify({"message": "Invalid role"}), 400
-
-
-    data["channel"] = data.get("channel")
 
     app.db.update_one({"_id": guild_id}, {"$set": data}, upsert=True)
     return jsonify({"message": "Success!"})
@@ -80,6 +79,8 @@ def get_guild(guild_id: int):
         return jsonify({"error": "Guild not found"}), 404
     del guild["_id"]
     del guild["prefix"]
+    guild["channel"] = str(guild.get("channel")) if guild.get("channel") else None
+    guild["role_id"] = str(guild.get("role_id")) if guild.get("role_id") else None
     data = {
         "status": True if guild else False,
         "guild": guild

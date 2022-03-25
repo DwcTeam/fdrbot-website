@@ -125,13 +125,13 @@
                 </div>
 
                 <div class="col update">
-                    <div class="card bg-dark">
+                    <div class="card bg-dark maintenance">
                         <div class="card-body">
                             <h1 class="set text-light text-center">علبة الوان</h1>
                         </div>
                         <div class="card-footer">
                             <input type="color" class="form-control form-control-color w-100" id="exampleColorInput"
-                                value="#262727" title="Choose your color"><br>
+                                value="#262727" title="Choose your color" disabled><br>
                         </div>
                     </div>
                 </div>
@@ -218,8 +218,6 @@
 </div>
 
 
-
-
 {% endblock %}
 
     
@@ -241,7 +239,7 @@
         getDataFromElements: function (){
             return {
                 channel: ($(".channel_id").val() == 0) ? null : $(".channel_id").val(),
-                time: $(".time").val(),
+                time: parseInt($(".time").val()),
                 anti_spam: $(".anti_spam").is(":checked"),
                 embed: $(".embed").is(":checked"),
                 role_id: ($(".role_id").val() == 0) ? null : $(".role_id").val(),
@@ -251,7 +249,6 @@
     var result = $.getValues("/api/guilds/{{ guild.id }}/info").guild;
     $('.update').change(function () {
         var data = $.getDataFromElements();
-        console.log(data);
         if (
             data.channel == result.channel &&
             data.time == result.time &&
@@ -259,13 +256,11 @@
             data.embed == result.embed &&
             data.role_id == result.role_id
         ) {
-            console.log("yes")
-            $('#liveToast').fadeOut(500).css('');
-            $('#liveToast').removeClass('show');
+            $('#liveToast').fadeOut(500);
+            $('#liveToast').addClass('d-none');
         } else {
-            console.log("no")
             $('#liveToast').fadeIn(500);
-            $('#liveToast').addClass('show');
+            $('#liveToast').removeClass('d-none');
         }
     });
 
@@ -278,8 +273,18 @@
             dataType: "json",
             contentType: "application/json",
             success: function (data) {
-                console.log(data);
-                $('#liveToast').removeClass('show');
+                if (data.message == "Success!"){
+                    $('#liveToast').fadeOut(500);
+                    $('#liveToast').addClass('d-none');
+                    result = data;
+                } else if (data.message == "No updates"){
+                    $('#liveToast').fadeOut(500);
+                    $('#liveToast').addClass('d-none');
+                } 
+                else {
+                    $('#liveToast').fadeOut(500);
+                    $('#liveToast').removeClass('d-none');
+                }
             }
         });
     });
@@ -290,7 +295,8 @@
         $(".anti_spam").prop("checked", result.anti_spam);
         $(".embed").prop("checked", result.embed);
         $(".role_id").val(result.role_id);
-        $('#liveToast').removeClass('show');
+        $('#liveToast').fadeOut(500);
+        $('#liveToast').addClass('d-none');
     });
 
 </script>
