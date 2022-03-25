@@ -40,7 +40,7 @@ def update_guild(guild_id: int):
     
     # chcek values type
     if not isinstance(data.get("anti_spam"), bool) or not isinstance(data.get("embed"), bool) or \
-        not isinstance(data.get("role_id"), t.Optional[int]) or not isinstance(data.get("channel"), t.Optional[int]) or not isinstance(data.get("time"), int):
+        not isinstance(data.get("role_id"), t.Optional[str]) or not isinstance(data.get("channel"), t.Optional[str]) or not isinstance(data.get("time"), int):
         return jsonify({"message": "Invalid values"}), 400
     
     # check values range
@@ -64,6 +64,9 @@ def update_guild(guild_id: int):
     # check if role is valid
     if data.get("role_id") and data.get("role_id") not in [i.id for i in guild.roles]:
         return jsonify({"message": "Invalid role"}), 400
+
+
+    data["channel"] = data.get("channel")
 
     app.db.update_one({"_id": guild_id}, {"$set": data}, upsert=True)
     return jsonify({"message": "Success!"})

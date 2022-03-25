@@ -25,6 +25,33 @@ def index_page():
 @login_required
 def guild_page(guild_id):
     user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+    
+    # get guild info from cache bot api
+    if is_admin(user.id):
+        guild = get_guild(guild_id)
+        user_guild = get_guild_info(guild_id)
+        if not user_guild["status"]:
+            return abort(404)
+        info = app.db.find_one({"_id": guild_id})  # get guild info form database
+        if not info:
+            info = {
+                "_id": guild_id,
+                "prefix": "!",
+                "channel": None,
+                "time": 1800,
+                "anti_spam": False,
+                "embed": False,
+                "role_id": None
+            }
+            app.db.insert_one(info)
+        text_channels = [i for i in guild.channels if i.type == 0]
+        voice_channels = [i for i in guild.channels if i.type == 2]
+        return render_template(
+            'guild.html', guild=user_guild.get("guild"), info=info, text_channels=text_channels, 
+            voice_channels=voice_channels, roles=guild.roles,
+            title=f"{user_guild.get('guild').get('name')} | لوحة التحكم", user=user, is_admin=is_admin(user.id)
+        )
+    
     info = app.db.find_one({"_id": guild_id})  # get guild info form database
     if not info:
         info = {
@@ -37,21 +64,7 @@ def guild_page(guild_id):
             "role_id": None
         }
         app.db.insert_one(info)
-    
-    # get guild info from cache bot api
-    if is_admin(user.id):
-        guild = get_guild(guild_id)
-        user_guild = get_guild_info(guild_id)
-        if not user_guild["status"]:
-            return abort(404)
-        text_channels = [i for i in guild.channels if i.type == 0]
-        voice_channels = [i for i in guild.channels if i.type == 2]
-        return render_template(
-            'guild.html', guild=user_guild.get("guild"), info=info, text_channels=text_channels, 
-            voice_channels=voice_channels, roles=guild.roles,
-            title=f"{user_guild.get('guild').get('name')} | لوحة التحكم", user=user, is_admin=is_admin(user.id)
-        )
-    
+
     user_guild = user.get_guild(guild_id)
     guild = get_guild(guild_id)
     text_channels = [i for i in guild.channels if i.type == 0]

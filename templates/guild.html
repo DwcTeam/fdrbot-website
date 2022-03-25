@@ -240,11 +240,11 @@
         },
         getDataFromElements: function (){
             return {
-                channel: (parseInt($(".channel_id").val()) == 0) ? null : parseInt($(".channel_id").val()),
-                time: parseInt($(".time").val()),
+                channel: ($(".channel_id").val() == 0) ? null : $(".channel_id").val(),
+                time: $(".time").val(),
                 anti_spam: $(".anti_spam").is(":checked"),
                 embed: $(".embed").is(":checked"),
-                role_id: (parseInt($(".role_id").val()) == 0) ? null : parseInt($(".role_id").val()),
+                role_id: ($(".role_id").val() == 0) ? null : $(".role_id").val(),
             }
         }
     });
