@@ -205,8 +205,8 @@
                             <div class="card-body">
                                 <h1 class="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
                                 <div class="group-buttons float-start save-menu">
-                                    <button class="btn btn-lg me-2 mx-2 save-button">حفظ التغييرات</button>
-                                    <button class="btn btn-lg me-2 mx-2 cancel-button">إلغاء</button>
+                                    <button class="btn me-2 mx-2 save-button">حفظ التغييرات</button>
+                                    <button class="btn me-2 mx-2 cancel-button">إلغاء</button>
                                 </div>
                             </div>
                         </div>
@@ -260,9 +260,11 @@
             data.role_id == result.role_id
         ) {
             console.log("yes")
+            $('#liveToast').fadeOut(500).css('');
             $('#liveToast').removeClass('show');
         } else {
             console.log("no")
+            $('#liveToast').fadeIn(500);
             $('#liveToast').addClass('show');
         }
     });

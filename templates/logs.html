@@ -4,21 +4,21 @@
 
 {% block stats_for_login %}
 <ul class="navbar-nav ml-auto text-center" dir="ltr">
-  <div class="btn-group d-block me-lg-1 mx-lg-1" role="group">
+<div class="btn-group d-block me-lg-1 mx-lg-1" role="group">
     <button id="users" type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown"
-      aria-expanded="false">
-      <img src="{{ user.avatar }}"
+        aria-expanded="false">
+        <img src="{{ user.avatar }}"
         width="28" height="28" class="image"> <b>{{ user.username }}</b>
     </button>
     <ul class="dropdown-menu saqrs" aria-labelledby="users">
-      <li class="nav-item"><a class="dropdown-item text-center primary" href="/dashboard">السيرفرات</a></li>
-      {% if is_admin %}
-      <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin">لوحة الادمن</a></li>
-      <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin/logs">السجلات</a></li>
-      {% endif %}
-      <li class="nav-item"><a class="dropdown-item text-center primary red" href="/logout">تسجيل خروج</a></li>
+        <li class="nav-item"><a class="dropdown-item text-center primary" href="/dashboard">السيرفرات</a></li>
+        {% if is_admin %}
+        <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin">لوحة الادمن</a></li>
+        <li class="nav-item"><a class="dropdown-item text-center primary" href="/admin/logs">السجلات</a></li>
+        {% endif %}
+        <li class="nav-item"><a class="dropdown-item text-center primary red" href="/logout">تسجيل خروج</a></li>
     </ul>
-  </div>
+</div>
 </ul>
 {% endblock %}
 
@@ -26,91 +26,26 @@
 
 
 
-<section class="py-5" id="Services">
-<div class="container">
-<div class="text-center">
-    <h2 id="saqr-6" class="text-center h1 text-white title">سجل لوحة التحكم</h2>
-    <br>
-    <br>
-    <div class="row text-center row-cols-1 row-cols-md-3 g-3">
-    <div class="col-sm" id="card-animation">
-        <div class="card text-light mb-3 card-fdr">
-        <div class="card-outline-fdr"></div>
-        <div class="h1 mt-3"><br>
-            <img class="image w-50" src="https://cdn.discordapp.com/avatars/277669327602188288/62b3648ce9aaee94eaceac137586ee23.png?size=1024">
+
+<section class="py-5">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-center flex-row-reverse">
+            <h1 class="text-white text-center title"><i class="fa-solid fa-shield icon-1"></i> Moderation : <a href="/guild" class="btn primary-1 text-light">back</a></h1>
         </div>
-        <div class="card-body text-center">
-            <h4 class="card-title about-fdr">agustin#0001</h4>
-            <p dir="ltr" class="form-control bot_2 text-start" id="floatingTextarea2" style="height: 100px; background-color: #10131e; border: 1px solid var(--color3);" readonly="">
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-id-card" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="id-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M528 32h-480C21.49 32 0 53.49 0 80V96h576V80C576 53.49 554.5 32 528 32zM0 432C0 458.5 21.49 480 48 480h480c26.51 0 48-21.49 48-48V128H0V432zM368 192h128C504.8 192 512 199.2 512 208S504.8 224 496 224h-128C359.2 224 352 216.8 352 208S359.2 192 368 192zM368 256h128C504.8 256 512 263.2 512 272S504.8 288 496 288h-128C359.2 288 352 280.8 352 272S359.2 256 368 256zM368 320h128c8.836 0 16 7.164 16 16S504.8 352 496 352h-128c-8.836 0-16-7.164-16-16S359.2 320 368 320zM176 192c35.35 0 64 28.66 64 64s-28.65 64-64 64s-64-28.66-64-64S140.7 192 176 192zM112 352h128c26.51 0 48 21.49 48 48c0 8.836-7.164 16-16 16h-192C71.16 416 64 408.8 64 400C64 373.5 85.49 352 112 352z"></path></svg> 277669327602188288</strong><br>
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512zM232 256C232 264 236 271.5 242.7 275.1L338.7 339.1C349.7 347.3 364.6 344.3 371.1 333.3C379.3 322.3 376.3 307.4 365.3 300L280 243.2V120C280 106.7 269.3 96 255.1 96C242.7 96 231.1 106.7 231.1 120L232 256z"></path></svg> 6:19 AM</strong><br>
-                <p style="font-size: 20px;">تسجيل دخول للداشبورد </p>
-                <p style="font-size: 20px;">21/03/2022 06:19:04 6:19 AM </p>
-            </p>
-        </div>
+        <!--  -->
+        <div class="row row-cols-1 row-cols-md-1 g-1">
+
+            <div class="col">
+                <div class="card bg-dark m-1">
+                    <img src="" alt="" width="28" height="28" class="image">
+                </div>
+            </div>
+
+
         </div>
     </div>
-
-    <div class="col-sm" id="card-animation">
-        <div class="card text-light mb-3 card-fdr">
-        <div class="card-outline-fdr"></div>
-        <div class="h1 mt-3"><br>
-            <img class="image w-50" src="https://cdn.discordapp.com/avatars/197795773952425985/a_487993dbf8fb77a4ca4ccad7463ae88e.gif?size=1024">
-        </div>
-        <div class="card-body text-center">
-            <h4 class="card-title about-fdr">oCMz#9999</h4>
-            <p dir="ltr" class="form-control bot_2 text-start" id="floatingTextarea2" style="height: 100px; background-color: #10131e; border: 1px solid var(--color3);" readonly="">
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-id-card" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="id-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M528 32h-480C21.49 32 0 53.49 0 80V96h576V80C576 53.49 554.5 32 528 32zM0 432C0 458.5 21.49 480 48 480h480c26.51 0 48-21.49 48-48V128H0V432zM368 192h128C504.8 192 512 199.2 512 208S504.8 224 496 224h-128C359.2 224 352 216.8 352 208S359.2 192 368 192zM368 256h128C504.8 256 512 263.2 512 272S504.8 288 496 288h-128C359.2 288 352 280.8 352 272S359.2 256 368 256zM368 320h128c8.836 0 16 7.164 16 16S504.8 352 496 352h-128c-8.836 0-16-7.164-16-16S359.2 320 368 320zM176 192c35.35 0 64 28.66 64 64s-28.65 64-64 64s-64-28.66-64-64S140.7 192 176 192zM112 352h128c26.51 0 48 21.49 48 48c0 8.836-7.164 16-16 16h-192C71.16 416 64 408.8 64 400C64 373.5 85.49 352 112 352z"></path></svg> 197795773952425985</strong><br>
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512zM232 256C232 264 236 271.5 242.7 275.1L338.7 339.1C349.7 347.3 364.6 344.3 371.1 333.3C379.3 322.3 376.3 307.4 365.3 300L280 243.2V120C280 106.7 269.3 96 255.1 96C242.7 96 231.1 106.7 231.1 120L232 256z"></path></svg> 6:19 AM</strong><br>
-                <p style="font-size: 20px;">تسجيل دخول للداشبورد </p>
-                <p style="font-size: 20px;">21/03/2022 06:19:04 6:19 AM </p>
-            </p>
-        </div>
-        </div>
-    </div>
-
-    <div class="col-sm" id="card-animation">
-        <div class="card text-light mb-3 card-fdr">
-        <div class="card-outline-fdr"></div>
-        <div class="h1 mt-3"><br>
-            <img class="image w-50" src="https://cdn.discordapp.com/avatars/716783245387235410/4e1581b67a4e10269da668db41716590.png?size=1024">
-        </div>
-        <div class="card-body text-center">
-            <h4 class="card-title about-fdr">S A Q R#1200</h4>
-            <p dir="ltr" class="form-control bot_2 text-start" id="floatingTextarea2" style="height: 100px; background-color: #10131e; border: 1px solid var(--color3);" readonly="">
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-id-card" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="id-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M528 32h-480C21.49 32 0 53.49 0 80V96h576V80C576 53.49 554.5 32 528 32zM0 432C0 458.5 21.49 480 48 480h480c26.51 0 48-21.49 48-48V128H0V432zM368 192h128C504.8 192 512 199.2 512 208S504.8 224 496 224h-128C359.2 224 352 216.8 352 208S359.2 192 368 192zM368 256h128C504.8 256 512 263.2 512 272S504.8 288 496 288h-128C359.2 288 352 280.8 352 272S359.2 256 368 256zM368 320h128c8.836 0 16 7.164 16 16S504.8 352 496 352h-128c-8.836 0-16-7.164-16-16S359.2 320 368 320zM176 192c35.35 0 64 28.66 64 64s-28.65 64-64 64s-64-28.66-64-64S140.7 192 176 192zM112 352h128c26.51 0 48 21.49 48 48c0 8.836-7.164 16-16 16h-192C71.16 416 64 408.8 64 400C64 373.5 85.49 352 112 352z"></path></svg> 716783245387235410</strong><br>
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512zM232 256C232 264 236 271.5 242.7 275.1L338.7 339.1C349.7 347.3 364.6 344.3 371.1 333.3C379.3 322.3 376.3 307.4 365.3 300L280 243.2V120C280 106.7 269.3 96 255.1 96C242.7 96 231.1 106.7 231.1 120L232 256z"></path></svg> 6:19 AM</strong><br>
-                <p style="font-size: 20px;">تسجيل دخول للداشبورد </p>
-                <p style="font-size: 20px;">21/03/2022 06:19:04 6:19 AM </p>
-            </p>
-        </div>
-        </div>
-    </div>
-
-    <div class="col-sm" id="card-animation">
-        <div class="card text-light mb-3 card-fdr">
-        <div class="card-outline-fdr"></div>
-        <div class="h1 mt-3"><br>
-            <img class="image w-50" src="https://cdn.discordapp.com/avatars/750376850768789534/7287518ab3eadb04e13e4eb285a8bb55.png?size=1024">
-        </div>
-        <div class="card-body text-center">
-            <h4 class="card-title about-fdr">H A Z E M#1629</h4>
-            <p dir="ltr" class="form-control bot_2 text-start" id="floatingTextarea2" style="height: 100px; background-color: #10131e; border: 1px solid var(--color3);" readonly="">
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-id-card" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="id-card" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" data-fa-i2svg=""><path fill="currentColor" d="M528 32h-480C21.49 32 0 53.49 0 80V96h576V80C576 53.49 554.5 32 528 32zM0 432C0 458.5 21.49 480 48 480h480c26.51 0 48-21.49 48-48V128H0V432zM368 192h128C504.8 192 512 199.2 512 208S504.8 224 496 224h-128C359.2 224 352 216.8 352 208S359.2 192 368 192zM368 256h128C504.8 256 512 263.2 512 272S504.8 288 496 288h-128C359.2 288 352 280.8 352 272S359.2 256 368 256zM368 320h128c8.836 0 16 7.164 16 16S504.8 352 496 352h-128c-8.836 0-16-7.164-16-16S359.2 320 368 320zM176 192c35.35 0 64 28.66 64 64s-28.65 64-64 64s-64-28.66-64-64S140.7 192 176 192zM112 352h128c26.51 0 48 21.49 48 48c0 8.836-7.164 16-16 16h-192C71.16 416 64 408.8 64 400C64 373.5 85.49 352 112 352z"></path></svg> 750376850768789534</strong><br>
-                <strong style="font-size: 20px;"><svg style="color: var(--color3);" class="svg-inline--fa fa-clock" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="clock" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg=""><path fill="currentColor" d="M256 512C114.6 512 0 397.4 0 256C0 114.6 114.6 0 256 0C397.4 0 512 114.6 512 256C512 397.4 397.4 512 256 512zM232 256C232 264 236 271.5 242.7 275.1L338.7 339.1C349.7 347.3 364.6 344.3 371.1 333.3C379.3 322.3 376.3 307.4 365.3 300L280 243.2V120C280 106.7 269.3 96 255.1 96C242.7 96 231.1 106.7 231.1 120L232 256z"></path></svg> 6:19 AM</strong><br>
-                <p style="font-size: 20px;">تسجيل دخول للداشبورد </p>
-                <p style="font-size: 20px;">21/03/2022 06:19:04 6:19 AM </p>
-            </p>
-        </div>
-        </div>
-    </div>
-
-
-
-    </div>
-</div>
-</div>
 </section>
+
 
 
 {% endblock %}
