@@ -47,7 +47,10 @@ body {
 
 
 
-
+.cmd {
+    background-color: var(--dark-body-bg);
+    border: 1px solid var(--color1);
+}
 
 
 /* loading */
