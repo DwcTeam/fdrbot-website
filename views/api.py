@@ -1,6 +1,8 @@
 from flask import Blueprint, request, jsonify, current_app as app, session
 from utlits import login_required, send_ping, Auth, convert_data_user, check_permission, get_guild as get_guild_api
 import typing as t
+from utlits.checks import only_admin
+from utlits.local_api import get_guild_info
 
 from utlits.objects import AccessToken
 
@@ -80,3 +82,18 @@ def get_guild(guild_id: int):
         "guild": guild
     }
     return jsonify(data)
+
+
+@api.route("/guilds/<int:guild_id>/info/admin", methods=["GET"])
+@login_required
+@only_admin
+def get_guild_admin(guild_id: int):
+    info = app.db.find_one({'_id': guild_id})
+    guild = get_guild_info(guild_id)
+    if not guild:
+        return jsonify({"error": "Guild not found"}), 404
+    return jsonify({
+        "status": True if guild["status"] else False,
+        "guild": guild,
+        "info": info
+    })

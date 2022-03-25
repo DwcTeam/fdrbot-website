@@ -31,8 +31,9 @@ def check_permission(function_to_protect):
     @wraps(function_to_protect)
     def deco(*args, **kwargs):
         user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
-        guild = app.auth.get_guild(user.access_token ,kwargs.get("guild_id"))
-        print(guild)
+        if is_admin(user.id):
+            return function_to_protect(*args, **kwargs)
+        guild = app.auth.get_guild(user.access_token, kwargs.get("guild_id"))
         if not guild:
             return abort(403)
             # Success!
@@ -41,3 +42,13 @@ def check_permission(function_to_protect):
 
 def is_admin(user_id: int):
     return True if user_id in app.config["ADMINS"] else False
+
+def only_admin(function_to_protect):
+    @wraps(function_to_protect)
+    def deco(*args, **kwargs):
+        user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+        if not is_admin(user.id):
+            return abort(403)
+        return function_to_protect(*args, **kwargs)
+    return deco
+

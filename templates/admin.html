@@ -32,14 +32,14 @@
             </div>
             <div class="card-body" style="background-color: var(--dark-section-bg-1); color: var(--color1);">
                 <div class="mb-3 row">
-                    <label for="botId" class="col-sm-2 col-form-label">ايدي سيرفر</label>
+                    <label for="botId" class="col-sm-2 col-form-label" >ايدي سيرفر</label>
                     <div class="col-sm-10">
-                        <input type="text" placeholder="الايدي من 18 رقم !" class="form-control bot_2 guild_id" id="botId" maxlength="18" value="">
+                        <input type="number" placeholder="الايدي من 18 رقم !" class="form-control bot_2 guild-id-input" id="botId" maxlength="18" value="" required>
                     </div>
                     <br>
                 </div>
                 <div class="text-center">
-                    <button class="bot_1 btn btn-danger btn-lg info"> <svg class="svg-inline--fa fa-info" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" data-fa-i2svg=""><path fill="currentColor" d="M160 448h-32V224c0-17.69-14.33-32-32-32L32 192c-17.67 0-32 14.31-32 32s14.33 31.1 32 31.1h32v192H32c-17.67 0-32 14.31-32 32s14.33 32 32 32h128c17.67 0 32-14.31 32-32S177.7 448 160 448zM96 128c26.51 0 48-21.49 48-48S122.5 32.01 96 32.01s-48 21.49-48 48S69.49 128 96 128z"></path></svg><!-- <i class="fas fa-info"></i> Font Awesome fontawesome.com --> إستعلام عن سيرفر</button>
+                    <button class="bot_1 btn btn-danger btn-lg info-search"> <svg class="svg-inline--fa fa-info" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="info" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 512" data-fa-i2svg=""><path fill="currentColor" d="M160 448h-32V224c0-17.69-14.33-32-32-32L32 192c-17.67 0-32 14.31-32 32s14.33 31.1 32 31.1h32v192H32c-17.67 0-32 14.31-32 32s14.33 32 32 32h128c17.67 0 32-14.31 32-32S177.7 448 160 448zM96 128c26.51 0 48-21.49 48-48S122.5 32.01 96 32.01s-48 21.49-48 48S69.49 128 96 128z"></path></svg> إستعلام عن سيرفر</button>
                 </div>
             </div>
 
@@ -55,20 +55,27 @@
                             </div>
                             <div class="card-body">
                                 <div class="text-center">
-                                    <img style="width: 200px; height: 200px; border-radius: 50%; border: 1px solid;" src="https://cdn.discordapp.com/icons/547436115741900801/a_90d8c6373b0d8637bcd743239f00e90e.gif?size=1024">
+                                    <img style="width: 200px; height: 200px; border-radius: 50%; border: 1px solid;" class="guild-icon" src="">
                                 </div>
-                                <h1 class="card-title text-center"><strong class="strtt" id="username-1">oCMz</strong></h1>
-                                <div dir="ltr" class="form-floating">
-                                    <textarea dir="ltr" class="form-control bot_2" id="floatingTextarea2" style="height: 100px; background-color: #10131e; border: 1px solid #437baf;" readonly="">
-SERVER GUILD ID: 841773880230150154
-SERVER NAME: oCMz
-SERVER Owner: oCMz#1111
-                                    </textarea>
-                                    <label for="floatingTextarea2">SERVER INFO</label>
+                                <h1 class="card-title text-center"><strong class="strtt guild-name" id="username-1"></strong></h1>
+                                
+                                <div class="card-body text-start form-floating" id="floatingTextarea2"  style="height: auto; background-color: #10131e; border: 1px solid #437baf;">
+                                    <label for="floatingTextarea2" style="color: var(--false);">SERVER INFO</label><br>
+                                    <p class="text-start">ID: <b class="strtt guild-id"></b></p>
+                                    <p class="text-start">Name: <b class="strtt guild-name"></b></p>
+                                    <p class="text-start">Owner: <b class="strtt owner-id"></b></p>
+                                    <p class="text-start">Channels: <b class="strtt channels"></b></p>
+                                    <p class="text-start">Emojis: <b class="strtt emojis"></b></p>
+                                    <p class="text-start">Members: <b class="strtt members"></b></p>
+                                    <p class="text-start">Channel: <b class="strtt channel"></b></p>
+                                    <p class="text-start">Embed: <b class="strtt embed"></b></p>
+                                    <p class="text-start">AntiSpam: <b class="strtt anti-spam"></b></p>
+                                    <p class="text-start">QuranRole: <b class="strtt role-id"></b></p>
+                                    <p class="text-start">Time: <b class="strtt time"></b></p>
                                 </div>
                             </div>
                             <div class="card-footer">
-                                <button class="btn primary btn-lg me-2 mx-2">تعديل البوت كمساول</button>
+                                <a href="" class="dashboard-link"><button class="btn primary btn-lg me-2 mx-2">تعديل البوت كمساول</button></a>
                             </div>
                         </div>
                     </div>
@@ -77,7 +84,7 @@ SERVER Owner: oCMz#1111
             <!--  -->
 
             <!-- if not found a server -->
-            <div class="d-none not-found">
+            <div class="not-found d-none">
                 <div class="container">
                     <div class="text-center">
                         <i class="fa-solid fa-triangle-exclamation fa-7x error-2" aria-hidden="true"></i><br><br>
@@ -98,27 +105,7 @@ SERVER Owner: oCMz#1111
     </div>
 </section>
 
-<!-- 
-<div class="bg-fdr">
-    <div class="container">
-        <div class="text-center">
-            <i class="fa-solid fa-triangle-exclamation fa-7x error-2" aria-hidden="true"></i><br><br>
-            <div class="error-1">
-                <div class="card error">
-                    <div class="card-body">
-                        <h2 class="card-text text-1"><i class="fa-solid fa-triangle-exclamation"></i> لا اصططيع العثور على السيرفر</h2>
-                    </div>
-                </div>
-            </div>
-            <br><br><br>
-        </div>
-    </div>
-</div>
- -->
-
-
 <div class="container py-5"></div>
-
 
 <section class="bot_4">
     <div id="error"
@@ -192,32 +179,42 @@ SERVER Owner: oCMz#1111
 
 <script>
     function show_guild_info() {
-        console.log($("guild_id"));
-        var guild_id = parseInt(document.getElementsByClassName("guild_id")[0].value);
+        var guild_id = $(".guild-id-input").val();
+        if (!guild_id) {
+            $(".guild-info").addClass("d-none");
+            $(".not-found").removeClass("d-none");
+            return;
+        }
         $.ajax({
             method: "GET",
-            url: `http://127.0.0.1:8080/get_guild/${guild_id}/info`,
+            url: `/api/guilds/${guild_id}/info/admin`,
             success: function (data) {
-                console.log(data)
-                if (data.guild) {
-                    console.log("ss")
+                if (data.status) {
+                    $(".not-found").addClass("d-none");
                     $(".guild-info").removeClass("d-none");
-                    const guild = data.guild;
-                    document.getElementById("floatingTextarea2").innerHTML = `
-SERVER ID: ${guild._id}
-SERVER NAME: ${guild.anti_spam}
-                    `;
+                    var guild = data.guild.guild;
+                    var info = data.info;
+                    $(".guild-icon").attr("src", guild.icon);
+                    $(".guild-name").text(guild.name);
+                    $(".guild-id").text(guild_id);
+                    $(".owner-id").text(guild.owner_id);
+                    $(".channels").text(guild.channels);
+                    $(".emojis").text(guild.emojis);
+                    $(".members").text(guild.member_count);
+                    $(".channel").text(info.channel ? info.channel : "لايوجد");
+                    $(".embed").text(info.embed);
+                    $(".anti-spam").text(info.anti_spam);
+                    $(".role-id").text(info.role_id ? info.role_id : "لايوجد");
+                    $(".time").text(info.time);
+                    $(".dashboard-link").attr("href", `/dashboard/${guild_id}`);
                 } else {
-                    // $(".guild-info").removeClass("d-block");
-                    // $(".guild-info").addClass("d-none");
+                    $(".guild-info").addClass("d-none");
+                    $(".not-found").removeClass("d-none");
                 }
             }
         })
-        document.getElementsByClassName("guild-info")[0].classList.toggle("d-none");
-        document.getElementsByClassName("not-found")[0].classList.toggle("d-none");
     }
-
-    document.querySelector("button.info").addEventListener("click", show_guild_info);
+    $(".info-search").click(show_guild_info)
 </script>
 
 {% endblock %}

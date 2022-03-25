@@ -131,6 +131,34 @@ body {
     width: 100%;
 }
 
+/* https://khaalipaper.com/html/remove-arrows-from-input-type-number.php#:~:text=In%20%3C%20input%20type%3D%22number%22%20%3E%20field%20by%20default,a%20form%20element%20that%20is%20new%20in%20HTML5. */
+input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    cursor:pointer;
+    display:block;
+    width:8px;
+    color: #333;
+    text-align:center;
+    position:relative;
+}
+
+input[type=number]::-webkit-inner-spin-button:before,
+input[type=number]::-webkit-inner-spin-button:after {
+    content: "^";
+    position:absolute;
+    right: 0;
+    font-family:monospace;
+    line-height:
+}
+
+input[type=number]::-webkit-inner-spin-button:before {
+    top:0px;
+}
+
+input[type=number]::-webkit-inner-spin-button:after {
+    bottom:0px;
+    -webkit-transform: rotate(180deg);
+}
 
 /* navbar */
 .navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-nav .nav-link {
