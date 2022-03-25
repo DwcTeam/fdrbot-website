@@ -108,6 +108,14 @@
         font-size: .5px;
         font-weight: 100;
     }
+    .cmd-1 {
+        font-size: 1.2px;
+        font-weight: 500;
+    }
+    .cmd-2 {
+        font-size: 1px;
+        font-weight: 500;
+    }
 }
 
 
