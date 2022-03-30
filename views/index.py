@@ -13,6 +13,20 @@ def index_page():
         title="الصفحة الرئيسية"
     )
 
+
+@index.route('/admin/log-sug')
+def log_sug_page():
+    return render_template('log-sug.html', title="الصفحة السجلات الاقتراحات")
+
+@index.route('/suggestions')
+def suggestions_page():
+    return render_template('suggestions.html', title="الصفحة الاقتراحات")
+
+
+@index.route('/admin/azkar')
+def azkar_page():
+    return render_template('azkar.html', title="الصفحة الاذكار")
+
 @index.route('/invite')
 def invite_page():
     return redirect(f"https://discord.com/api/oauth2/authorize?client_id={current_app.config['CLIENT_ID']}&permissions=8&scope=bot%20applications.commands")
