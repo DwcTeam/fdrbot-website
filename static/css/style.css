@@ -12,9 +12,10 @@
     --color2: #262727;
     --color3: #FED302;
     --color4: #FED3027a;
+    --color5: #dc3545;
     --navbarC: #2a2a2a;
     --false: #888888;
-    --true: #008800;
+    --true: #20c997;
     
     --fontColor1: #eeeeee;
     --dark-section-bg: #34331f;
@@ -36,7 +37,9 @@ body {
     font-family: var(--font1_ar);
 }
 
-
+a {
+    text-decoration: none;
+}
 
 
 
@@ -270,7 +273,7 @@ nav ul li a:hover::after {
 }
 .primary:hover {
     background: var(--color3);
-    color: var(--color1);
+    color: var(--color2);
 }
 .primary:focus {
     background: var(--color3);
@@ -289,7 +292,7 @@ nav ul li a:hover::after {
 .button-fdr:hover {
     background: var(--color4);
     border-radius: 7px;
-    color: var(--color1);
+    color: var(--color2);
 }
 
 .title {
@@ -369,7 +372,6 @@ nav ul li a:hover::after {
 
 #card-animation {
     transition: all ease .5s; 
-    
 }
 #card-animation:hover {
     transform: scale(1.02);
@@ -756,6 +758,287 @@ img.logs_3 {
 .saqr_bot {
     border: 3px solid var(--color3);
     border-radius: 50px;
+}
+
+/* azkar & suggestions*/
+.bg-fdr-col {
+    border-color: var(--dark-section-bg-1);
+}
+
+.card-3 {
+    border-radius: 0px;
+    background: var(--dark-section-bg-1);
+    box-shadow:  5px 5px 0px #181818,
+    /* -5px -5px 0px #2c2c2c; */
+}
+
+.color-1 {
+    color: #00ccb1;
+}
+
+.color-2 {
+    color: #fe0202;
+}
+
+.text-color {
+    color: var(--color3);
+}
+.text-color-1{
+    color: var(--color1);
+}
+
+
+.color-2 {
+    color: var(--color5);
+}
+
+
+.card-image {
+    border-left: 5px double var(--color3);
+    border-right: 5px double var(--color1);
+    border-top: 5px dotted var(--color1);
+    border-bottom: 5px dotted var(--color3);
+    /* border: 5px double var(--color3); */
+    border-radius: 80px;
+}
+
+.card-avatar {
+    /* border-left: 5px double var(--color3);
+    border-right: 5px double var(--color1);
+    border-top: 5px dotted var(--color1);
+    border-bottom: 5px dotted var(--color3); */
+    border: 3px dashed var(--color3);
+    /* border-bottom: 5px solid var(--color1); */
+    border-radius: 100px 0px 100px 0px;
+}
+
+.card-avatar-1 {
+    border-right: 3px dashed var(--color3);
+    border-radius: 10px 0px 100px 10px;
+    border: 2px double var(--color3);
+}
+
+#card-animation-1 {
+    transition: all ease .5s;
+}
+
+#card-animation-1:hover {
+    transform: scale(1.1);
+}
+
+.up {
+    transform: rotate(-180deg);
+}
+
+.down {
+    /* margin-top: 20px; */
+    transform: rotate(-180deg);
+}
+
+.modal-content {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    pointer-events: auto;
+    background-color: var(--dark-section-bg-1);
+    color: var(--color1);
+    background-clip: padding-box;
+    border: 1px solid rgba(0,0,0,.2);
+    border-radius: .3rem;
+    outline: 0;
+}
+
+.edit {
+    border-right: 3px dashed var(--color3);
+}
+
+
+/* media */
+/* responsive */
+@media only screen and (max-width: 1029.33px) {
+    .title::before {
+        transform: translateY(60px);
+    }
+    .text-1 {
+        font-weight: 400;
+        font-family: var(--font1_ar);
+        font-size: 20px;
+    }
+}
+/* 1 */
+@media only screen and (max-width: 866px) {
+    .title::before {
+        transform: translateY(57px);
+    }
+    .text-1 {
+        font-size: 15px!important;
+        font-weight: 300;
+    }
+    .text-9 {
+        font-size: 10px;
+    }
+}
+/* 2 */
+@media only screen and (max-width: 690px) {
+    .title::before {
+        transform: translateY(54px);
+    }
+}
+/* 3 */
+@media only screen and (max-width: 500px) {
+    .title::before {
+        transform: translateY(51px);
+    }
+    .h5, h5 {
+        font-size: 0.80rem;
+    }
+}
+/* 4 */
+@media only screen and (max-width: 390px) {
+    .title::before {
+        transform: translateY(49px);
+    }
+    .h5, h5 {
+        font-size: .5rem;
+    }
+    .mx-2 {
+        margin-left: .1rem;
+    }
+    .display-4 {
+        font-size: calc(1rem + 2.7vw);
+    }
+    .about {
+        width: 900px;
+    }
+}
+/* 5 */
+@media only screen and (max-width: 394px) {
+    .title::before {
+        transform: translateY(49px);
+    }
+    .mx-2 {
+        margin-left: 0rem!important;
+    }
+}
+
+/* 6 */
+@media only screen and (max-width: 375px) {
+    .title::before {
+        transform: translateY(48px);
+    }
+    .btn-group-lg>.btn, .btn-lg {
+        font-size: 1rem;
+    }
+    .py-5 {
+        padding-top: .5rem!important;
+        padding-bottom: .5rem!important;
+    }
+}
+/* 7 */
+@media only screen and (max-width: 340px) {
+    .title::before {
+        width: 150px;
+        transform: translateY(48px);
+    }
+    .btn-group-lg>.btn, .btn-lg {
+        font-size: .2rem;
+    }
+    .avatar-image {
+        height: 150px;
+    }
+    .h5, h5 {
+        font-size: .4rem;
+        font-weight: 700;
+    }
+}
+/* 8 */
+@media only screen and (max-width: 282px) {
+    .title::before {
+        width: 150px;
+        transform: translateY(46px);
+    }
+    .h5, h5 {
+        font-size: .2rem;
+        font-weight: 400;
+    }
+    .btn-group-lg>.btn, .btn-lg {
+        padding: .25rem .5rem;
+    }
+    .text-1 {
+        font-size: 10px!important;
+        font-weight: 100;
+    }
+    .text-9 {
+        font-size: .5px;
+        font-weight: 100;
+    }
+    .cmd-1 {
+        font-size: 1.2px;
+        font-weight: 500;
+    }
+    .cmd-2 {
+        font-size: 1px;
+        font-weight: 500;
+    }
+}
+
+
+
+/* animation  */
+#saqr {
+    animation: saqr 10s linear infinite;
+}
+
+@keyframes saqr {
+0%, 100% {
+    transform: translateY(30px);
+}
+50% {
+    transform: translateY(-30px);
+}
+}
+
+
+#logo:hover{
+    animation: shake 1s linear 1;
+}
+@keyframes shake{
+0%{
+    transform: rotate(0deg);
+}
+25%{
+    transform: rotate(-5deg);
+}
+50%{
+    transform: rotate(5deg);
+}
+75%{
+    transform: rotate(-5deg);
+}
+100%{
+    transform: rotate(0deg);
+}
+}
+
+/* webkits */
+::-webkit-scrollbar {
+    width: 5.5px;
+    color: var(--color1);
+}
+
+::-webkit-scrollbar-track {
+    background: var(--navbarC);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color3);
+    border-radius: 100px;
+    transition: all 1s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color4);
 }
 
 /* Thanks for developer sqer to devlop this style 🤍 */
