@@ -271,21 +271,6 @@
     
 {% block js %}
 <script>
-
-var toastTrigger = document.getElementById('saqr44')
-var toastLiveExample = document.getElementById('saqr144')
-if (toastTrigger) {
-  toastTrigger.addEventListener('click', function () {
-    var toast = new bootstrap.Toast(toastLiveExample)
-
-    toast.show()
-  })
-}
-
-
-
-
-
     jQuery.extend({
         getValues: function(url, method = "GET") {
             var result = null;
@@ -361,7 +346,6 @@ if (toastTrigger) {
         $('#liveToast').fadeOut(500);
         $('#liveToast').addClass('d-none');
     });
-
 </script>
 
 {% endblock %}
