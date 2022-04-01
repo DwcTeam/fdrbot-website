@@ -41,7 +41,9 @@ a {
     text-decoration: none;
 }
 
-
+img {
+    pointer-events: none;
+}
 
 
 
@@ -441,7 +443,7 @@ nav ul li a:hover::after {
 .unvalidated {
     width: 47%;
     cursor: pointer;
-    filter: grayscale(80%);
+    filter: grayscale(90%);
     transition: .5s;
 }
 
