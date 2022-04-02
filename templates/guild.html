@@ -295,6 +295,7 @@
         }
     });
     var result = $.getValues("/api/guilds/{{ guild.id }}/info").guild;
+    console.log(result);
     $('.update').change(function () {
         var data = $.getDataFromElements();
         if (

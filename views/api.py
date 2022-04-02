@@ -1,3 +1,4 @@
+from __future__ import annotations
 from flask import Blueprint, request, jsonify, current_app as app, session
 from utlits import login_required, send_ping, Auth, convert_data_user, check_permission, get_guild as get_guild_api
 import typing as t
@@ -40,7 +41,7 @@ def update_guild(guild_id: int):
     
     # chcek values type
     if not isinstance(data.get("anti_spam"), bool) or not isinstance(data.get("embed"), bool) or \
-        not isinstance(data.get("role_id"), t.Optional[str]) or not isinstance(data.get("channel"), t.Optional[str]) or not isinstance(data.get("time"), int):
+        not isinstance(data.get("role_id"), (str, None)) or not isinstance(data.get("channel"), (str, None)) or not isinstance(data.get("time"), int):
         return jsonify({"message": "Invalid values"}), 400
     
     # check values range
