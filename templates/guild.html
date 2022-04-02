@@ -48,7 +48,7 @@
                         </div>
                         <div class="card-footer">
                             <select class="form-select form-select-sm channel_id" aria-label=".form-select-sm example">
-                                <option selected value="0">اختر ..</option>
+                                <option selected value="0" >اختر ..</option>
                                 {% for channel in text_channels %}
                                     {% if channel.id == info.channel %}
                                         <option value="{{ channel.id }}" class="text-start" selected>#{{ channel.name }}
@@ -175,8 +175,8 @@
                         <div class="card-body">
                             <h1 class="set text-light d-inline-flex float-end">تحديد نوع الارسال</h1>
                             <div class="form-check form-switch text-start h3 d-inline-flex rt">
-                                <input class="form-check-input rt anti_spam" type="checkbox" role="switch" name="anti_spam"
-                                    id="flexSwitchCheckChecked" {% if info.ant_spam %}checked{% endif %}>
+                                <input class="form-check-input rt anti_spam" type="checkbox" role="switch"
+                                    id="flexSwitchCheckChecked" {% if info.anti_spam %}checked{% endif %}>
                             </div>
                             <p class="text-end h6 sfsf"><b class="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال
                                 الذكار
@@ -215,8 +215,8 @@
                             <div class="card-body">
                                 <h1 class="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
                                 <div class="group-buttons float-start save-menu">
-                                    <button class="btn me-2 mx-2 save-button" id="saqr44">حفظ التغييرات</button>
-                                    <button class="btn me-2 mx-2 cancel-button">إلغاء</button>
+                                    <button class="btn me-2 mx-2 save-button" id="liveToastBtn">حفظ التغييرات</button>
+                                    <button class="btn me-2 mx-2 cancel-button" id="liveToastBtn">إلغاء</button>
                                 </div>
                             </div>
                         </div>
@@ -271,81 +271,80 @@
     
 {% block js %}
 <script>
-    jQuery.extend({
-        getValues: function(url, method = "GET") {
-            var result = null;
-            $.ajax({
-                url: url,
-                method: method,
-                async: false,
-                success: function(data) {
-                    result = data;
-                }
-            });
-        return result;
-        },
-        getDataFromElements: function (){
-            return {
-                channel: ($(".channel_id").val() == 0) ? null : $(".channel_id").val(),
-                time: parseInt($(".time").val()),
-                anti_spam: $(".anti_spam").is(":checked"),
-                embed: $(".embed").is(":checked"),
-                role_id: ($(".role_id").val() == 0) ? null : $(".role_id").val(),
-            }
-        }
-    });
-    var result = $.getValues("/api/guilds/{{ guild.id }}/info").guild;
-    $('.update').change(function () {
-        var data = $.getDataFromElements();
-        if (
-            data.channel == result.channel &&
-            data.time == result.time &&
-            data.anti_spam == result.anti_spam &&
-            data.embed == result.embed &&
-            data.role_id == result.role_id
-        ) {
-            $('#liveToast').fadeOut(500);
-            $('#liveToast').addClass('d-none');
-        } else {
-            $('#liveToast').fadeIn(500);
-            $('#liveToast').removeClass('d-none');
-        }
-    });
-
-    $('.save-button').click(function () {
-        var data = $.getDataFromElements();
+jQuery.extend({
+    getValues: function(url, method = "GET") {
+        var result = null;
         $.ajax({
-            url: "/api/guilds/{{ guild.id }}/update",
-            method: "POST",
-            data: JSON.stringify(data),
-            dataType: "json",
-            contentType: "application/json",
-            success: function (data) {
-                if (data.message == "Success!"){
-                    $('#liveToast').fadeOut(500);
-                    $('#liveToast').addClass('d-none');
-                    result = data;
-                } else if (data.message == "No updates"){
-                    $('#liveToast').fadeOut(500);
-                    $('#liveToast').addClass('d-none');
-                } 
-                else {
-                    $('#liveToast').fadeOut(500);
-                    $('#liveToast').removeClass('d-none');
-                }
+            url: url,
+            method: method,
+            async: false,
+            success: function(data) {
+                result = data;
             }
         });
-    });
-
-    $(".cancel-button").click(function () {
-        $(".channel_id").val(result.channel);
-        $(".time").val(result.time);
-        $(".anti_spam").prop("checked", result.anti_spam);
-        $(".embed").prop("checked", result.embed);
-        $(".role_id").val(result.role_id);
+    return result;
+    },
+    getDataFromElements: function (){
+        return {
+            channel: ($(".channel_id").val() == 0) ? null : $(".channel_id").val(),
+            time: parseInt($(".time").val()),
+            anti_spam: $(".anti_spam").is(":checked"),
+            embed: $(".embed").is(":checked"),
+            role_id: ($(".role_id").val() == 0) ? null : $(".role_id").val(),
+        }
+    }
+});
+var result = $.getValues("/api/guilds/{{ guild.id }}/info").guild;
+$('.update').change(function () {
+    var data = $.getDataFromElements();
+    if (
+        data.channel == result.channel &&
+        data.time == result.time &&
+        data.anti_spam == result.anti_spam &&
+        data.embed == result.embed &&
+        data.role_id == result.role_id
+    ) {
         $('#liveToast').fadeOut(500);
-        $('#liveToast').addClass('d-none');
+        $('#liveToastBtn').addClass('d-none');
+    } else {
+        $('#liveToast').fadeIn(500);
+        $('#liveToastBtn').removeClass('d-none');
+    }
+});
+
+$('.save-button').click(function () {
+    var data = $.getDataFromElements();
+    $.ajax({
+        url: "/api/guilds/{{ guild.id }}/update",
+        method: "POST",
+        data: JSON.stringify(data),
+        dataType: "json",
+        contentType: "application/json",
+        success: function (data) {
+            if (data.message == "Success!"){
+                $('#liveToast').fadeOut(500);
+                $('#liveToastBtn').addClass('d-none');
+                result = data;
+            } else if (data.message == "No updates"){
+                $('#liveToast').fadeOut(500);
+                $('#liveToastBtn').addClass('d-none');
+            } 
+            else {
+                $('#liveToast').fadeOut(500);
+                $('#liveToastBtn').removeClass('d-none');
+            }
+        }
     });
+});
+$(".cancel-button").click(function () {
+    $(".channel_id").val(result.channel);
+    $(".time").val(result.time);
+    $(".anti_spam").prop("checked", result.anti_spam);
+    $(".embed").prop("checked", result.embed);
+    $(".role_id").val(result.role_id);
+    $('#liveToast').fadeOut(500);
+    $('#liveToastBtn').addClass('d-none');
+});
 </script>
 
 {% endblock %}
