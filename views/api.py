@@ -41,7 +41,9 @@ def update_guild(guild_id: int):
     
     # chcek values type
     if not isinstance(data.get("anti_spam"), bool) or not isinstance(data.get("embed"), bool) or \
-        not isinstance(data.get("role_id"), (str, None)) or not isinstance(data.get("channel"), (str, None)) or not isinstance(data.get("time"), int):
+        not isinstance(data.get("role_id"), str) or not isinstance(data.get("role_id"), None) or \
+        not isinstance(data.get("channel"), str) or not isinstance(data.get("channel"), None) or \
+        not isinstance(data.get("time"), int):
         return jsonify({"message": "Invalid values"}), 400
     
     # check values range
