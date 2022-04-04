@@ -11,7 +11,9 @@ def login_required(function_to_protect):
         token = session.get("token", None)
         if token:
             user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
-            
+            # not working
+            # if user.scope.split(" ") != app.config.get("SCOPES"):
+            #     return redirect("/login")
             # If access_token is expired
             if datetime.now() >= user.expires_in:
                 token = app.auth.refresh_token(user.access_token)

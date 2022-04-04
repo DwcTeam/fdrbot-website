@@ -179,7 +179,7 @@ class User:
     token_type: str
     expires_in: datetime
     refresh_token: str
-    scope: t.List[str]
+    scope: t.Union[t.List[str], str]
 
     @property
     def as_dict(self) -> dict:
