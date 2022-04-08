@@ -14,18 +14,11 @@ def index_page():
     )
 
 
-@index.route('/admin/log-sug')
-def log_sug_page():
-    return render_template('log-sug.html', title="الصفحة السجلات الاقتراحات")
 
 @index.route('/suggestions')
 def suggestions_page():
     return render_template('suggestions.html', title="الصفحة الاقتراحات")
 
-
-@index.route('/admin/azkar')
-def azkar_page():
-    return render_template('azkar.html', title="الصفحة الاذكار")
 
 @index.route('/invite')
 def invite_page():
@@ -44,13 +37,12 @@ def support_page():
 def commands_page():
     return render_template(
         'commands.html', commands=get_commands(), 
-        is_login=True if "token" in session else False,
         title="الأوامر"
     )
 
 @index.route("/about")
 def about_page():
     return render_template(
-        "about.html", is_login=True if "token" in session else False,
+        "about.html",
         title="عن البوت"
     )
