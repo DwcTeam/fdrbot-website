@@ -1,0 +1,10 @@
+.nav-link {
+    display: block;
+    justify-content: right;
+    align-items: center;
+    text-align: center;
+    color: gold ;
+}
+.nav-link:hover {
+    color: #fff;
+}
