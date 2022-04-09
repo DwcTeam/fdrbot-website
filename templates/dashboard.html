@@ -31,42 +31,15 @@
 {% endblock %}
 
 {% block content %}
-<!--  --><br><br>
+<br><br>
 <section class="py-5">
   <div class="container">
+
     <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
-      <!-- dont forget name for user -->
       <h1 class="text-white text-center title">يا هلا والله فيك, {{ user.username }}</h1>
     </div>
 
-    <div class="row text-center row-cols-1 row-cols-md-3 g-3">
-      {% for guild in available_guilds %}
-
-      <div class="col  text-center">
-        <div class="card h-75 card-1">
-          <div class="card-body">
-            {% if guild.is_icon %}
-            <div class="sc-1vemdld-4 banner"
-              style="background: url('{{ guild.icon }}') center center / cover no-repeat;"></div>
-            {% else %}
-            <div class="sc-1vemdld-4 banner"
-              style="background: url('{{ url_for('static', filename='images/banner.jpg') }}') center center / cover no-repeat;background-size: 100%">
-            </div>
-            {% endif %}
-            <img src="{{ guild.icon }}"
-              class="avatar-server justify-content-center align-items-center w-50 avalidated"
-              alt="{{ guild.name }}">
-          </div>
-        </div>
-        <div class="pt-2">
-          <small class="text-muted float-end">{{ guild.name }}
-            <!-- <br><b class="text-muted float-end">ادمن</b> -->
-          </small>
-          <a href="/dashboard/{{ guild.id }}"><button class="btn primary card-title float-start pe-3 px-3 pt-2 pb-2 saqr-but">تحكم</button></a>
-        </div>
-      </div>
-      {% endfor %}
-    </div>
+    
 </section>
 
 <section class="py-5">
@@ -103,6 +76,40 @@
       {% endfor %}
     </div>
 </section>
+
+{% endblock %}
+
+{% block js %}
+
+<script>
+    $.ajax(
+      {
+        url: '/api/user/@me/guilds',
+        type: 'GET',
+        success: function(data){
+          console.log(data);
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].available_guilds) {
+              var guild = data[i];
+              console.log(guild);
+              
+              $('.available').find(".banner").attr('style', `background: url('${guild.icon}') center center / cover no-repeat;` ? guild.is_icon : `background: url('{{ url_for('static', filename='images/banner.jpg') }}') center center / cover no-repeat;background-size: 100%`);
+              $('.available').find("img").attr('src', guild.icon).attr('alt', guild.name);
+              $('.available').find("small").text(guild.name);
+              $('.available').find("a").attr('href', '/dashboard/' + guild.id);
+            }
+          }
+          for (let i = 0; i < data.length; i++) {
+            if (data[i].unavailable_guilds) {
+              $('.unvalidated').attr('src', data[i].icon);
+              $('.unvalidated').attr('alt', data[i].name);
+              $('.unvalidated').attr('title', data[i].name);
+              $('.unvalidated').attr('href', '/dashboard/' + data[i].id);
+            }
+          }
+      }
+    });
+</script>
 
 {% endblock %}
 

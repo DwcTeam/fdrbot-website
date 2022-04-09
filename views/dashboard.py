@@ -11,13 +11,11 @@ auth: Auth = app.auth
 @login_required
 def index_page():
     user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
-    guilds = user.guilds()
-    alive_guilds = check_guilds(guilds)  # send to cache bot to know if guild is alive
-    available_guilds = [i for i in guilds if i.id in alive_guilds]
-    unavailable_guilds = [i for i in guilds if i.id not in alive_guilds]
     return render_template(
-        'dashboard.html', available_guilds=available_guilds, unavailable_guilds=unavailable_guilds,
-        title="لوحة التحكم", user=user, is_admin=is_admin(user.id)
+        'dashboard.html', 
+        title="لوحة التحكم", 
+        user=user, 
+        is_admin=is_admin(user.id)
     )
 
 @dashboard.route('/<int:guild_id>')

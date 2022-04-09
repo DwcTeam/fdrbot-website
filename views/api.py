@@ -1,11 +1,17 @@
 from __future__ import annotations
 from flask import Blueprint, request, jsonify, current_app as app, session
-from utlits import login_required, send_ping, Auth, convert_data_user, check_permission, get_guild as get_guild_api
+from utlits import (
+    login_required, 
+    send_ping, 
+    Auth, 
+    convert_data_user, 
+    check_permission, 
+    get_guild as get_guild_api,
+    check_guilds
+)
 import typing as t
 from utlits.checks import only_admin
 from utlits.local_api import get_guild_info
-
-from utlits.objects import AccessToken
 
 
 api = Blueprint("api", __name__, url_prefix="/api")
@@ -104,3 +110,13 @@ def get_guild_admin(guild_id: int):
         "guild": guild,
         "info": info
     })
+
+@api.route("/user/@me/guilds", methods=["GET"])
+@login_required
+def user_guilds():
+    user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+    guilds = user.guilds()
+    alive_guilds = check_guilds(guilds)  # send to cache bot to know if guild is alive
+    available_guilds = [i for i in guilds if i.id in alive_guilds]
+    unavailable_guilds = [i for i in guilds if i.id not in alive_guilds]
+    return jsonify({"available_guilds": available_guilds, "unavailable_guilds": unavailable_guilds})
