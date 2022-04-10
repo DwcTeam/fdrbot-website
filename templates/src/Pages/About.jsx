@@ -7,7 +7,7 @@ class About extends React.Component {
         return (
             <Fragment>
             <Nav />
-            <h1>About</h1>
+            
             <Footer />
             </Fragment>
         )

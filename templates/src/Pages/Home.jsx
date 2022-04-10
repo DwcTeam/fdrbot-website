@@ -7,7 +7,7 @@ class Home extends React.Component {
         return (
             <Fragment>
                 <Nav />
-                <h1>Home</h1>
+                
                 <Footer />
             </Fragment>
         )
