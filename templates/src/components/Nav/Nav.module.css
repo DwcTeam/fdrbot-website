@@ -1,10 +1,61 @@
-.nav-link {
-    display: block;
-    justify-content: right;
-    align-items: center;
-    text-align: center;
-    color: gold ;
+@import url("../../static/css/App.css");
+
+.navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-nav .nav-link {
+    color: var(--color1);
 }
-.nav-link:hover {
-    color: #fff;
+
+.navbar-dark .navbar-nav .nav-link:focus, .navbar-dark .navbar-nav .nav-link:hover {
+    color: var(--color3);
+}
+
+.bg-dark {
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))!important;
+}
+
+.navbar-dark .navbar-toggler {
+    color: rgba(255,255,255,.55);
+    border-color: rgba(255,255,255,.1);
+}
+
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 0.0rem;
+}
+
+#phone-navbar {
+    color: #FFFFFF;
+    display: inline-block;
+    width: 1.5em;
+    height: 1.5em;
+    vertical-align: middle;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+}
+
+nav ul li a {
+    position: relative;
+}
+
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%) scaleX(0);
+    -webkit-transform: translateX(-50%) scaleX(0);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+    width: 100%;
+    height: 2px;
+    background-color: var(--fontColor1);
+    -webkit-transition: transform 250ms;
+    transition: transform 250ms;
+}
+
+nav ul li a:hover::after {
+    -webkit-transform: translateX(-50%) scaleX(1);
+    transform: translateX(-50%) scaleX(1);
 }
