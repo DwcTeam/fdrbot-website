@@ -28,8 +28,8 @@ class Home extends React.Component {
                             <h5 className="text">بوت فاذكروني اول بوت عربي اسلامي للأذكار | بوت فاذكروني للتذكير بذكر الله في الشات</h5>
                             <br />
                             <div className="group-buttons">
-                                {/*<Link to="/dashboard"><button className="btn button-fdr btn-lg me-2 mx-2">لوحة التحكم</button></Link>*/}
-                                <Link to="/login"><button className="btn button-fdr btn-lg me-2 mx-2">تسجيل الدخول</button></Link>
+                                <Link to="/dashboard"><button className="btn button-login btn-lg me-2 mx-2">لوحة التحكم</button></Link>
+                                {/*<Link to="/login"><button className="btn button-login btn-lg me-2 mx-2">تسجيل الدخول</button></Link>*/}
                                 <Link to="/invite"><button className="btn primary btn-lg me-2 mx-2">أضف البوت</button></Link>
                             </div>
                             <br />
@@ -65,7 +65,7 @@ class Home extends React.Component {
                     <CardImage image={easy_to_use_2} title="مناسب لجميع الفئات" description="مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات وسيرفرات الاجتماعية" />
                 </section>
                 
-                /* end section for introduction */
+                {/* end section for introduction */}
 
                 {/* section for about */}
                 <section className="py-5">

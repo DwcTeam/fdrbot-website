@@ -45,14 +45,7 @@ img {
     font-family: var(--font2_ar);
 }
 
-
-
-
-
-
-
-
-
+/*  */
 
 .btn-check:focus+.btn, .btn:focus {
     outline: 0;
@@ -111,7 +104,6 @@ input[type=number]::-webkit-inner-spin-button:after {
     -webkit-transform: rotate(180deg);
 }
 
-/* navbar */
 
 /* fdrbot */
 .bg-fdr {
@@ -142,7 +134,7 @@ input[type=number]::-webkit-inner-spin-button:after {
     color: var(--color1);
 }
 
-.button-fdr {
+.button-login {
     color: var(--color1);
     border-radius: 5px;
     background: var(--color3);
@@ -151,7 +143,7 @@ input[type=number]::-webkit-inner-spin-button:after {
 
 
 
-.button-fdr:hover {
+.button-login:hover {
     background: var(--color4);
     border-radius: 7px;
     color: var(--color2);

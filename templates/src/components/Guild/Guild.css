@@ -1,0 +1,37 @@
+.banner {
+    position: absolute;
+    inset: 0px;
+    z-index: 1;
+    transform: scale(1);
+    filter: blur(10px);
+    opacity: 0.5;
+}
+
+.avatar-server {
+    position: relative;
+    z-index: 2;
+    border: 2px solid rgb(242, 244, 251);
+    filter: drop-shadow(rgba(0, 0, 0, 0.16) 0px 32px 72px);
+    border-radius: 100px;
+    flex-shrink: 0;
+}
+
+.avalidated {
+    transition: .5s;    
+}
+
+.avalidated:hover {
+    transform: scale(1.1);
+}
+
+.unvalidated {
+    width: 47%;
+    cursor: pointer;
+    filter: grayscale(90%);
+    transition: .5s;
+}
+
+.unvalidated:hover {
+    filter: grayscale(0%);
+    transform: scale(1.1);
+}

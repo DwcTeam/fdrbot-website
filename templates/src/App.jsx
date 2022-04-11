@@ -7,12 +7,15 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Commands from "./Pages/Commands";
 import Error from "./Pages/Error";
+import Dashboard from "./Pages/Dashboard";
+
 
 const App = () => {
   let routes = useRoutes([
     {path: "/", element: <Home />},
     {path: "/about", element: <About />},
     {path: "/commands", element: <Commands />},
+    {path: "/dashboard", element: <Dashboard />},
     {path: "*", element: <Error />}
   ])
   return routes
