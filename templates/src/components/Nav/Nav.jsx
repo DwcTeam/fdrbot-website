@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.css";
 import "./Nav.module.css";
 import logo from "../../static/images/logo.png";
+import "bootstrap/dist/css/bootstrap.css";
 
 
 export default class Nav extends Component {

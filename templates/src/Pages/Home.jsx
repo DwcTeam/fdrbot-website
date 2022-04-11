@@ -6,6 +6,7 @@ import logo from "../static/images/logo.png";
 import { Link } from 'react-router-dom';
 import FontAwesome from "react-fontawesome";
 
+
 class Home extends React.Component {
     render() {
         return (
@@ -16,7 +17,8 @@ class Home extends React.Component {
                 <section className="bg-fdr">
                     <div className="container">
                         <div className="text-center">
-                            <img id="img1" className="img-respnsive img-fluid mx-auto d-block avatar-image lds-circle" src={logo}></img>
+                            <img id="img1" className="img-respnsive img-fluid mx-auto d-block avatar-image lds-circle" src={logo} alt="logo">
+                            </img>
                             <br />
                             <h1 className="title">فاذكروني</h1>
                             <hr style={{ border: "1px solid",  height: "1px"}}/>

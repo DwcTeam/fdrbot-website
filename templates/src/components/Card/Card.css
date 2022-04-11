@@ -1,0 +1,33 @@
+@import url("../../static/css/App.css");
+
+.card-fdr {
+    border-radius: 10px;
+    background: #222222;
+    transition: all ease .5s; 
+}
+
+.card-fdr:hover {
+    background: #22222288;
+}
+
+.card-outline-fdr {
+    width: 60%;
+    height: 10px;
+    position: absolute;
+    left: 50%;
+    top: -1px;
+    transform: translateX(-50%);
+    background-color: var(--color3);
+    border-radius: 0px 0px 10px 10px;
+}
+
+.icon {
+    color: var(--color3);
+}
+
+#card-animation {
+    transition: all ease .5s; 
+}
+#card-animation:hover {
+    transform: scale(1.02);
+}
