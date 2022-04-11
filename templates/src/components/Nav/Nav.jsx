@@ -1,8 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import "./Nav.module.css";
+import "./Nav.css";
 import logo from "../../static/images/logo.png";
-import "bootstrap/dist/css/bootstrap.css";
 
 
 export default class Nav extends Component {
@@ -13,7 +12,7 @@ export default class Nav extends Component {
                     <div className="navbar navbar-expand-lg bg-dark navbar-dark fixed-top">
                         <div className="container saqr">
                             <Link to="/" className="navbar-brand d-lg-none d-block" id="male-1">
-                                <img src={logo} alt="" width="50" height="50"></img>
+                                <img src={logo} alt="logo" width="50" height="50"></img>
                             </Link>
                             <hr />
                             <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainmenu">

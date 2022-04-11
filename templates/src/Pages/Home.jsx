@@ -3,8 +3,11 @@ import Nav from "../components/Nav/Nav";
 import Footer from "../components/Footer/Footer";
 import Card from "../components/Card/Card";
 import logo from "../static/images/logo.png";
+import easy_to_use from "../static/images/easy_to_use.png";
+import easy_to_use_2 from "../static/images/easy_to_use_2.png";
 import { Link } from 'react-router-dom';
 import FontAwesome from "react-fontawesome";
+import CardImage from "../components/CardImage/CardImage";
 
 
 class Home extends React.Component {
@@ -38,14 +41,14 @@ class Home extends React.Component {
 
                 {/* section for services */}
                 <section id="Services"></section>
-                <section class="py-5">
-                <div class="container">
-                    <div class="text-center">
-                    <h2 id="saqr-6" class="text-center h1 text-white title">ما نقدم ؟</h2>
+                <section className="py-5">
+                <div className="container">
+                    <div className="text-center">
+                    <h2 id="saqr-6" className="text-center h1 text-white title">ما نقدم ؟</h2>
                     <br />
                     <br />
                     
-                    <div class="row text-center row-cols-1 row-cols-md-3 g-3">
+                    <div className="row text-center row-cols-1 row-cols-md-3 g-3">
                         <Card icon={<FontAwesome name="fas fa-quran" />} title={"القرآن الكريم"}/>
                         <Card icon={<FontAwesome name="fa-solid fa-mosque" />} title={"الأذكار"}/>
                         <Card icon={<FontAwesome name="fa-solid fa-star-and-crescent" />} title={"السنه النبوية"}/>
@@ -55,14 +58,23 @@ class Home extends React.Component {
                 </section>
                 {/* end section for services */}
                 
+                {/* section for introduction */}
+                <hr className="container mx-auto p-4" />
+                <section className="py-5">
+                    <CardImage image={easy_to_use} title="لوحة تحكم سهلة الاستخدام" description="تمتع بتجربة فريدة, ومميزة وتحكم كامل بسيرفرك" />
+                    <CardImage image={easy_to_use_2} title="مناسب لجميع الفئات" description="مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات وسيرفرات الاجتماعية" />
+                </section>
+                <hr className="container mx-auto p-4" />
+                {/* end section for introduction */}
+
                 {/* section for about */}
-                <section class="py-5">
-                <div class="container">
-                    <div class="text-center">
-                    <h2 id="saqr-6" class="text-center h1 text-white title">الإحصائيات #</h2>
+                <section className="py-5">
+                <div className="container">
+                    <div className="text-center">
+                    <h2 id="saqr-6" className="text-center h1 text-white title">الإحصائيات #</h2>
                     <br />
                     <br />
-                    <div class="row text-center row-cols-1 row-cols-md-4 g-3">
+                    <div className="row text-center row-cols-1 row-cols-md-4 g-3">
                         <Card icon={<FontAwesome name="fa-solid fa-terminal" />} title={"عدد الأوامر"} text="1212"/>
                         <Card icon={<FontAwesome name="fas fa-hashtag" />} title={"عدد الشاتات"} text="212"/>
                         <Card icon={<FontAwesome name="fas fa-server" />} title={"عدد الخوادم"} text="327"/>

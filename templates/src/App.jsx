@@ -1,16 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, useRoutes } from "react-router-dom";
+import "./static/css/Root.css"
+import "./static/css/normalize.css";
+import "./static/css/App.css";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Commands from "./Pages/Commands";
-import "./static/css/normalize.css";
-import "./static/css/App.css";
+import Error from "./Pages/Error";
 
 const App = () => {
   let routes = useRoutes([
     {path: "/", element: <Home />},
     {path: "/about", element: <About />},
     {path: "/commands", element: <Commands />},
+    {path: "*", element: <Error />}
   ])
   return routes
 }

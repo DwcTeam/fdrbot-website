@@ -1,4 +1,4 @@
-@import url("../../static/css/App.css");
+@import url("../../static/css/Root.css");
 
 .navbar-dark .navbar-nav .nav-link, .navbar-dark .navbar-nav .nav-link {
     color: var(--color1);

@@ -1,28 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Changa:wght@200;300;400;500;600;700;800&family=Mada:wght@200;300;400;500;600;700;900&family=Tajawal:wght@200;300;400;500;700;800;900&display=swap');
 
-:root {
-    --font1_ar: "Cairo", sans-serif;
-    --font2_ar: "Changa", sans-serif;
-    --font7_ar: "Tajawal", sans-serif;
-    --font5_ar: "Mada", sans-serif;
 
-    --body: rgb(39, 41, 52);
-    --sections: #1919195d;
-    --color1: #eeeeee;
-    --color2: #262727;
-    --color3: #FED302;
-    --color4: #FED3027a;
-    --color5: #dc3545;
-    --navbarC: #2a2a2a;
-    --false: #888888;
-    --true: #20c997;
-    
-    --fontColor1: #eeeeee;
-    --dark-section-bg: #34331f;
-    --dark-section-bg-1: #1f2034;
-    --dark-body-bg: #222222;
-    --image: 100%;
-}
 
 /* body style */
 * {
@@ -900,12 +877,12 @@ img.logs_3 {
 }
 
 @keyframes saqr {
-0%, 100% {
-    transform: translateY(30px);
-}
-50% {
-    transform: translateY(-30px);
-}
+    0%, 100% {
+        transform: translateY(30px);
+    }
+    50% {
+        transform: translateY(-30px);
+    }
 }
 
 
@@ -913,21 +890,21 @@ img.logs_3 {
     animation: shake 1s linear 1;
 }
 @keyframes shake{
-0%{
-    transform: rotate(0deg);
-}
-25%{
-    transform: rotate(-5deg);
-}
-50%{
-    transform: rotate(5deg);
-}
-75%{
-    transform: rotate(-5deg);
-}
-100%{
-    transform: rotate(0deg);
-}
+    0%{
+        transform: rotate(0deg);
+    }
+    25%{
+        transform: rotate(-5deg);
+    }
+    50%{
+        transform: rotate(5deg);
+    }
+    75%{
+        transform: rotate(-5deg);
+    }
+    100%{
+        transform: rotate(0deg);
+    }
 }
 
 /* webkits */
