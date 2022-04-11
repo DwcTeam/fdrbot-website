@@ -1,16 +1,16 @@
 @import url("../../static/css/App.css");
 
-.card-fdr {
+.card-custome {
     border-radius: 10px;
     background: #222222;
     transition: all ease .5s; 
 }
 
-.card-fdr:hover {
+.card-custome:hover {
     background: #22222288;
 }
 
-.card-outline-fdr {
+.card-outline-custome {
     width: 60%;
     height: 10px;
     position: absolute;
@@ -25,9 +25,9 @@
     color: var(--color3);
 }
 
-#card-animation {
+.card-animation {
     transition: all ease .5s; 
 }
-#card-animation:hover {
+.card-animation:hover {
     transform: scale(1.02);
 }

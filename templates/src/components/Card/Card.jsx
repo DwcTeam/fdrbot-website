@@ -6,9 +6,9 @@ class Card extends React.Component {
     render() {
         return (
             <Fragment>
-                <div className="col-sm" id="card-animation">
-                    <div className="card text-light mb-3 card-fdr">
-                        <div className="card-outline-fdr"></div>
+                <div className="col-sm card-animation">
+                    <div className="card text-light mb-3 card-custome">
+                        <div className="card-outline-custome"></div>
                         <div className="h1 mt-3">
                             <br />
                             {this.props.icon}

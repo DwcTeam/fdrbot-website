@@ -59,13 +59,13 @@ class Home extends React.Component {
                 {/* end section for services */}
                 
                 {/* section for introduction */}
-                <hr className="container mx-auto p-4" />
+                
                 <section className="py-5">
                     <CardImage image={easy_to_use} title="لوحة تحكم سهلة الاستخدام" description="تمتع بتجربة فريدة, ومميزة وتحكم كامل بسيرفرك" />
                     <CardImage image={easy_to_use_2} title="مناسب لجميع الفئات" description="مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات وسيرفرات الاجتماعية" />
                 </section>
-                <hr className="container mx-auto p-4" />
-                {/* end section for introduction */}
+                
+                /* end section for introduction */
 
                 {/* section for about */}
                 <section className="py-5">
