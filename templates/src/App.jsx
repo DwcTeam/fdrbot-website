@@ -10,7 +10,6 @@ const App = () => {
     {path: "/", element: <Home />},
     {path: "/about", element: <About />}
   ])
-  console.log(routes)
   return routes
 }
 
