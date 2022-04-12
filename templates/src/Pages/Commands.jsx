@@ -109,23 +109,22 @@ class Commands extends React.Component{
             }
         ]
 
-        var commandsO = commands.map((cmds) => {
-            return (
-                <CommandsGroub 
-                title={cmds.title} 
-                description={cmds.description} 
-                childrens={cmds.childrens.map((cmd) => {
-                    return <Command name={cmd.name} description={cmd.description} />
-                })} 
-            />)
-        })
         return (
             <Fragment>
                 <Nav />
                 <section class="py-5 text-center" dir="ltr">
                     <div class="container">
                         <div class="card">
-                            {commandsO}
+                            {commands.map((cmds) => {
+                                return (
+                                    <CommandsGroub 
+                                    title={cmds.title} 
+                                    description={cmds.description} 
+                                    childrens={cmds.childrens.map((cmd) => {
+                                        return <Command name={cmd.name} description={cmd.description} />
+                                    })} 
+                                />)
+                            })}
                         </div>
                     </div>
                 </section>
