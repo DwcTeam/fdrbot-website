@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import Guild from "../components/Guild/Guild";
-import Nav from "../components/Nav/Nav";
-import Footer from "../components/Footer/Footer";
+
 
 class Dashboard extends React.Component {
     render() {
@@ -35,10 +34,8 @@ class Dashboard extends React.Component {
         ]
         return (
             <Fragment>
-                <Nav />
                 <br />
                 <br />
-
                 <section class="py-5">
                     <div class="container">
                         <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
@@ -64,8 +61,6 @@ class Dashboard extends React.Component {
                         </div>
                     </div>
                 </section>
-
-                <Footer />
             </Fragment>
         );
     }

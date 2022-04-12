@@ -1,6 +1,4 @@
 import React, { Fragment } from "react";
-import Nav from "../components/Nav/Nav";
-import Footer from "../components/Footer/Footer";
 import Card from "../components/Card/Card";
 import logo from "../static/images/logo.png";
 import easy_to_use from "../static/images/easy_to_use.png";
@@ -14,8 +12,7 @@ class Home extends React.Component {
     render() {
         return (
             <Fragment>
-                <Nav />
-                
+                                
                 {/* section for login */}
                 <section className="bg-fdr">
                     <div className="container">
@@ -85,7 +82,6 @@ class Home extends React.Component {
                 </section>
                 {/* end section for about */}
 
-                <Footer />
             </Fragment>
         )
     };

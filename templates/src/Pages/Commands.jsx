@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import { Command, CommandsGroub } from "../components/Command/Commands";
-import Footer from "../components/Footer/Footer";
-import Nav from "../components/Nav/Nav";
+
 
 class Commands extends React.Component{
     render() {
@@ -111,7 +110,6 @@ class Commands extends React.Component{
 
         return (
             <Fragment>
-                <Nav />
                 <section class="py-5 text-center" dir="ltr">
                     <div class="container">
                         <div class="card">
@@ -128,7 +126,6 @@ class Commands extends React.Component{
                         </div>
                     </div>
                 </section>
-                <Footer />
             </Fragment>
         )
     }

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Children } from "react";
 import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import "./static/css/Root.css"
 import "./static/css/normalize.css";
@@ -8,6 +8,9 @@ import About from "./Pages/About";
 import Commands from "./Pages/Commands";
 import Error from "./Pages/Error";
 import Dashboard from "./Pages/Dashboard";
+import Nav from "./components/Nav/Nav";
+import Footer from "./components/Footer/Footer";
+import DashboardGuild from "./Pages/DashboardGuild";
 
 
 const App = () => {
@@ -15,8 +18,10 @@ const App = () => {
     {path: "/", element: <Home />},
     {path: "/about", element: <About />},
     {path: "/commands", element: <Commands />},
-    {path: "/dashboard", element: <Dashboard />},
-    {path: "/dashboard/{guild_id:int}", element: <Error />},
+    {path: "/dashboard", element: <Dashboard />, children: [
+      {path: ":id", element: <DashboardGuild />}
+    ]},
+    {path: "/outh", element: <Error />},
     {path: "*", element: <Error />}
   ])
   return routes
@@ -25,7 +30,9 @@ const App = () => {
 const AppWrapper = () => {
   return (
     <Router>
+      <Nav />
       <App />
+      <Footer />
     </Router>
   );
 };
