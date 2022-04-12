@@ -1,5 +1,4 @@
 import React, {Fragment} from "react";
-import { Link } from "react-router-dom";
 import "./Commands.css"
 
 class CommandsGroub extends React.Component {
@@ -28,7 +27,7 @@ class Command extends React.Component {
     render() {
         return (
             <Fragment>
-                <div className="col p-2" id="#{this.props.name}">
+                <div className="col p-2" id={ "#" + this.props.name }>
                     <div className="card command m-1">
                         <div className="card-body pb-4">
                             <h3 className="card-title cmd-1 float-start">

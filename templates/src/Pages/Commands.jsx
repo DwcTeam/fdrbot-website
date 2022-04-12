@@ -2,70 +2,122 @@ import React, { Fragment } from "react";
 import { Command, CommandsGroub } from "../components/Command/Commands";
 import Footer from "../components/Footer/Footer";
 import Nav from "../components/Nav/Nav";
-import Warning from "../components/Warning/Warning";
 
 class Commands extends React.Component{
     render() {
 
         const commands = [
             {
-                "title": "الأداره",
-                "description": "تحكم في الأداره",
+                "title": "العامة",
                 "childrens": [
                     {
-                        "name": "تحديث البرنامج",
-                        "description": "تحديث البرنامج",
-                        "icon": "🔄",
-                        "link": "/update"
+                        "name": "ping",
+                        "description": "سرعة اتصال البوت",
                     },
                     {
-                        "name": "تحديث البرنامج",
-                        "description": "تحديث البرنامج",
-                        "icon": "🔄",
-                        "link": "/update"
+                        "name": "support",
+                        "description": "طلب الدعم الفني",
                     },
                     {
-                        "name": "تحديث البرنامج",
-                        "description": "تحديث البرنامج",
-                        "icon": "🔄",
-                        "link": "/update"
+                        "name": "info",
+                        "description": "طلب معلومات الخادم",
+                    },
+                    {
+                        "name": "azan",
+                        "description": "معرفة وقت الأذان في المدينة الخاصه بك",
+                    },
+                    {
+                        "name": "bot",
+                        "description": "جلب معلومات البوت",
+                    },
+                    {
+                        "name": "invite",
+                        "description": "أضافة البوت إلى خادمك",
+                    },
+                    {
+                        "name": "help",
+                        "description": "أرسال رساله تعرض جميع الأوامر",
                     },
                 ]
             },
             {
-                "title": "العامه",
-                "description": "تحكم في الأداره",
+                "title": "القرآن الكريم",
                 "childrens": [
                     {
-                        "name": "تحديث البرنامج",
-                        "description": "تحديث البرنامج",
-                        "icon": "🔄",
-                        "link": "/update"
+                        "name": "quran play",
+                        "description": "تشغيل القران الكريم",
                     },
                     {
-                        "name": "تحديث البرنامج",
-                        "description": "تحديث البرنامج",
-                        "icon": "🔄",
-                        "link": "/update"
+                        "name": "quran radio",
+                        "description": "تشغيل اذاعه القران الكريم",
                     },
                     {
-                        "name": "تحديث البرنامج",
-                        "description": "تحديث البرنامج",
-                        "icon": "🔄",
-                        "link": "/update"
+                        "name": "quran stop",
+                        "description": "إيقاف تشغيل القران الكريم",
+                    },
+                    {
+                        "name": "quran volume",
+                        "description": "تغير مستوى الصوت للقرآن الكريم",
                     },
                 ]
             },
+            {
+                "title": "المصحف الشريف",
+                "childrens": [
+                    {
+                        "name": "moshaf pages",
+                        "description": "عرض صفحات القرآن الكريم",
+                    },
+                    {
+                        "name": "moshaf page",
+                        "description": "عرض صفحه محدده من القرآن الكريم",
+                    },
+                    {
+                        "name": "moshaf surahs",
+                        "description": "عرض جميع سور القرآن الكريم",
+                    },
+                ]
+            },
+            {
+                "title": "الأداره",
+                "childrens": [
+                    {
+                        "name": "set prefix",
+                        "description": "تغير البادئة الخاصة بالخادم",
+                    },
+                    {
+                        "name": "set spam",
+                        "description": "خاصية تمنع تكرر ارسال الاذكار في حالة عدم تفاعل الشات",
+                    },
+                    {
+                        "name": "set embed",
+                        "description": "تغير خاصيه ارسال الاذكار الى امبد",
+                    },
+                    {
+                        "name": "set time",
+                        "description": "تغير وقت ارسال الأذكار",
+                    },
+                    {
+                        "name": "set room",
+                        "description": "أختيار قناة الأذكار",
+                    },
+                    {
+                        "name": "set role",
+                        "description": "تقيد صلاحيات التحكم بالقرآن الكريم",
+                    },
+                ]
+            }
         ]
 
         var commandsO = commands.map((cmds) => {
             return (
-                <CommandsGroub title={cmds.title} description={cmds.description}>
-                    {cmds.childrens.map((cmd) => {
-                        return <Command name={cmd.name} description={cmd.description} />
-                    })}
-                </CommandsGroub>
-            )
+                <CommandsGroub 
+                title={cmds.title} 
+                description={cmds.description} 
+                childrens={cmds.childrens.map((cmd) => {
+                    return <Command name={cmd.name} description={cmd.description} />
+                })} 
+            />)
         })
         return (
             <Fragment>
