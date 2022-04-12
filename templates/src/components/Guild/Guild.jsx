@@ -16,8 +16,8 @@ class Guild extends React.Component {
             </div>
             <div className="pt-2">
             <small className="text-muted float-end">{ this.props.name }</small>
-            <Link to={ "/dashboard"+this.props.id }>
-                <button className={"btn primary card-title float-start pe-3 px-3 pt-2 pb-2 "+this.props.alive ? "saqr-but" : "button-fdr"}>تحكم</button>
+            <Link to={ "/dashboard/"+this.props.id }>
+                <button className={"btn primary card-title float-start pe-3 px-3 pt-2 pb-2 "+(this.props.alive ? "saqr-but" : "button-fdr")}>{this.props.alive ? "تحكم" : "أضافة البوت"}</button>
             </Link>
             </div>
         </div>

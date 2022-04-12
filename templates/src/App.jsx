@@ -16,6 +16,7 @@ const App = () => {
     {path: "/about", element: <About />},
     {path: "/commands", element: <Commands />},
     {path: "/dashboard", element: <Dashboard />},
+    {path: "/dashboard/{guild_id:int}", element: <Error />},
     {path: "*", element: <Error />}
   ])
   return routes

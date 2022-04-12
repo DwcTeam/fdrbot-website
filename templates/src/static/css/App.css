@@ -121,6 +121,13 @@ input[type=number]::-webkit-inner-spin-button:after {
     color: #eeeeee;
 }
 
+.button-fdr {
+    color: var(--color1);
+    border-radius: 5px;
+    background: var(--color3);
+    transition: all .5s;
+}
+
 .primary {
     border-color: var(--color3);
     color: var(--color1);

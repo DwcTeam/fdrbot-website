@@ -46,7 +46,7 @@ class Dashboard extends React.Component {
                         </div>
                         <div class="row text-center row-cols-1 row-cols-md-3 g-3">
                         {guilds.map((item, index) => {
-                            return <Guild name={item.name} banner={item.banner} avatar={item.avatar} id={item.id} />
+                            return <Guild name={item.name} banner={item.banner} avatar={item.avatar} id={item.id} alive={true} />
                         })}
                         </div>
                     </div>
@@ -55,7 +55,7 @@ class Dashboard extends React.Component {
                 <section class="py-5">
                     <div class="container">
                         <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
-                            <h1 class="text-white text-center title">الخوادم غير</h1>
+                            <h1 class="text-white text-center title">الخوادم غير المتاحة</h1>
                         </div>
                         <div class="row text-center row-cols-1 row-cols-md-3 g-3">
                         {Unguilds.map((item, index) => {
