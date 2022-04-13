@@ -1,4 +1,4 @@
-import React, { Children } from "react";
+import React from "react";
 import { BrowserRouter as Router, useRoutes } from "react-router-dom";
 import "./static/css/Root.css"
 import "./static/css/normalize.css";
@@ -11,6 +11,7 @@ import Dashboard from "./Pages/Dashboard";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
 import DashboardGuild from "./Pages/DashboardGuild";
+import Outh from "./Pages/Outh";
 
 
 const App = () => {
@@ -21,7 +22,7 @@ const App = () => {
     {path: "/dashboard", element: <Dashboard />, children: [
       {path: ":id", element: <DashboardGuild />}
     ]},
-    {path: "/outh", element: <Error />},
+    {path: "/outh", element: <Outh />},
     {path: "*", element: <Error />}
   ])
   return routes
