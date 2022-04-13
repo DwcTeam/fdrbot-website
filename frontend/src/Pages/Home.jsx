@@ -58,8 +58,8 @@ class Home extends React.Component {
                 {/* section for introduction */}
                 
                 <section className="py-5">
-                    <CardImage image={easy_to_use} title="لوحة تحكم سهلة الاستخدام" description="تمتع بتجربة فريدة, ومميزة وتحكم كامل بسيرفرك" />
-                    <CardImage image={easy_to_use_2} title="مناسب لجميع الفئات" description="مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات وسيرفرات الاجتماعية" />
+                    <CardImage image={easy_to_use} title="لوحة تحكم سهلة الاستخدام" description="تمتع بتجربة فريدة, ومميزة وتحكم كامل بسيرفرك" dir="rtl" />
+                    <CardImage image={easy_to_use_2} title="مناسب لجميع الفئات" description="مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات وسيرفرات الاجتماعية" dir="ltr" />
                 </section>
                 
                 {/* end section for introduction */}

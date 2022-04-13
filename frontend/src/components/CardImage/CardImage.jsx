@@ -4,7 +4,7 @@ class CardImage extends React.Component {
     render() {
         return (
             <Fragment>
-                <div className="card py-5 card-1" style={{ maxWidth: "100%" }}>
+                <div className="card py-5 card-1" style={{ maxWidth: "100%" }} dir={this.props.dir}>
                     <div className="row g-0 flex-row-reverse">
                         <div className="col-md-4">
                             <img id="saqr" src={this.props.image} alt="easy_to_use" className="img-fluid rounded-start p-5" />
