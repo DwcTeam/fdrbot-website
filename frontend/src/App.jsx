@@ -19,9 +19,8 @@ const App = () => {
     {path: "/", element: <Home />},
     {path: "/about", element: <About />},
     {path: "/commands", element: <Commands />},
-    {path: "/dashboard", element: <Dashboard />, children: [
-      {path: ":id", element: <DashboardGuild />}
-    ]},
+    {path: "/dashboard", element: <Dashboard />},
+    {path: "/saqr", element: <DashboardGuild />},
     {path: "/outh", element: <Outh />},
     {path: "*", element: <Error />}
   ])
