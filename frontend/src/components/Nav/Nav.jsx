@@ -2,6 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import "./Nav.css";
 import logo from "../../static/images/logo.png";
+import NavUser from "./NavUser";
 
 
 export default class Nav extends Component {
@@ -31,6 +32,7 @@ export default class Nav extends Component {
                                     <li className="nav-item me-2"><Link to="/vote" target="_blank" className="nav-link">تصويت للبوت</Link></li>
                                     <li className="nav-item me-2"><Link to="/invite" target="_blank" className="nav-link">أضف البوت</Link></li>
                                     <li className="nav-item me-2"><Link to="/support" target="_blank" className="nav-link">سيرفر الدعم</Link></li>
+                                    { this.props.is_admin ? <NavUser user={ this.props.user } /> : null }
                                 </ul>
                             </div>
                         </div>

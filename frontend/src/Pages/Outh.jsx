@@ -1,5 +1,6 @@
 import React from "react";
 import  { Navigate } from 'react-router-dom'
+import * as queryString from "query-string";
 import axios from "axios";
 
 
@@ -8,12 +9,19 @@ class Outh extends React.Component {
         var token = localStorage.getItem("token");
         if (token) {
             return (
-                <Navigate to="/dashboard"/>
+                <Navigate to="/dashboard" replace={true} />
             )
         }
-        else {
-            axios.post("http://localhost:5000/auth/login", {})
+        var params = queryString.parse(window.location.search);
+        if (!params.code) {
+            return (
+                <Navigate to="/login" replace={true} />
+            )
         }
+        axios.post("/auth/login", {code: params.code}).then(res => {
+            console.log(res);
+            localStorage.setItem("token", res.data.token);
+        })
         return <Navigate to='/' replace={true} />
     }
 }

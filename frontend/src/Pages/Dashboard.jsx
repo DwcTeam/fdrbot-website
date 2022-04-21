@@ -2,6 +2,20 @@ import React, { Fragment } from "react";
 import Guild from "../components/Guild/Guild";
 
 
+/*
+    static contextType = ContextUser;
+    constructor(props) {
+        super(props)
+        this.state = {
+            guilds: [],
+        }
+    }
+    componentDidMount() {
+        const context = this.context;
+        console.log(context);
+        const guilds = context.state.guilds;
+    }
+*/
 class Dashboard extends React.Component {
     render() {
         var guilds = [

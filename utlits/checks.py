@@ -1,20 +1,23 @@
 from __future__ import annotations
-from flask import session, redirect, current_app as app, abort, request
+from flask import session, redirect, current_app as app, abort, request, jsonify
 from functools import wraps
 from .objects import convert_data_user
 from datetime import datetime
+from flask_jwt_extended import decode_token
 
-
-def login_required(function_to_protect):
+def is_auth(function_to_protect):
     @wraps(function_to_protect)
     def wrapper(*args, **kwargs):
-        token = session.get("token", None)
+        authorization = request.headers.get('Authorization')
+        if not authorization:
+            return jsonify({"error": "No authorization"}), 400
+        type_token, token = authorization.split(' ')[0], authorization.split(' ')[1]
+        if type_token != "Bearer":
+            return jsonify({"error": "Inviled token type"}), 400
+        user_id = decode_token(token).get("sub").get("user_id")
+        user_data = app.logins.find_one({"_id": user_id})
         if token:
-            user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
-            # not working
-            # if user.scope.split(" ") != app.config.get("SCOPES"):
-            #     return redirect("/login")
-            # If access_token is expired
+            user = convert_data_user(user_data)
             if datetime.now() >= user.expires_in:
                 token = app.auth.refresh_token(user.access_token)
                 user = app.auth.user(token)
