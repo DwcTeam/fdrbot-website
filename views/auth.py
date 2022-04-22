@@ -1,4 +1,4 @@
-from flask import Blueprint, redirect, request, session, current_app as app, jsonify
+from flask import Blueprint, redirect, request, current_app as app, jsonify
 from utlits import Auth, encrypt_token, is_auth
 from datetime import datetime
 

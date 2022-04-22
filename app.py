@@ -2,7 +2,6 @@ from flask import Flask
 from flask_cors import CORS
 from pymongo import MongoClient
 from utlits import Auth
-from flask_jwt_extended import JWTManager
 
 app = Flask(__name__, instance_relative_config=True)
 
@@ -18,7 +17,6 @@ app.db = app.mongodb.get_collection("guilds")
 app.logins = app.mongodb.get_collection("logins")
 app.logs = app.mongodb.get_collection("logs")
 app.auth = Auth(app.config['CLIENT_ID'], app.config['CLIENT_SECRET'], app.config['REDIRECT_URI'])
-app.jwt = JWTManager(app)
 
 import views
 
