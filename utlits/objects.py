@@ -194,6 +194,7 @@ class User:
         return {
             "_id": self.id,
             "user": {
+                "id": str(self.id),
                 "username": self.username,
                 "avatar": self.avatar,
                 "discriminator": self.discriminator,

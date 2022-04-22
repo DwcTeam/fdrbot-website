@@ -3,7 +3,7 @@ from flask import session, redirect, current_app as app, abort, request, jsonify
 from functools import wraps
 from .objects import convert_data_user
 from datetime import datetime
-from flask_jwt_extended import decode_token
+from .encrypt import decrypt_token
 
 def is_auth(function_to_protect):
     @wraps(function_to_protect)
@@ -14,10 +14,17 @@ def is_auth(function_to_protect):
         type_token, token = authorization.split(' ')[0], authorization.split(' ')[1]
         if type_token != "Bearer":
             return jsonify({"error": "Inviled token type"}), 400
-        user_id = decode_token(token).get("sub").get("user_id")
+        if token.split(".").__len__() != 2:
+            return jsonify({"error": "Inviled token"}), 400
+        try:
+            user_id, access_token = decrypt_token(token)
+        except:
+            return jsonify({"error": "Inviled token"}), 400
         user_data = app.logins.find_one({"_id": user_id})
+        user = convert_data_user(user_data)
+        if not user.access_token.access_token.startswith(access_token):
+            return jsonify({"error": "Inviled token"}), 400
         if token:
-            user = convert_data_user(user_data)
             if datetime.now() >= user.expires_in:
                 token = app.auth.refresh_token(user.access_token)
                 user = app.auth.user(token)
