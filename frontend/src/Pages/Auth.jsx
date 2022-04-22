@@ -1,6 +1,5 @@
 import React from "react";
 import Redirect from "../components/Redirect/Redirect";
-// import { ContextUser } from "../App.jsx"
 
 class Auth extends React.Component {
     render() {

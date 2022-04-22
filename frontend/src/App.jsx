@@ -17,14 +17,12 @@ import Auth from "./Pages/Auth";
 import axios from "axios";
 import "bootstrap"
 
-
 export const ContextUser = React.createContext();
 export const ContextGuilds = React.createContext();
 export const ContextState = React.createContext();
+export const IsLogin = React.createContext(false);
 
 function App() {
-  
-
   let routes = useRoutes([
     {path: "/", element: <Home />},
     {path: "/about", element: <About />},
@@ -74,21 +72,20 @@ function AppWrapper() {
       console.log(err);
     })
   }, []);
-
   return (
     <Router>
     
       <ContextUser.Provider value={user}> 
         <ContextGuilds.Provider value={guilds}>
           <ContextState.Provider value={stats}>
+            <IsLogin.Provider value={user ? true : false}>
+              <Nav />
+              <App />
+              <Footer />
+            </IsLogin.Provider>
           </ContextState.Provider>
         </ContextGuilds.Provider>
       </ContextUser.Provider>
-      
-    
-      <Nav user={user}/>
-      <App />
-      <Footer />
     </Router>
   );
 };
