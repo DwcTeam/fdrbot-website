@@ -1,7 +1,6 @@
 from flask import Blueprint, redirect, request, session, current_app as app, jsonify
-from utlits import Auth
-from datetime import datetime, timedelta
-from flask_jwt_extended import create_access_token
+from utlits import Auth, encrypt_token, is_auth
+from datetime import datetime
 
 auth = Blueprint("auth", __name__)
 
@@ -20,20 +19,16 @@ def outh():
         app.logins.insert_one(user.as_dict)
     else :
         app.logins.update_one({"_id": user.id}, {"$set": user.as_dict})
-    token = create_access_token(identity={"user_id": user.id})
+    token = encrypt_token(access_token.access_token, user.id)
     user_data = user.as_dict
     user = user_data["user"]
     user["id"] = str(user_data["_id"])
     return jsonify({"user": user, "token": token})
 
 
-@auth.route("/auth_guild")
-def auth_guild():
-    args = request.args
-    return redirect(f"/dashboard/{args.get('guild_id')}")
-
-
 @auth.route("/logout")
+@is_auth
 def logout():
-    session.clear()
+
+    # app.logs.insert_one({"user_id": user.id, "username": user.username, "avatar_url": user.avatar, "type": "login", "time": datetime.now()})
     return redirect("/")
