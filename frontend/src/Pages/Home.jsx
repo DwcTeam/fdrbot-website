@@ -72,10 +72,10 @@ class Home extends React.Component {
                     <br />
                     <br />
                     <div className="row text-center row-cols-1 row-cols-md-4 g-3">
-                        <Card icon={<FontAwesome name="fa-solid fa-terminal" />} title={"عدد الأوامر"} text="1212"/>
-                        <Card icon={<FontAwesome name="fas fa-hashtag" />} title={"عدد الشاتات"} text="212"/>
-                        <Card icon={<FontAwesome name="fas fa-server" />} title={"عدد الخوادم"} text="327"/>
-                        <Card icon={<FontAwesome name="fas fa-share" />} title={"عدد الشاردات"} text="21"/>
+                        <Card icon={<FontAwesome name="fa-solid fa-terminal" />} title={"عدد الأوامر"} text="32"/>
+                        <Card icon={<FontAwesome name="fas fa-hashtag" />} title={"عدد الشاتات"} text={ "" + this.props.channels } />
+                        <Card icon={<FontAwesome name="fas fa-server" />} title={"عدد الخوادم"} text={ "" + this.props.guilds }/>
+                        <Card icon={<FontAwesome name="fas fa-share" />} title={"عدد الشاردات"} text={ "" + this.props.shards }/>
                     </div>
                     </div>
                 </div>

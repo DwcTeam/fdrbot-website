@@ -22,7 +22,15 @@ def convert_guild(data: dict) -> Guild:
         is_owner=data.get("owner"),
         permissions=int(data.get("permissions")),
         features=data.get("features"),
-        as_dict=data
+        as_dict={
+            "id": str(data.get("id")),
+            "name": data.get("name"),
+            "icon": convert_icon_hash(data),
+            "is_icon": True if data.get("icon") else False,
+            "is_owner": data.get("owner"),
+            "permissions": str(data.get("permissions")),
+            "features": data.get("features")
+        }
     )
 
 def convert_avatar(data: dict) -> str:

@@ -1,19 +1,15 @@
-from flask import Blueprint, render_template, redirect, current_app, session
+from flask import Blueprint, jsonify, render_template, redirect, current_app, session
 from utlits import get_bot_info, get_commands
 
 index = Blueprint('index', __name__)
 
 @index.route('/')
 def index_page():
-    bot = get_bot_info()
-    return render_template(
-        'index.html', is_login=True if "token" in session else False, 
-        channels_count=bot["channels"], shards_count=bot["shards"], 
-        commands_count=len(get_commands()), guilds_count=bot["guilds"],
-        title="الصفحة الرئيسية"
-    )
+    return jsonify({"status": "ok"})
 
-
+@index.route("/stats")
+def stats():
+    return jsonify(get_bot_info())
 
 @index.route('/suggestions')
 def suggestions_page():
