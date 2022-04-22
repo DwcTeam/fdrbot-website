@@ -22,8 +22,37 @@ img {
 }
 
 
+/* login */
+
+.login {
+    border-radius: 10px;
+    background: var(--login);
+    padding: 20px;
+    margin: auto;
+    margin-top: 100px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.5);
+    border: 1px solid #34331f;
+}
+
+.login-button {
+    padding: 15px;
+    border-radius: 100px;
+    color: var(--color1);
+    background: #7289da!important;
+    transition: all .8s;
+}
+
+.login-button:hover {
+    background-color: #5470d2!important;
+    border-color: #4a67cf!important;
+    border-radius: 50px;
+    color: var(--color1);
+}
 
 
+
+
+/* nnnnnlogin */
 
 .about-title {
     font-size: 50px;

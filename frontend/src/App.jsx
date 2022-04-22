@@ -15,6 +15,7 @@ import Outh from "./Pages/Outh";
 import Login from "./Pages/Login";
 import Auth from "./Pages/Auth";
 import axios from "axios";
+import "bootstrap"
 
 
 export const ContextUser = React.createContext();

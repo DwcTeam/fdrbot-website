@@ -6,7 +6,12 @@ class Redirect extends React.Component {
         window.location.href = this.props.redirect_uri
     }
     render() {
-        return <Fragment></Fragment>
+        return (        
+        <Fragment>
+
+        </Fragment>
+        )
+
     }
 }
 

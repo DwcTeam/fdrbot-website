@@ -125,7 +125,7 @@ class DashboardGuild extends React.Component {
                         <h1 className="set text-light d-inline-flex float-end">تحديد نوع الارسال</h1>
                         <div className="form-check form-switch text-start h3 d-inline-flex rt">
                           <input className="form-check-input rt anti_spam" type="checkbox" role="switch"
-                            id="flexSwitchCheckChecked" checke />
+                            id="flexSwitchCheckChecked" aria-checked={true} />
                         </div>
                         <p className="text-end h6 sfsf"><b className="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال
                           الاذكار
@@ -141,7 +141,7 @@ class DashboardGuild extends React.Component {
                         <h1 className="set text-light d-inline-flex float-end">تحديد نوع الامبد</h1>
                         <div className="form-check form-switch text-start h3 d-inline-flex rt">
                           <input className="form-check-input rt embed" type="checkbox" role="switch"
-                            id="flexSwitchCheckChecked" checke />
+                            id="flexSwitchCheckChecked" aria-checked={true} />
                         </div>
                         <p className="text-end h6 sfsf">يضع الاذكار في سندوق مرتب</p>
                       </div>
