@@ -22,6 +22,7 @@ class Outh extends React.Component {
             console.log(res);
             localStorage.setItem("token", res.data.token);
         })
+        window.location.reload();
         return <Navigate to='/' replace={true} />
     }
 }

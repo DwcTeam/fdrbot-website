@@ -53,9 +53,7 @@ function AppWrapper() {
   if (token) {
     useEffect(() => {
       axios.get("/user/@me/guilds").then(response => {
-          // console.log(response.data);
           setGuilds(response.data);
-          console.log(guilds);
         }).catch(err => {
           console.log(err);
         });
@@ -85,7 +83,6 @@ function AppWrapper() {
       return <Loading />
     }
   }
-  console.log(guilds);
   return (
     <Router>
       <AppContext.Provider value={{

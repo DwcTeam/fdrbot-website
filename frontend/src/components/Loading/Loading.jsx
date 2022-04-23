@@ -7,10 +7,10 @@ class Loading extends React.Component {
         return (
             <Fragment>
                 <div id="loading" dir="ltr">
-                    <div class="load">
-                        <div class="load-one"></div>
-                        <div class="load-two"></div>
-                        <div class="load-three"></div>
+                    <div className="load">
+                        <div className="load-one"></div>
+                        <div className="load-two"></div>
+                        <div className="load-three"></div>
                     </div>
                 </div>
             </Fragment>
