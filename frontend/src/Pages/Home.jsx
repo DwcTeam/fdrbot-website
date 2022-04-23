@@ -13,7 +13,7 @@ class Home extends React.Component {
     static contextType = AppContext;
     render() {
         const stats = this.context.stats;
-        console.log(stats);
+        const is_login = this.context.is_login;
         return (
             <Fragment>
                                 
@@ -29,8 +29,7 @@ class Home extends React.Component {
                             <h5 className="text">بوت فاذكروني اول بوت عربي اسلامي للأذكار | بوت فاذكروني للتذكير بذكر الله في الشات</h5>
                             <br />
                             <div className="group-buttons">
-                                <Link to="/dashboard"><button className="btn button-login btn-lg me-2 mx-2">لوحة التحكم</button></Link>
-                                {/*<Link to="/login"><button className="btn button-login btn-lg me-2 mx-2">تسجيل الدخول</button></Link>*/}
+                                {is_login ? <Link to="/dashboard" className="btn button-login btn-lg me-2 mx-2">لوحة التحكم</Link> : <Link to="/login" className="btn button-login btn-lg me-2 mx-2">تسجيل الدخول</Link>}
                                 <Link to="/invite"><button className="btn primary btn-lg me-2 mx-2">أضف البوت</button></Link>
                             </div>
                             <br />
