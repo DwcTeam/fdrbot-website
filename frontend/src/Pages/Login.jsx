@@ -15,7 +15,7 @@ class Login extends React.Component {
                                     <h1 className="card-title text-light login">يجب أن تسجل دخولك لـ تتمكن من رؤية الصفحة!</h1>
                                 </div>
                                 <div className="card-text py-5">
-                                <Link to="#" class="btn login-button btn-lg me-2 mx-2">تسجيل الدخول باستخدام ديسكورد <i className="fab fa-discord btn-discord-logo"></i></Link>
+                                <Link to="/auth" class="btn login-button btn-lg me-2 mx-2">تسجيل الدخول باستخدام ديسكورد <i className="fab fa-discord btn-discord-logo"></i></Link>
                                 </div>
                             </div>
                         </div>

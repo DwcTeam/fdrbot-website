@@ -1,15 +1,23 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { ContextUser } from "../../Context";
 
+// function NavUser(){
+//     const [user, setUser] = useContext(ContextUser);
+//     console.log(user);
+//     return <Fragment></Fragment>
+// }
 
 class NavUser extends React.Component {
+    static contextType = ContextUser;
     render(){
+        const user = this.context;
         return (
             <Fragment>
-                <ul class="navbar-nav ml-auto text-center" dir="ltr">
+            <ul class="navbar-nav ml-auto text-center" dir="ltr">
                     <div class="btn-group d-block me-lg-1 mx-lg-1" role="group">
                         <button id="users" type="button" class="btn primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src={ this.props.user.avatar } width="28" height="28" class="image" alt={ this.props.user.username } /> <b>{ this.props.user.username }</b>
+                            <img src={ user.avatar } width="28" height="28" class="image" alt={ user.username } /> <b>{ user.username }</b>
                         </button>
                         <ul class="dropdown-menu saqrs" aria-labelledby="users">
                             <li class="nav-item">
@@ -22,7 +30,7 @@ class NavUser extends React.Component {
                                 <hr class="dropdown-divider bg-light" />
                             </li>
                             { 
-                                this.props.user.is_admin && (
+                                user.admin && (
                                     <Fragment>
                                         <li class="nav-item">
                                             <Link class="dropdown-item text-center primary" to="/admin">لوحة الادمن</Link>
@@ -46,7 +54,7 @@ class NavUser extends React.Component {
                             </li>
                         </ul>
                     </div>
-                </ul>
+                        </ul>
             </Fragment>
         )
     }

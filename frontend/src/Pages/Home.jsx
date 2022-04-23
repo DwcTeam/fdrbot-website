@@ -6,9 +6,11 @@ import easy_to_use_2 from "../static/images/easy_to_use_2.png";
 import { Link } from 'react-router-dom';
 import FontAwesome from "react-fontawesome";
 import CardImage from "../components/CardImage/CardImage";
+import { ContextState } from "../Context";
 
 
 class Home extends React.Component {
+    static contextType = ContextState;
     render() {
         return (
             <Fragment>
