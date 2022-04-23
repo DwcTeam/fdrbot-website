@@ -1,76 +1,46 @@
 import React, { Fragment } from "react";
+import { Navigate } from "react-router-dom";
 import Guild from "../components/Guild/Guild";
+import { default_banner } from "../Config";
+import { AppContext } from "../Context";
 
 
-/*
-    static contextType = ContextUser;
-    constructor(props) {
-        super(props)
-        this.state = {
-            guilds: [],
-        }
-    }
-    componentDidMount() {
-        const context = this.context;
-        console.log(context);
-        const guilds = context.state.guilds;
-    }
-*/
 class Dashboard extends React.Component {
+    static contextType = AppContext;
     render() {
-        var guilds = [
-            {
-                name: "بوت فاذكروني",
-                banner: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                avatar: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                id: "729526735749513267",
-            },
-            {
-                name: "بوت ذكر",
-                banner: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                avatar: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                id: "729526735749513267",
-            },
-        ]
-        var Unguilds = [
-            {
-                name: "بوت فاذكروني",
-                banner: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                avatar: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                id: "729526735749513267",
-            },
-            {
-                name: "بوت ذكر",
-                banner: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                avatar: "https://cdn.discordapp.com/icons/729526735749513267/222785a5ff8429dbfee4b6a56fd88d8a.png",
-                id: "729526735749513267",
-            },
-        ]
+
+        if (!this.context.is_login) {
+            return <Navigate to="/login" replace={true} />
+        } 
+
+        const available_guilds = this.context.available_guilds;
+        const unavailable_guilds = this.context.unavailable_guilds;
+        const user = this.context.user
         return (
             <Fragment>
                 <br />
                 <br />
-                <section class="py-5">
-                    <div class="container">
-                        <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
-                            <h1 class="text-white text-center title">يا هلا والله فيك, H A Z E M</h1>
+                <section className="py-5">
+                    <div className="container">
+                        <div className="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
+                            <h1 className="text-white text-center title">يا هلا والله فيك, { user.username }</h1>
                         </div>
-                        <div class="row text-center row-cols-1 row-cols-md-3 g-3">
-                        {guilds.map((item, index) => {
-                            return <Guild name={item.name} banner={item.banner} avatar={item.avatar} id={item.id} alive={true} />
+                        <div className="row text-center row-cols-1 row-cols-md-3 g-3">
+                        {available_guilds.map((guild) => {
+                            return <Guild name={guild.name} banner={guild.is_icon ? guild.icon : default_banner } avatar={guild.icon} id={guild.id} alive={true} />
                         })}
                         </div>
                     </div>
                 </section>
 
-                <section class="py-5">
-                    <div class="container">
-                        <div class="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
-                            <h1 class="text-white text-center title">الخوادم غير المتاحة</h1>
+                <section className="py-5">
+                    <div className="container">
+                        <div className="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
+                            <h1 className="text-white text-center title">الخوادم غير المتاحة</h1>
                         </div>
-                        <div class="row text-center row-cols-1 row-cols-md-3 g-3">
-                        {Unguilds.map((item, index) => {
-                            return <Guild name={item.name} banner={item.banner} avatar={item.avatar} id={item.id} alive={false}/>
+                        <div className="row text-center row-cols-1 row-cols-md-3 g-3">
+                        {unavailable_guilds.map((guild) => {
+                            return <Guild name={guild.name} banner={guild.is_icon ? guild.icon : default_banner } avatar={guild.icon} id={guild.id} alive={false}/>
                         })}   
                         </div>
                     </div>

@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import "./Nav.css";
 import logo from "../../static/images/logo.png";
 import NavUser from "./NavUser";
-import { IsLogin } from "../../Context";
+import { AppContext } from "../../Context";
 
 
 export default class Nav extends Component {
-    static contextType = IsLogin;
+    static contextType = AppContext;
     render() {
-        const isLogin = this.context;
+        const isLogin = this.context.is_login;
         return (
             <Fragment>
                 <nav className="py-4">

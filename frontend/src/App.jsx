@@ -17,7 +17,7 @@ import axios from "axios";
 import "bootstrap"
 import Redirect from "./components/Redirect/Redirect";
 import { authorization_uri, invite_uri, support_server_uri, vote_uri } from "./Config";
-import { ContextGuilds, ContextState, ContextUser, IsLogin } from "./Context"
+import { AppContext } from "./Context"
 import Loading from "./components/Loading/Loading";
 
 function App() {
@@ -47,13 +47,15 @@ function AppWrapper() {
   if (token) {
     axios.defaults.headers.common["Authorization"] = `Bearer ${token}`;
   }
-  const [guilds, setGuilds] = useState([]);
-  const [stats, setStats] = useState({});
-  const [user, setUser] = useState(null);
+  const [guilds, setGuilds] = useState();
+  const [stats, setStats] = useState();
+  const [user, setUser] = useState();
   if (token) {
     useEffect(() => {
       axios.get("/user/@me/guilds").then(response => {
+          // console.log(response.data);
           setGuilds(response.data);
+          console.log(guilds);
         }).catch(err => {
           console.log(err);
         });
@@ -83,19 +85,20 @@ function AppWrapper() {
       return <Loading />
     }
   }
+  console.log(guilds);
   return (
     <Router>
-      <ContextUser.Provider value={user}> 
-        <ContextGuilds.Provider value={guilds}>
-          <ContextState.Provider value={stats}>
-            <IsLogin.Provider value={user ? true : false}>
-              <Nav />
-              <App />
-              <Footer />
-            </IsLogin.Provider>
-          </ContextState.Provider>
-        </ContextGuilds.Provider>
-      </ContextUser.Provider>
+      <AppContext.Provider value={{
+        available_guilds: guilds ? guilds.available_guilds : [],
+        unavailable_guilds: guilds ? guilds.unavailable_guilds : [],
+        is_login: user ? true : false,
+        user: user ? user : {},
+        stats: stats,
+      }}> 
+          <Nav />
+          <App />
+          <Footer />
+      </AppContext.Provider>
     </Router>
   );
 };

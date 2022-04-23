@@ -1,6 +1,10 @@
 import { createContext } from "react";
 
-export const ContextUser = createContext();
-export const ContextGuilds = createContext();
-export const ContextState = createContext();
-export const IsLogin = createContext(false);
+export const AppContext = createContext({
+    available_guilds: [],
+    unavailable_guilds: [],
+    is_login: false,
+    user: {},
+    stats: {},
+})
+

@@ -1,17 +1,12 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { ContextUser } from "../../Context";
+import { AppContext } from "../../Context";
 
-// function NavUser(){
-//     const [user, setUser] = useContext(ContextUser);
-//     console.log(user);
-//     return <Fragment></Fragment>
-// }
 
 class NavUser extends React.Component {
-    static contextType = ContextUser;
+    static contextType = AppContext;
     render(){
-        const user = this.context;
+        const user = this.context.user;
         return (
             <Fragment>
             <ul class="navbar-nav ml-auto text-center" dir="ltr">

@@ -6,12 +6,14 @@ import easy_to_use_2 from "../static/images/easy_to_use_2.png";
 import { Link } from 'react-router-dom';
 import FontAwesome from "react-fontawesome";
 import CardImage from "../components/CardImage/CardImage";
-import { ContextState } from "../Context";
-
+import { AppContext } from "../Context";
+// import commands from "../data/commands.json";
 
 class Home extends React.Component {
-    static contextType = ContextState;
+    static contextType = AppContext;
     render() {
+        const stats = this.context.stats;
+        console.log(stats);
         return (
             <Fragment>
                                 
@@ -74,10 +76,10 @@ class Home extends React.Component {
                     <br />
                     <br />
                     <div className="row text-center row-cols-1 row-cols-md-4 g-3">
-                        <Card icon={<FontAwesome name="fa-solid fa-terminal" />} title={"عدد الأوامر"} text="32"/>
-                        <Card icon={<FontAwesome name="fas fa-hashtag" />} title={"عدد الشاتات"} text={ "" + this.props.channels } />
-                        <Card icon={<FontAwesome name="fas fa-server" />} title={"عدد الخوادم"} text={ "" + this.props.guilds }/>
-                        <Card icon={<FontAwesome name="fas fa-share" />} title={"عدد الشاردات"} text={ "" + this.props.shards }/>
+                        <Card icon={<FontAwesome name="fa-solid fa-terminal" />} title={"عدد الأوامر"} text={ 20 }/>
+                        <Card icon={<FontAwesome name="fas fa-hashtag" />} title={"عدد الشاتات"} text={ stats.channels } />
+                        <Card icon={<FontAwesome name="fas fa-server" />} title={"عدد الخوادم"} text={ stats.guilds }/>
+                        <Card icon={<FontAwesome name="fas fa-share" />} title={"عدد الشاردات"} text={ stats.shards }/>
                     </div>
                     </div>
                 </div>
