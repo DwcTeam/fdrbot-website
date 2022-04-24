@@ -19,11 +19,11 @@ class Outh extends React.Component {
             )
         }
         axios.post("/auth/login", {code: params.code}).then(res => {
-            console.log(res);
             localStorage.setItem("token", res.data.token);
+            setTimeout(() => {
+                window.location.reload();
+            }, 1000);
         })
-        window.location.reload();
-        return <Navigate to='/' replace={true} />
     }
 }
 
