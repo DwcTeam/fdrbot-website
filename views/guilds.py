@@ -8,23 +8,23 @@ from utlits import (
     check_permission, 
     get_guild as get_guild_api, 
     get_guild_info,
-    only_admin
+    is_auth
 )
 
 
-api = Blueprint("api", __name__, url_prefix="/api")
+guilds = Blueprint("api", __name__, url_prefix="/guilds")
 
 auth: Auth = app.auth
 
-@api.route("/")
+@guilds.route("/")
 def index():
     return jsonify({"message": "Why are you hacker? pls don't hack me!"})
 
-@api.route("/ping")
+@guilds.route("/ping")
 def ping():
     return jsonify({"stats": send_ping()})
 
-@api.route("/guilds/<int:guild_id>/update", methods=["POST"])
+@guilds.route("/<int:guild_id>/update", methods=["POST"])
 def update_guild(guild_id: int):
     user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
     guild = user.get_guild(guild_id)
@@ -76,25 +76,26 @@ def update_guild(guild_id: int):
     app.db.update_one({"_id": guild_id}, {"$set": data}, upsert=True)
     return jsonify({"message": "Success!"})
 
-@api.route("/guilds/<int:guild_id>/info", methods=["GET"])
-@check_permission
+
+@guilds.route("/<int:guild_id>", methods=["GET"])
+@is_auth
 def get_guild(guild_id: int):
-    guild = app.db.find_one({'_id': guild_id})
-    if not guild:
+    info = app.db.find_one({'_id': guild_id})
+    if not info:
         return jsonify({"error": "Guild not found"}), 404
-    del guild["_id"]
-    del guild["prefix"]
-    guild["channel"] = str(guild.get("channel")) if guild.get("channel") else None
-    guild["role_id"] = str(guild.get("role_id")) if guild.get("role_id") else None
+    del info["_id"]
+    del info["prefix"]
+    info["channel"] = str(info.get("channel")) if info.get("channel") else None
+    info["role_id"] = str(info.get("role_id")) if info.get("role_id") else None
+    guild = get_guild_api(guild_id)
     data = {
-        "status": True if guild else False,
-        "guild": guild
+        "guild": guild,
+        "info": info
     }
     return jsonify(data)
 
 
-@api.route("/guilds/<int:guild_id>/info/admin", methods=["GET"])
-@only_admin
+@guilds.route("/<int:guild_id>/info/admin", methods=["GET"])
 def get_guild_admin(guild_id: int):
     info = app.db.find_one({'_id': guild_id})
     guild = get_guild_info(guild_id)

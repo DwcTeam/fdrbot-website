@@ -1,4 +1,4 @@
-from .api import api
+from .guilds import guilds
 from .auth import auth
 from .user import user
 from .index import index

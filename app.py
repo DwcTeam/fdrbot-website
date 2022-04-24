@@ -20,7 +20,7 @@ app.auth = Auth(app.config['CLIENT_ID'], app.config['CLIENT_SECRET'], app.config
 
 import views
 
-app.register_blueprint(views.api)
+app.register_blueprint(views.guilds)
 app.register_blueprint(views.auth)
 app.register_blueprint(views.user)
 app.register_blueprint(views.index)
