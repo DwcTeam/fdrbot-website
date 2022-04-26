@@ -1,6 +1,9 @@
 import axios from "axios";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
+import CheckBox from "../components/UpdateOption/CheckBox";
+import ColorMenu from "../components/UpdateOption/ColorMenu";
+import SelectMenu from "../components/UpdateOption/SelectMenu";
 import Warning from "../components/Warning/Warning";
 import { AppContext } from "../Context";
 
@@ -8,10 +11,19 @@ import { AppContext } from "../Context";
 const DashboardGuild = () => {
   const context = useContext(AppContext);
   const guild_id = useParams().id;
-  const [channels, setChannels] = useState();
-  const [roles, setRoles] = useState();
-  const [info, setInfo] = useState();
+  const [channels, setChannels] = useState([]);
+  const [roles, setRoles] = useState([]);
+  const [info, setInfo] = useState({});
   const available_guilds = context.available_guilds;
+
+  const available_times = [
+    "دقيقه 30",
+    "ساعة",
+    "ساعتين",
+    "6 ساعات",
+    "12 ساعات",
+    "24 ساعات",
+  ]
 
   if (!context.is_login) {
     return <Navigate to="/login" replace={true} />
@@ -31,180 +43,28 @@ const DashboardGuild = () => {
     });
   }, []);
 
-  if (!channels || !roles || !info) {
-    return (
-      <div className="d-flex justify-content-center">
-        <div className="spinner-border text-primary" role="status">
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    )
-  }
-
   return(
     <Fragment>
       <div className="all text first div">
-
         <section className="py-5 text-white text first div">
           <div className="container">
-
             <div className="row row-cols-1 row-cols-md-3 g-1">
-
-              {/* <!-- Setup channel --> */}
-              <div className="col update">
-                <div className="card bg-dark m-1">
-                  <div className="card-body">
-                    <h1 className="set text-light text-center">تحديد روم للأذكار</h1>
-                  </div>
-                  <div className="card-footer">
-                    <select className="form-select form-select-sm" aria-label=".form-select-sm example" defaultValue={info.channel ? info.channel : "0"}>
-                      <option key="0" value="0" >اختر ..</option>
-                      {channels.map((channel, idx) => {
-                        return <option key={idx} value={channel.id} className="text-start" >#{channel.name}</option>
-                      })}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              {/* <!-- Setup qurau role channel --> */}
-              <div className="col update">
-                <div className="card bg-dark m-1 mb-3">
-                  <div className="card-body">
-                    <h1 className="set text-light text-center">تحديد رتبه للقران الكربم</h1>
-                  </div>
-                  <div className="card-body">
-                    <select className="form-select form-select-sm role_id" aria-label=".form-select-sm example">
-                      <option value="0">اختر ..</option>
-                      {roles.map((role, idx) => {
-                        if (role.name === "@everyone") {
-                          return null
-                        }
-                        return <option key={idx} value={role.id} className="text-start" >@{role.name}</option>
-                      })}
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col update">
-                <div className="card bg-dark m-1 maintenance">
-                  <div className="card-body">
-                    <h1 className="set text-light text-center">تحديد روم صوتي</h1>
-                  </div>
-                  <div className="card-footer">
-                    <select className="form-select form-select-sm" aria-label=".form-select-sm example" disabled>
-                      <option selected value="0">قريباً ..</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
+              <SelectMenu title="تحديد روم للأذكار"  items={channels} defaultValue={info.channel} prefix="#" />
+              <SelectMenu title="تحديد رتبه للقران الكربم"  items={roles} defaultValue={info.role_id} prefix="@" ignoreValues={["@everyone"]} />
+              <SelectMenu title="تحديد روم صوتي" items={[]} defaultValue="0" defaultOption="قريباً .." isDisabled={true} />
             </div>
-
             <div className="row row-cols-1 row-cols-md-3 g-3">
-
-              <div className="col update">
-                <div className="card bg-dark m-1">
-                  <div className="card-body">
-                    <h1 className="set text-light text-center">تغير الوقت</h1>
-                  </div>
-                  <div className="card-footer">
-                    <select className="form-select form-select-sm time" aria-label=".form-select-sm example">
-                      <option value="1800" className="text-end" selected={info.time === "1800" ? true : false} >دقيقه 30</option>
-                      <option value="3600" className="text-end" selected={info.time === "3600" ? true : false} >ساعة</option>
-                      <option value="7200" className="text-end" selected={info.time === "7200" ? true : false} >ساعتين</option>
-                      <option value="21600" className="text-end" selected={info.time === "21600" ? true : false} >6 ساعات</option>
-                      <option value="43200" className="text-end" selected={info.time === "43200" ? true : false} >ساعات 12</option>
-                      <option value="86400" className="text-end" selected={info.time === "86400" ? true : false} >ساعات 24</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col update">
-                <div className="card bg-dark maintenance">
-                  <div className="card-body">
-                    <h1 className="set text-light text-center">علبة الوان</h1>
-                  </div>
-                  <div className="card-footer">
-                    <input type="color" className="form-control form-control-color w-100" id="exampleColorInput"
-                      value="#262727" title="Choose your color" disabled /><br />
-                  </div>
-                </div>
-              </div>
-
-              <div className="col update">
-                <div className="card bg-dark m-1 maintenance ">
-                  <div className="card-body">
-                    <h1 className="set text-light text-center">تحديد روم الخاتمه</h1>
-                  </div>
-                  <div className="card-body">
-                    <select className="form-select form-select-sm" aria-label=".form-select-sm example" disabled>
-                      <option value="0" selected={true}>قريباً ..</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
+              <SelectMenu title="تغير الوقت" items={available_times} defaultValue={info.time} />
+              <ColorMenu title="علبة الوان" defaultValue="#262727" isDisabled={true} />
+              <SelectMenu title="تحديد روم الخاتمه" items={[]} defaultValue="0" defaultOption="قريباً .." isDisabled={true} />
             </div>
-
             <br />
-              <div className="row row-cols-1 row-cols-md-1 g-4">
-
-                <div className="col update" dir="ltr">
-                  <div className="card bg-dark m-1">
-                    <div className="card-body">
-                      <h1 className="set text-light d-inline-flex float-end">تحديد نوع الارسال</h1>
-                      <div className="form-check form-switch text-start h3 d-inline-flex rt">
-                        <input className="form-check-input rt anti_spam" type="checkbox" role="switch" id="flexSwitchCheckChecked" aria-checked={true} checked={info.anti_spam} />
-                      </div>
-                      <p className="text-end h6 sfsf"><b className="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال
-                        الاذكار
-                        اذا لم يكون
-                        اشات المتفاعل</p>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="col update" dir="ltr">
-                  <div className="card bg-dark m-1">
-                    <div className="card-body">
-                      <h1 className="set text-light d-inline-flex float-end">تحديد نوع الامبد</h1>
-                      <div className="form-check form-switch text-start h3 d-inline-flex rt">
-                        <input className="form-check-input rt embed" type="checkbox" role="switch"
-                          id="flexSwitchCheckChecked" aria-checked={true} checked={info.embed} />
-                      </div>
-                      <p className="text-end h6 sfsf">يضع الاذكار في سندوق مرتب</p>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
+            <div className="row row-cols-1 row-cols-md-1 g-4">
+              <CheckBox title="تحديد نوع الارسال" checked={info.anti_spam} description={ <Fragment><b className="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال الاذكار اذا لم يكون اشات المتفاعل </Fragment>} />
+              <CheckBox title="تحديد نوع الامبد" checked={info.embed} description="يضع الاذكار في سندوق مرتب" />
+            </div>
           </div>
         </section>
-      </div>
-
-
-      <div className="container">
-        <div className="row row-cols-1 row-cols-md-1 g-3">
-          <div className="position-fixed bottom-0 end-0" style={{zIndex: "11"}}>
-            <div aria-live="polite" alive={true} className="d-flex justify-content-center align-items-center w-100">
-              <div id="liveToast" className="toast" role="alert" aria-live="assertive" alive={true}>
-                <div className="col" dir="ltr">
-                  <div className="card bg-dark m-2" style={{border: "1px solid var(--color1);"}}>
-                    <div className="card-body">
-                      <h1 className="set text-light d-inline-flex float-end ">احذر — لديك تغييرات لم يتم حفظها!</h1>
-                      <div className="group-buttons float-start save-menu">
-                        <button className="btn me-2 mx-2 save-button" id="liveToastBtn">حفظ التغييرات</button>
-                        <button className="btn me-2 mx-2 cancel-button" id="liveToastBtn">إلغاء</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
     </Fragment>
   );
