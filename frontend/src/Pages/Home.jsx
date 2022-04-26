@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import FontAwesome from "react-fontawesome";
 import CardImage from "../components/CardImage/CardImage";
 import { AppContext } from "../Context";
-// import commands from "../data/commands.json";
+
 
 class Home extends React.Component {
     static contextType = AppContext;
@@ -21,7 +21,7 @@ class Home extends React.Component {
                 <section className="bg-fdr">
                     <div className="container">
                         <div className="text-center">
-                            <img id="img1" className="img-respnsive img-fluid mx-auto d-block avatar-image lds-circle" src={logo} alt="logo">
+                            <img className="img-respnsive img-fluid mx-auto d-block avatar-image lds-circle" src={logo} alt="logo">
                             </img>
                             <br />
                             <h1 className="title">فاذكروني</h1>
@@ -59,12 +59,10 @@ class Home extends React.Component {
                 {/* end section for services */}
                 
                 {/* section for introduction */}
-                
                 <section className="py-5">
                     <CardImage image={easy_to_use} title="لوحة تحكم سهلة الاستخدام" description="تمتع بتجربة فريدة, ومميزة وتحكم كامل بسيرفرك" dir="rtl" />
                     <CardImage image={easy_to_use_2} title="مناسب لجميع الفئات" description="مناسب لسيرفرات المتاجر, البوتات, الالعاب, وسيرفرات المسابقات وسيرفرات الاجتماعية" dir="ltr" />
                 </section>
-                
                 {/* end section for introduction */}
 
                 {/* section for about */}
