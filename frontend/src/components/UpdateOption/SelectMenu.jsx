@@ -6,11 +6,12 @@ class SelectMenu extends React.Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         items: PropTypes.array.isRequired,
-        defaultValue: PropTypes.string.isRequired,
+        defaultValue: PropTypes.any.isRequired,
+        callback: PropTypes.func.isRequired,
         prefix: PropTypes.string,
         ignoreValues: PropTypes.array,
         defaultOption: PropTypes.string,
-        isDisabled: PropTypes.bool
+        isDisabled: PropTypes.bool,
     }
     render() {
 
@@ -23,7 +24,7 @@ class SelectMenu extends React.Component {
                 </div>
                 )
         }
-
+        // console.log(this.props.defaultValue)
         return (
             <Fragment>
                 <div className="col">
@@ -32,14 +33,20 @@ class SelectMenu extends React.Component {
                             <h1 className="set text-light text-center">{ this.props.title }</h1>
                         </div>
                         <div className="card-footer">
-                            <select className="form-select form-select-sm" aria-label=".form-select-sm example" defaultValue={ this.props.defaultValue } disabled={this.props.isDisabled}>
-                            <option key="0" value="0" >{this.props.defaultOption ? this.props.defaultOption : "اختر .."}</option>
-                            {this.props.items.map((item, idx) => {
-                                if (this.props.ignoreValues && this.props.ignoreValues.includes(item.id)) {
-                                    return <Fragment></Fragment>
-                                }
-                                return <option key={idx} value={item.id ? item.id : item} className="text-start" >{this.props.prefix ? this.props.prefix : ""}{item.name ? item.name : item}</option>
-                            })}
+                            <select 
+                                className="form-select form-select-sm" 
+                                aria-label=".form-select-sm example" 
+                                defaultValue={ this.props.defaultValue } 
+                                disabled={this.props.isDisabled}
+                                onChange={this.props.callback}
+                            >
+                                <option key="0" value="0" >{this.props.defaultOption ? this.props.defaultOption : "اختر .."}</option>
+                                {this.props.items.map((item, idx) => {
+                                    if (this.props.ignoreValues && this.props.ignoreValues.includes(item.id)) {
+                                        return <Fragment></Fragment>
+                                    }
+                                    return <option key={item.id} value={item.id ? item.id : item} className="text-start" >{this.props.prefix ? this.props.prefix : ""}{item.name ? item.name : item}</option>
+                                })}
                             </select>
                         </div>
                     </div>

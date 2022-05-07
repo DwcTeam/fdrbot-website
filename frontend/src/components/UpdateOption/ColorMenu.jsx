@@ -5,6 +5,7 @@ class ColorMenu extends React.Component {
     static propTypes = {
         title: PropTypes.string.isRequired,
         defaultValue: PropTypes.string.isRequired,
+        callback: PropTypes.func.isRequired,
         isDisabled: PropTypes.bool,   
     }
     
@@ -21,7 +22,8 @@ class ColorMenu extends React.Component {
                             className="form-control form-control-color w-100"
                             value={this.props.defaultValue} 
                             title="Choose your color" 
-                            disabled={this.props.isDisabled} 
+                            disabled={this.props.isDisabled}
+                            onChange={this.props.callback}
                         />
                         <br />
                   </div>
