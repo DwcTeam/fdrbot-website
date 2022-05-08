@@ -7,18 +7,21 @@ import Home from "./Pages/Home";
 import About from "./Pages/About";
 import Commands from "./Pages/Commands";
 import Error from "./Pages/Error";
-import Dashboard from "./Pages/Dashboard";
+import Dashboard from "./Pages/Dashboard/Home";
 import Nav from "./components/Nav/Nav";
 import Footer from "./components/Footer/Footer";
-import DashboardGuild from "./Pages/DashboardGuild";
-import Outh from "./Pages/Outh";
-import Login from "./Pages/Login";
+import DashboardGuild from "./Pages/Dashboard/Dashboard";
+import Outh from "./Pages/Dashboard/Outh";
+import Login from "./Pages/Dashboard/Login";
 import axios from "axios";
 import "bootstrap"
 import Redirect from "./components/Redirect/Redirect";
 import { authorization_uri, invite_uri, support_server_uri, vote_uri } from "./Config";
 import { AppContext } from "./Context"
 import Loading from "./components/Loading/Loading";
+import Logout from "./Pages/Dashboard/Logout";
+import Admin from "./Pages/Admin/Admin";
+// import Suggestions from "./Pages/Suggestions";
 
 function App() {
   let routes = useRoutes([
@@ -29,6 +32,11 @@ function App() {
     {path: "/dashboard/:id", element: <DashboardGuild />},
     {path: "/outh", element: <Outh />},
     {path: "/login", element: <Login />},
+    {path: "/logout", element: <Logout />},
+    // {path: "/suggestions", element: <Suggestions />},
+
+    // Admin
+    {path: "/admin", element: <Admin />},
 
     // Redirect
     {path: "/auth", element: <Redirect redirect_uri={ authorization_uri } />},

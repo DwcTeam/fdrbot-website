@@ -1,8 +1,8 @@
 import React, { Fragment } from "react";
 import { Navigate } from "react-router-dom";
-import Guild from "../components/Guild/Guild";
-import { default_banner } from "../Config";
-import { AppContext } from "../Context";
+import Guild from "../../components/Guild/Guild";
+import { default_banner } from "../../Config";
+import { AppContext } from "../../Context";
 
 
 class Dashboard extends React.Component {

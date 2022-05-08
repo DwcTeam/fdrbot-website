@@ -1,12 +1,12 @@
 import axios from "axios";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
-import CheckBox from "../components/UpdateOption/CheckBox";
-import ColorMenu from "../components/UpdateOption/ColorMenu";
-import SaveMenu from "../components/UpdateOption/SaveMenu";
-import SelectMenu from "../components/UpdateOption/SelectMenu";
-import Warning from "../components/Warning/Warning";
-import { AppContext } from "../Context";
+import CheckBox from "../../components/UpdateOption/CheckBox";
+import ColorMenu from "../../components/UpdateOption/ColorMenu";
+import SaveMenu from "../../components/UpdateOption/SaveMenu";
+import SelectMenu from "../../components/UpdateOption/SelectMenu";
+import Warning from "../../components/Warning/Warning";
+import { AppContext } from "../../Context";
 
 
 const DashboardGuild = () => {

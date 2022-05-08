@@ -20,6 +20,7 @@ class Outh extends React.Component {
         }
         axios.post("/auth/login", {code: params.code}).then(res => {
             localStorage.setItem("token", res.data.token);
+            console.log(res.data)
             setTimeout(() => {
                 window.location.reload();
             }, 1000);

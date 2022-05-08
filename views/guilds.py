@@ -85,6 +85,7 @@ def get_guild(guild_id: int):
         return jsonify({"error": "Guild not found"}), 404
     del info["_id"]
     del info["prefix"]
+    del info["webhook_url"]
     info["channel"] = str(info.get("channel")) if info.get("channel") else None
     info["role_id"] = str(info.get("role_id")) if info.get("role_id") else None
     guild = get_guild_api(guild_id)
@@ -95,14 +96,15 @@ def get_guild(guild_id: int):
     return jsonify(data)
 
 
-@guilds.route("/<int:guild_id>/info/admin", methods=["GET"])
+@guilds.route("/<int:guild_id>/info", methods=["GET"])
 def get_guild_admin(guild_id: int):
     info = app.db.find_one({'_id': guild_id})
     guild = get_guild_info(guild_id)
-    if not guild:
+    if not guild["status"]:
         return jsonify({"error": "Guild not found"}), 404
-    return jsonify({
-        "status": True if guild["status"] else False,
-        "guild": guild,
-        "info": info
-    })
+    data = {}
+    data.update(guild["guild"])
+    del info["_id"]
+    del info["webhook_url"]
+    data.update(info)
+    return jsonify(data)
