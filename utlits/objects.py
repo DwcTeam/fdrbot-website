@@ -157,14 +157,14 @@ class BotGuild:
 
 @dataclass
 class Channel:
-    id: int
+    id: str
     name: str
     type: t.Any
 
 
 @dataclass
 class Role:
-    id: int
+    id: str
     name: str
 
 

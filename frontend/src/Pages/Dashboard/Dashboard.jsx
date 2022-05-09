@@ -20,15 +20,17 @@ const DashboardGuild = () => {
 
   const [state, setState] = useState({});  // is the new data that will be display save menu
 
+  const [isChange, setChange] = useState(false);
+
   const available_guilds = context.available_guilds;
 
   const available_times = [
-    "دقيقه 30",
-    "ساعة",
-    "ساعتين",
-    "6 ساعات",
-    "12 ساعات",
-    "24 ساعات",
+    { id: "1800", name: "دقيقه 30"},
+    { id: "3600", name: "ساعه"},
+    { id: "7200", name: "ساعتين"},
+    { id: "21600", name: "ساعات 6"},
+    { id: "43200", name: "ساعه 12"},
+    { id: "86400", name: "ساعه 24"},
   ]
 
   if (!context.is_login) {
@@ -44,6 +46,7 @@ const DashboardGuild = () => {
       setChannels(res.data.guild.channels);
       setRoles(res.data.guild.roles);
       setInfo(res.data.info);
+      setState(res.data.info);
     }).catch((err) => {
       console.log(err);
     });
@@ -53,26 +56,21 @@ const DashboardGuild = () => {
     return <div>loading...</div>
   }
 
-  if (
-    (state.channel && state.channel !== info.channel) || 
-    // eslint-disable-next-line
-    (state.role && state.role !== info.role) || 
-    // eslint-disable-next-line
-    (state.time && state.time !== info.time) && !state.show
-  ) {
-    useEffect(() => {
-      setState({...state, show: true});
-    }, []);
-    console.log("work")
-  } else {
-    if (state.show) {
-      useEffect(() => {
-        setState({...state, show: false});
-      }, []);
-      console.log("not work")
+  useEffect(() => {
+    if (
+      (state.channel && state.channel !== info.channel) || 
+      // eslint-disable-next-line
+      (state.role && state.role !== info.role) || 
+      // eslint-disable-next-line
+      (state.time && state.time !== info.time) && (!isChange)
+    ) {
+      setChange(true);
+    } else {
+      if (isChange) {
+        setChange(false);
+      }
     }
-  }
-
+  }, [state, info, isChange]);
   return (
     <Fragment>
       <div className="all text first div">
@@ -84,8 +82,8 @@ const DashboardGuild = () => {
                 items={channels.filter(channel => channel.type === 0)} 
                 defaultValue={info.channel ? info.channel : "0"} 
                 prefix="#" 
-                callback={(value) => {
-                  setState({...state, channel: value});
+                callback={(e) => {
+                  setState({...state, channel: e.target.value});
                 }}
               />
               <SelectMenu 
@@ -93,8 +91,8 @@ const DashboardGuild = () => {
                 items={roles} 
                 defaultValue={info.role_id ? info.role_id : "0"} 
                 prefix="@" 
-                callback={(value) => {
-                  setState({...state, role_id: value});
+                callback={(e) => {
+                  setState({...state, role_id: e.target.value});
                 }}
                 // ignoreValues={roles.find((role) => role.name === "@everyone").} 
               />
@@ -104,7 +102,7 @@ const DashboardGuild = () => {
                 defaultValue="0" 
                 defaultOption="قريباً .." 
                 isDisabled={true} 
-                callback={(value) => {}}
+                callback={(e) => {}}
               />
             </div>
             <div className="row row-cols-1 row-cols-md-3 g-3">
@@ -112,15 +110,16 @@ const DashboardGuild = () => {
                 title="تغير الوقت" 
                 items={available_times}
                 defaultValue={info.time} 
-                callback={(value) => {
-                  setState({...state, time: value});
+                callback={(e) => {
+                  setState({...state, time: e.target.value});
                 }}
+                isDisabledDefault={true}
                 />
               <ColorMenu 
                 title="علبة الوان" 
                 defaultValue="#262727" 
                 isDisabled={true} 
-                callback={(value) => {}}
+                callback={(e) => {}}
               />
               <SelectMenu 
                 title="تحديد روم الخاتمه" 
@@ -128,7 +127,7 @@ const DashboardGuild = () => {
                 defaultValue="0" 
                 defaultOption="قريباً .." 
                 isDisabled={true} 
-                callback={(value) => {}}
+                callback={(e) => {}}
               />
             </div>
             <br />
@@ -137,25 +136,35 @@ const DashboardGuild = () => {
                 title="تحديد نوع الارسال" 
                 checked={info.anti_spam} 
                 description={ <Fragment><b className="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال الاذكار اذا لم يكون اشات المتفاعل </Fragment>} 
-                callback={(value) => {
-                  setState({...state, anti_spam: value});
+                callback={(e) => {
+                  setState({...state, anti_spam: e.target.value});
                 }}
                 />
               <CheckBox 
                 title="تحديد نوع الامبد" 
                 checked={info.embed} 
                 description="يضع الاذكار في سندوق مرتب" 
-                callback={(value) => {
-                  setState({...state, embed: value});
+                callback={(e) => {
+                  setState({...state, embed: e.target.value});
                 }}
               />
             </div>
-
-            {<SaveMenu show={state.show} />}
-
           </div>
         </section>
       </div>
+      <SaveMenu 
+        show={isChange} 
+        saveCallback={() => {
+          axios.post(`/guilds/${guild_id}/update`, state).then((res) => {
+            setInfo(state);
+          }).catch((err) => {
+            console.log(err);
+          })
+        }}
+        cancelCallback={() => {
+          window.location.reload()
+        }} 
+      />
     </Fragment>
   );
 }

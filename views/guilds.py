@@ -10,6 +10,7 @@ from utlits import (
     get_guild_info,
     is_auth
 )
+from utlits.encrypt import decrypt_token
 
 
 guilds = Blueprint("api", __name__, url_prefix="/guilds")
@@ -25,8 +26,14 @@ def ping():
     return jsonify({"stats": send_ping()})
 
 @guilds.route("/<int:guild_id>/update", methods=["POST"])
+@is_auth
 def update_guild(guild_id: int):
-    user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+    authorization = request.headers.get('Authorization')
+    print(authorization)
+    type_token, token = authorization.split(' ')[0], authorization.split(' ')[1]
+    user_id, access_token = decrypt_token(token)
+    user_data = app.logins.find_one({"_id": user_id})
+    user = convert_data_user(user_data)
     guild = user.get_guild(guild_id)
     
     if not guild:
@@ -39,23 +46,23 @@ def update_guild(guild_id: int):
 
     # cehck values
     keys = ["channel", "time", "anti_spam", "embed", "role_id"]
-    if keys != list(data.keys()):
+    if (False in [True for i in list(data.keys()) if i in keys]) and len(data.keys()) != len(keys):
         return jsonify({"message": "Missing values"}), 400
-    
     # chcek values type
     if not isinstance(data.get("anti_spam"), bool) or not isinstance(data.get("embed"), bool) or \
         not (isinstance(data.get("role_id"), str) or data.get("role_id") is None) or \
         not (isinstance(data.get("channel"), str) or data.get("channel") is None) or \
-        not isinstance(data.get("time"), int):
+        not data.get("time").isdigit():
         return jsonify({"message": "Invalid values"}), 400
     
     # check values range
-    if data.get("time") not in [1800, 3600, 7200, 21600, 28800, 43200, 86400]:
+    if int(data.get("time")) not in [1800, 3600, 7200, 21600, 28800, 43200, 86400]:
         return jsonify({"message": "Invalid time"}), 400
 
     info = app.db.find_one({"_id": guild_id})
-    del info["_id"]
-    del info["prefix"]
+    for key in list(info.keys()):
+        if key not in keys:
+            info.pop(key)
 
     data["channel"] = int(data.get("channel")) if data.get("channel") else None
     data["role_id"] = int(data.get("role_id")) if data.get("role_id") else None
@@ -66,11 +73,11 @@ def update_guild(guild_id: int):
     guild = get_guild_api(guild_id)
 
     # check if channel is valid
-    if data.get("channel") and int(data.get("channel")) not in [i.id for i in guild.channels]:
+    if data.get("channel") and str(data.get("channel")) not in [i.id for i in guild.channels]:
         return jsonify({"message": "Invalid channel"}), 400
     
     # check if role is valid
-    if data.get("role_id") and int(data.get("role_id")) not in [i.id for i in guild.roles]:
+    if data.get("role_id") and str(data.get("role_id")) not in [i.id for i in guild.roles]:
         return jsonify({"message": "Invalid role"}), 400
 
     app.db.update_one({"_id": guild_id}, {"$set": data}, upsert=True)
@@ -88,7 +95,11 @@ def get_guild(guild_id: int):
     del info["webhook_url"]
     info["channel"] = str(info.get("channel")) if info.get("channel") else None
     info["role_id"] = str(info.get("role_id")) if info.get("role_id") else None
+    info["time"] = str(info.get("time")) if info.get("time") else None
     guild = get_guild_api(guild_id)
+    
+    # remove everyone role
+    del guild.roles[0]
     data = {
         "guild": guild,
         "info": info
@@ -105,6 +116,10 @@ def get_guild_admin(guild_id: int):
     data = {}
     data.update(guild["guild"])
     del info["_id"]
+    del info["prefix"]
     del info["webhook_url"]
+    info["channel"] = str(info.get("channel")) if info.get("channel") else None
+    info["role_id"] = str(info.get("role_id")) if info.get("role_id") else None
+    info["time"] = str(info.get("time")) if info.get("time") else None
     data.update(info)
     return jsonify(data)
