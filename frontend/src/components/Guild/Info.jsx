@@ -25,27 +25,27 @@ class Info extends React.Component {
                             </div>
                             <div className="card-body">
                                 <div className="text-center">
-                                    <img style={{ width: "200px", height: "200px", borderRadius: "50%", border: "1px solid" }} className="guild-icon" src="https://cdn.discordapp.com/icons/843865725886398554/f2c051341380c0c7aa0cda715be6568e.png?size=4096" />
+                                    <img style={{ width: "200px", height: "200px", borderRadius: "50%", border: "1px solid" }} className="guild-icon" src={guild.icon} alt={guild.name} />
                                 </div>
-                                <h1 className="card-title text-center"><strong className="strtt guild-name" id="username-1">Ottawa 4 programming</strong></h1>
+                                <h1 className="card-title text-center"><strong className="strtt guild-name" id="username-1">{guild.name}</strong></h1>
                                 
                                 <div className="card-body text-start form-floating" id="floatingTextarea2" style={{ height: "auto", backgroundColor: "#10131e", border: "1px solid #437baf" }}>
                                     <label for="floatingTextarea2" style={{ color: "var(--false)" }}>SERVER INFO</label><br />
-                                    <p className="text-start">ID: <b className="strtt guild-id">843865725886398554</b></p>
-                                    <p className="text-start">Name: <b className="strtt guild-name">Ottawa 4 programming</b></p>
-                                    <p className="text-start">Owner: <b className="strtt owner-id">750376850768789500</b></p>
-                                    <p className="text-start">Channels: <b className="strtt channels">84</b></p>
-                                    <p className="text-start">Emojis: <b className="strtt emojis">160</b></p>
-                                    <p className="text-start">Members: <b className="strtt members">1623</b></p>
-                                    <p className="text-start">Channel: <b className="strtt channel">860816245460435000</b></p>
-                                    <p className="text-start">Embed: <b className="strtt embed">false</b></p>
-                                    <p className="text-start">AntiSpam: <b className="strtt anti-spam">false</b></p>
-                                    <p className="text-start">QuranRole: <b className="strtt role-id">843871678768742400</b></p>
-                                    <p className="text-start">Time: <b className="strtt time">7200</b></p>
+                                    <p className="text-start">ID: <b className="strtt guild-id">{guild.name}</b></p>
+                                    <p className="text-start">Name: <b className="strtt guild-name">{guild.name}</b></p>
+                                    <p className="text-start">Owner: <b className="strtt owner-id">{guild.owner_id}</b></p>
+                                    <p className="text-start">Channels: <b className="strtt channels">{guild.channels}</b></p>
+                                    <p className="text-start">Emojis: <b className="strtt emojis">{guild.emojis}</b></p>
+                                    <p className="text-start">Members: <b className="strtt members">{guild.member_count}</b></p>
+                                    <p className="text-start">Channel: <b className="strtt channel">{guild.channel}</b></p>
+                                    <p className="text-start">Embed: <b className="strtt embed">{guild.embed ? "yes" : "no"}</b></p>
+                                    <p className="text-start">AntiSpam: <b className="strtt anti-spam">{guild.anti_spam ? "yes" : "no"}</b></p>
+                                    <p className="text-start">QuranRole: <b className="strtt role-id">{guild.role_id}</b></p>
+                                    <p className="text-start">Time: <b className="strtt time">{guild.time}</b></p>
                                 </div>
                             </div>
                             <div className="card-footer">
-                                <a href="/dashboard/843865725886398554" className="dashboard-link"><button className="btn primary btn-lg me-2 mx-2">تعديل البوت كمساول</button></a>
+                                <a href={"/dashboard/" + guild.id} className="dashboard-link"><button className="btn primary btn-lg me-2 mx-2">تعديل البوت كمساول</button></a>
                             </div>
                         </div>
                     </div>
