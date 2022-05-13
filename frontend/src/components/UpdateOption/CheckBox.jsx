@@ -21,8 +21,7 @@ class CheckBox extends React.Component {
                                     className="form-check-input rt" 
                                     type="checkbox" 
                                     role="switch" 
-                                    aria-checked={true} 
-                                    checked={this.props.checked} 
+                                    defaultChecked={this.props.checked}
                                     onChange={this.props.callback} 
                                 />
                             </div>

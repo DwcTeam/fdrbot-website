@@ -52,7 +52,7 @@ const DashboardGuild = () => {
     });
   }, []);
 
-  if (!info || !channels || !roles) {
+  if (!info || !channels || !roles || !state) {
     return <div>loading...</div>
   }
 
@@ -60,11 +60,17 @@ const DashboardGuild = () => {
     if (
       (state.channel && state.channel !== info.channel) || 
       // eslint-disable-next-line
-      (state.role && state.role !== info.role) || 
+      (state.role_id && state.role_id !== info.role_id) || 
       // eslint-disable-next-line
-      (state.time && state.time !== info.time) && (!isChange)
+      (state.time && state.time !== info.time) ||
+      // eslint-disable-next-line
+      (state.anti_spam !== info.anti_spam) ||
+      // eslint-disable-next-line
+      (state.embed !== info.embed)
     ) {
-      setChange(true);
+      if (!isChange) {
+        setChange(true);
+      }
     } else {
       if (isChange) {
         setChange(false);
@@ -94,7 +100,6 @@ const DashboardGuild = () => {
                 callback={(e) => {
                   setState({...state, role_id: e.target.value});
                 }}
-                // ignoreValues={roles.find((role) => role.name === "@everyone").} 
               />
               <SelectMenu 
                 title="تحديد روم صوتي" 
@@ -122,7 +127,7 @@ const DashboardGuild = () => {
                 callback={(e) => {}}
               />
               <SelectMenu 
-                title="تحديد روم الخاتمه" 
+                title="تحديد روم الختمة" 
                 items={[]} 
                 defaultValue="0" 
                 defaultOption="قريباً .." 
@@ -137,7 +142,7 @@ const DashboardGuild = () => {
                 checked={info.anti_spam} 
                 description={ <Fragment><b className="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال الاذكار اذا لم يكون اشات المتفاعل </Fragment>} 
                 callback={(e) => {
-                  setState({...state, anti_spam: e.target.value});
+                  setState({...state, anti_spam: e.target.checked});
                 }}
                 />
               <CheckBox 
@@ -145,7 +150,7 @@ const DashboardGuild = () => {
                 checked={info.embed} 
                 description="يضع الاذكار في سندوق مرتب" 
                 callback={(e) => {
-                  setState({...state, embed: e.target.value});
+                  setState({...state, embed: e.target.checked});
                 }}
               />
             </div>

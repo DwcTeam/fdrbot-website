@@ -8,7 +8,6 @@ class SaveMenu extends React.Component {
         saveCallback: PropTypes.func.isRequired,
     }
     render() {
-        console.log(this.props.show)
         if (!this.props.show) {
             return null;
         }
