@@ -1,5 +1,6 @@
 from flask import Blueprint, jsonify, current_app as app, request
-from utlits import is_auth, Auth, is_admin, check_guilds, convert_data_user, decrypt_token
+from redis import Redis
+from utlits import is_auth, is_admin, convert_data_user, decrypt_token
 from pymongo.collection import Collection
 
 
@@ -30,12 +31,14 @@ def user_guilds():
     user_id, access_token = decrypt_token(token)
     with app.app_context():
         col_logins: Collection = app.col_logins
+        redis: Redis = app.redis
     user_data = col_logins.find_one({"_id": user_id})
     user = convert_data_user(user_data)
     guilds = user.guilds()
-    alive_guilds = check_guilds(guilds)  # send to cache bot to know if guild is alive
-    available_guilds = [i.as_dict for i in guilds if i.id in alive_guilds]
-    unavailable_guilds = [i.as_dict for i in guilds if i.id not in alive_guilds]
+    alive_guilds = filter(lambda guild: True if redis.get(f"guild:{guild.id}") else False, guilds)
+    ids = [g.id for g in list(alive_guilds)]
+    available_guilds = [i.as_dict for i in guilds if i.id in ids]
+    unavailable_guilds = [i.as_dict for i in guilds if i.id not in ids]
     return jsonify({"available_guilds": available_guilds, "unavailable_guilds": unavailable_guilds})
     
 

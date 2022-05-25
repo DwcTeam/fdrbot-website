@@ -1,21 +1,13 @@
-from __future__ import annotations
-import json
 from flask import Blueprint, request, jsonify, current_app as app
+import json
 import typing as t
-
-from redis import Redis
-from utlits import (
-    convert_data_user,  
-    get_guild as get_guild_api, 
-    get_guild_info,
-    is_auth
-)
+from utlits import convert_data_user, is_auth
 from utlits.encrypt import decrypt_token
 from pymongo.collection import Collection
+from redis import Redis
+from utlits.objects import convert_guild
 
-from utlits.objects import convert_roles
-
-guilds = Blueprint("api", __name__, url_prefix="/guilds")
+guilds = Blueprint("guilds", __name__, url_prefix="/guilds")
 
 @guilds.route("/")
 def index():
@@ -57,6 +49,7 @@ def update_guild(guild_id: int):
 
     with app.app_context():
         db: Collection = app.col_guilds
+        redis: Redis = app.redis
 
     info = db.find_one({"_id": guild_id})
     for key in list(info.keys()):
@@ -69,7 +62,7 @@ def update_guild(guild_id: int):
     if info == data:
         return jsonify({"message": "No updates"}), 400
 
-    guild = get_guild_api(guild_id)
+    guild = convert_guild(json.loads(redis.get(f"guild:{guild_id}")))
 
     # check if channel is valid
     if data.get("channel") and str(data.get("channel")) not in [i.id for i in guild.channels]:
@@ -82,45 +75,14 @@ def update_guild(guild_id: int):
     db.update_one({"_id": guild_id}, {"$set": data}, upsert=True)
     return jsonify({"message": "Success!"})
 
-
-# @guilds.route("/<int:guild_id>", methods=["GET"])
-# @is_auth
-# def get_guild(guild_id: int):
-#     with app.app_context():
-#         db: Collection = app.col_guilds
-#         redis: Redis = app.redis
-
-#     info = db.find_one({'_id': guild_id})
-#     if not info:
-#         return jsonify({"error": "Guild not found"}), 404
-#     del info["_id"]
-#     del info["webhook"]
-#     info["channel_id"] = str(info.get("channel_id")) if info.get("channel_id") else None
-#     info["role_id"] = str(info.get("role_id")) if info.get("role_id") else None
-#     info["time"] = str(info.get("time")) if info.get("time") else None
-#     guild = json.loads(redis.get(f"guild:{guild_id}"))
-#     roles = convert_roles(guild["roles"])
-#     channels = guild["channels"]    
-#     # remove everyone role
-#     del guild.roles[0]
-#     data = {
-#         "guild": {
-#             "roles": roles,
-#             "channels": channels
-#         },
-#         "info": info
-#     }
-#     return jsonify(data)
-
-
 @guilds.route("/<int:guild_id>", methods=["GET"])
 @is_auth
-def get_guild_admin(guild_id: int):
+def get_guild(guild_id: int):
     with app.app_context():
         db: Collection = app.col_guilds
         redis: Redis = app.redis
     info = db.find_one({'_id': guild_id})
-    guild = json.loads(redis.get(f"guild:{guild_id}"))
+    guild = json.loads(redis.get(f"guild:{guild_id}") or "{}")
     if not guild:
         return jsonify({"error": "Guild not found"}), 404
     data = {}
