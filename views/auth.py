@@ -1,6 +1,7 @@
 from flask import Blueprint, redirect, request, current_app as app, jsonify
 from utlits import Auth, encrypt_token, is_auth
 from datetime import datetime
+from pymongo.collection import Collection
 
 auth = Blueprint("auth", __name__)
 
@@ -13,12 +14,14 @@ def outh():
     access_token = auth.access_token(data["code"])
     user = auth.user(access_token)
     # insert to logs for admin page
-    app.logs.insert_one({"user_id": user.id, "username": user.username, "avatar_url": user.avatar, "type": "login", "time": datetime.now()})
-    data = app.logins.find_one({"_id": user.id})
+    with app.app_context():
+        col_logins: Collection = app.col_logins
+    col_logins.insert_one({"user_id": user.id, "username": user.username, "avatar_url": user.avatar, "type": "login", "time": datetime.now()})
+    data = col_logins.find_one({"_id": user.id})
     if not data:
-        app.logins.insert_one(user.as_dict)
+        col_logins.insert_one(user.as_dict)
     else :
-        app.logins.update_one({"_id": user.id}, {"$set": user.as_dict})
+        col_logins.update_one({"_id": user.id}, {"$set": user.as_dict})
     token = encrypt_token(access_token.access_token, user.id)
     user_data = user.as_dict
     user = user_data["user"]

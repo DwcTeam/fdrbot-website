@@ -4,10 +4,13 @@ from functools import wraps
 from .objects import convert_data_user
 from datetime import datetime
 from .encrypt import decrypt_token
+from pymongo.collection import Collection
 
 def is_auth(function_to_protect):
     @wraps(function_to_protect)
     def wrapper(*args, **kwargs):
+        with app.app_context():
+            col_logins: Collection = app.col_logins
         authorization = request.headers.get('Authorization')
         if not authorization:
             return jsonify({"error": "No authorization"}), 400
@@ -20,7 +23,7 @@ def is_auth(function_to_protect):
             user_id, access_token = decrypt_token(token)
         except:
             return jsonify({"error": "Inviled token"}), 400
-        user_data = app.logins.find_one({"_id": user_id})
+        user_data = col_logins.find_one({"_id": user_id})
         user = convert_data_user(user_data)
         if not user.access_token.access_token.startswith(access_token):
             return jsonify({"error": "Inviled token"}), 400
@@ -28,11 +31,11 @@ def is_auth(function_to_protect):
             if datetime.now() >= user.expires_in:
                 token = app.auth.refresh_token(user.access_token)
                 user = app.auth.user(token)
-                data = app.logins.find_one({"_id": user.id})
+                data = col_logins.find_one({"_id": user.id})
                 if not data:
-                    app.logins.insert_one(user.as_dict)
+                    col_logins.insert_one(user.as_dict)
                 else :
-                    app.logins.update_one({"_id": user.id}, {"$set": user.as_dict})
+                    col_logins.update_one({"_id": user.id}, {"$set": user.as_dict})
             
             # Success!
             return function_to_protect(*args, **kwargs)
@@ -42,7 +45,9 @@ def is_auth(function_to_protect):
 def check_permission(function_to_protect):
     @wraps(function_to_protect)
     def deco(*args, **kwargs):
-        user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+        with app.app_context():
+            col_logins: Collection = app.col_logins
+        user = convert_data_user(col_logins.find_one({"token.access_token": session["token"]}))
         if is_admin(user.id):
             return function_to_protect(*args, **kwargs)
         guild = app.auth.get_guild(user.access_token, kwargs.get("guild_id"))
@@ -58,7 +63,9 @@ def is_admin(user_id: int):
 def only_admin(function_to_protect):
     @wraps(function_to_protect)
     def deco(*args, **kwargs):
-        user = convert_data_user(app.logins.find_one({"token.access_token": session["token"]}))
+        with app.app_context():
+            col_logins: Collection = app.col_logins
+        user = convert_data_user(col_logins.find_one({"token.access_token": session["token"]}))
         if not is_admin(user.id):
             return abort(403)
         return function_to_protect(*args, **kwargs)

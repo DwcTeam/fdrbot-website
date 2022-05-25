@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify
-from utlits import get_bot_info
+import json
+from flask import Blueprint, jsonify, current_app as app
+
 
 index = Blueprint('index', __name__)
 
@@ -9,4 +10,6 @@ def index_route():
 
 @index.route("/stats")
 def stats():
-    return jsonify(get_bot_info())
+    with app.app_context():
+        redis = app.redis
+    return jsonify(json.loads(redis.get("bot:stats")))
