@@ -23,6 +23,7 @@ class CheckBox extends React.Component {
                                     role="switch" 
                                     defaultChecked={this.props.checked}
                                     onChange={this.props.callback} 
+                                    aria-checked="mixed"
                                 />
                             </div>
                                 <p className="text-end h6 sfsf">{this.props.description}</p>

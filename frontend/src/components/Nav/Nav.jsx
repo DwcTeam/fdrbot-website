@@ -26,7 +26,7 @@ export default class Nav extends Component {
                                 <ul className="navbar-nav nav-pillsnav navbar-nav ml-auto w-100 justify-content-center nav-pills">
                                     <li className="nav-item me-2 pe-3"><Link to="/" className="nav-link">الرئيسية</Link></li>
                                     <li className="nav-item me-2 pe-3"><Link to="/about" className="nav-link">حول</Link></li>
-                                    <li className="nav-item me-2 pe-3"><Link to="/commands" className="nav-link">الاوامر</Link></li>
+                                    <li className="nav-item me-2 pe-3"><Link to="/commands" className="nav-link">الأوامر</Link></li>
                                 </ul>
                                 <Link to="/" className="navbar-brand d-none d-lg-block" id="male-1">
                                     <img src={logo} alt="" width="50" height="50"></img>
@@ -34,7 +34,7 @@ export default class Nav extends Component {
                                 <ul className="navbar-nav nav-pillsnav navbar-nav ml-auto w-100 justify-content-center nav-pills">
                                     <li className="nav-item me-2"><Link to="/vote" target="_blank" className="nav-link">تصويت للبوت</Link></li>
                                     <li className="nav-item me-2"><Link to="/invite" target="_blank" className="nav-link">أضف البوت</Link></li>
-                                    <li className="nav-item me-2"><Link to="/support" target="_blank" className="nav-link">سيرفر الدعم</Link></li>
+                                    <li className="nav-item me-2"><Link to="/support" target="_blank" className="nav-link">الدعم الفني</Link></li>
                                     {isLogin ? <NavUser /> : null}
                                 </ul>
                             </div>
