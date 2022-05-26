@@ -5,7 +5,7 @@ from utlits import convert_data_user, is_auth
 from utlits.encrypt import decrypt_token
 from pymongo.collection import Collection
 from redis import Redis
-from utlits.objects import convert_guild
+from utlits.objects import convert_guild, BotGuild
 
 guilds = Blueprint("guilds", __name__, url_prefix="/guilds")
 
@@ -20,7 +20,11 @@ def update_guild(guild_id: int):
     authorization = request.headers.get('Authorization')
     type_token, token = authorization.split(' ')[0], authorization.split(' ')[1]
     user_id, access_token = decrypt_token(token)
-    user_data = app.logins.find_one({"_id": user_id})
+    with app.app_context():
+        db: Collection = app.col_guilds
+        redis: Redis = app.redis
+        logins: Collection = app.col_logins
+    user_data = logins.find_one({"_id": user_id})
     user = convert_data_user(user_data)
     guild = user.get_guild(guild_id)
     
@@ -33,23 +37,19 @@ def update_guild(guild_id: int):
         return jsonify({"message": "No data sent"}), 400
 
     # cehck values
-    keys = ["channel", "time", "anti_spam", "embed", "role_id"]
+    keys = ["channel", "time", "embed", "role_id"]
     if (False in [True for i in list(data.keys()) if i in keys]) and len(data.keys()) != len(keys):
         return jsonify({"message": "Missing values"}), 400
     # chcek values type
-    if not isinstance(data.get("anti_spam"), bool) or not isinstance(data.get("embed"), bool) or \
+    if not isinstance(data.get("embed"), bool) or \
         not (isinstance(data.get("role_id"), str) or data.get("role_id") is None) or \
-        not (isinstance(data.get("channel"), str) or data.get("channel") is None) or \
+        not (isinstance(data.get("channel_id"), str) or data.get("channel_id") is None) or \
         not data.get("time").isdigit():
         return jsonify({"message": "Invalid values"}), 400
     
     # check values range
     if int(data.get("time")) not in [1800, 3600, 7200, 21600, 43200, 86400]:
         return jsonify({"message": "Invalid time"}), 400
-
-    with app.app_context():
-        db: Collection = app.col_guilds
-        redis: Redis = app.redis
 
     info = db.find_one({"_id": guild_id})
     for key in list(info.keys()):
@@ -62,7 +62,8 @@ def update_guild(guild_id: int):
     if info == data:
         return jsonify({"message": "No updates"}), 400
 
-    guild = convert_guild(json.loads(redis.get(f"guild:{guild_id}")))
+    guild_data = json.loads(redis.get(f"guild:{guild_id}"))
+    guild = BotGuild(channels=guild_data["channels"], roles=guild_data["roles"])
 
     # check if channel is valid
     if data.get("channel") and str(data.get("channel")) not in [i.id for i in guild.channels]:
