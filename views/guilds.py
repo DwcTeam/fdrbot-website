@@ -76,22 +76,29 @@ def update_guild(guild_id: int):
     if data.get("role_id") and str(data.get("role_id")) not in [i.id for i in guild.roles]:
         return jsonify({"message": "Invalid role"}), 400
     
-    webhook = {}
+    webhook_data = {}
 
     if data["channel_id"] and info["channel_id"] != data["channel_id"]:
         channel_webhooks = RestWebhook.get_webhooks(app.config["TOKEN"], int(data["channel_id"]))
         bot_webhooks = list(filter(lambda i: (i.name == "فاذكروني" and int(i.get_user().id) == app.config["CLIENT_ID"]) , channel_webhooks))
         if not bot_webhooks:
-            webhook["channel_id"] = data["channel_id"]
-            webhook["channel_name"] = RestWebhook.get_channel(app.config["TOKEN"], int(data["channel_id"])).name
-        
+            webhook = RestWebhook.create(app.config["TOKEN"], data["channel_id"], "فاذكروني", "https://i.imgur.com/djbP3Zz.png")
+            webhook_data = {
+                "id": int(webhook.id),
+                "token": webhook.token
+            }
+        else :
+            webhook_data = {
+                "id": int(bot_webhooks[0].id),
+                "token": bot_webhooks[0].token
+            }
     
     new_data = {
         "channel_id": data["channel_id"] if (data["channel_id"] != "0") else None,
         "time": int(data["time"]),
         "embed": data["embed"],
         "role_id": data["role_id"] if (data["role_id"] != "0") else None,
-        "webhook": {}
+        "webhook": webhook_data
     }
     db.update_one({"_id": guild_id}, {"$set": new_data}, upsert=True)
     return jsonify({"message": "Success!"})

@@ -1,6 +1,8 @@
+import base64
 from requests import request
-from .objects import AccessToken, User, Guild, Permissions, convert_guild, convert_user, Webhook, WebhookUser
+from .objects import AccessToken, User, Guild, Permissions, convert_guild, convert_user, Webhook
 import typing as t
+from io import BytesIO
 
 BASE = "https://discord.com/api/v10"
 
@@ -10,8 +12,34 @@ class RestWebhook(object):
         self.url = url
         self.token = "Bot " + token
 
-    def create(self, data: t.Dict[str, str]) -> Webhook:
-        return Webhook(**request("POST", self.url, headers={"Authorization": self.token}, json=data).json())
+    @classmethod
+    def create(cls, token: str, channel_id: t.Union[str, int], name: str, avatar_url: str) -> Webhook:
+        """
+        Create a webhook in a channel. 
+
+        Prameters
+        ---------
+        token: :class:`str`
+            The bot's token.
+        channel_id: :class:`str || int`
+            The channel id.
+        name: :class:`str`
+            The webhook's name.
+        avatar: :class:`str`
+            The webhook's avatar its take a url.
+        """
+        buffered = BytesIO(request("GET", avatar_url).content)
+        img_base64 = base64.b64encode(buffered.getvalue())
+        res = request(
+            "POST", 
+            f"{BASE}/channels/{channel_id}/webhooks", 
+            headers={"Authorization": "Bot " + token}, 
+            json={
+                "name": name,
+                "avatar": "data:image/png;base64," + img_base64.decode()
+            }
+        )
+        return Webhook(**res.json())
 
     def delete(self):
         return request("DELETE", self.url, headers={"Authorization": self.token})
@@ -20,7 +48,7 @@ class RestWebhook(object):
         return request("GET", self.url, headers={"Authorization": self.token})
 
     @classmethod
-    def get_webhooks(self, token: str, channel_id: int) -> t.List["Webhook"]:
+    def get_webhooks(cls, token: str, channel_id: int) -> t.List["Webhook"]:
         res = request(
             "GET",
             f"{BASE}/channels/{channel_id}/webhooks",
