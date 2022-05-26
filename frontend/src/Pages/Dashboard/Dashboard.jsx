@@ -38,15 +38,22 @@ const DashboardGuild = () => {
   }
   const guild = available_guilds.find((guild) => guild.id === guild_id);
   if (!guild) {
-    return <Warning text="هاذا الخادم غير متاح للتعديل" />
+    return <Warning text="هذا الخادم غير متاح للتعديل" />
   }
 
   useEffect(() => {
     axios.get(`/guilds/${guild_id}`).then((res) => {
-      setChannels(res.data.guild.channels);
-      setRoles(res.data.guild.roles);
-      setInfo(res.data.info);
-      setState(res.data.info);
+      setChannels(res.data.channels);
+      setRoles(res.data.roles);
+      var info = {
+        id: res.data.id,
+        channel_id: res.data.channel_id,
+        role_id: res.data.role_id,
+        time: res.data.time,
+        embed: res.data.embed,
+      }
+      setInfo(info);
+      setState(info);
     }).catch((err) => {
       console.log(err);
     });
@@ -58,13 +65,11 @@ const DashboardGuild = () => {
 
   useEffect(() => {
     if (
-      (state.channel && state.channel !== info.channel) || 
+      (state.channel_id && state.channel_id !== info.channel_id) || 
       // eslint-disable-next-line
       (state.role_id && state.role_id !== info.role_id) || 
       // eslint-disable-next-line
       (state.time && state.time !== info.time) ||
-      // eslint-disable-next-line
-      (state.anti_spam !== info.anti_spam) ||
       // eslint-disable-next-line
       (state.embed !== info.embed)
     ) {
@@ -86,10 +91,10 @@ const DashboardGuild = () => {
               <SelectMenu 
                 title="تحديد روم للأذكار"  
                 items={channels.filter(channel => channel.type === 0)} 
-                defaultValue={info.channel ? info.channel : "0"} 
+                defaultValue={info.channel_id ? info.channel_id : "0"} 
                 prefix="#" 
                 callback={(e) => {
-                  setState({...state, channel: e.target.value});
+                  setState({...state, channel_id: e.target.value});
                 }}
               />
               <SelectMenu 
@@ -138,19 +143,11 @@ const DashboardGuild = () => {
             <br />
             <div className="row row-cols-1 row-cols-md-1 g-4">
               <CheckBox 
-                title="تحديد نوع الارسال" 
-                checked={info.anti_spam} 
-                description={ <Fragment><b className="sfsf-1">(ينصح لسيرفرات الكبيره)</b> يقلل في ارسال الاذكار اذا لم يكون اشات المتفاعل </Fragment>} 
-                callback={(e) => {
-                  setState({...state, anti_spam: e.target.checked});
-                }}
-                />
-              <CheckBox 
                 title="تحديد نوع الامبد" 
                 checked={info.embed} 
                 description="يضع الاذكار في سندوق مرتب" 
-                callback={(e) => {
-                  setState({...state, embed: e.target.checked});
+                callback={(checked) => {
+                  setState({...state, embed: checked});
                 }}
               />
             </div>
