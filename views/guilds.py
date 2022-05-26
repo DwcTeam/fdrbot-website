@@ -5,7 +5,8 @@ from utlits import convert_data_user, is_auth
 from utlits.encrypt import decrypt_token
 from pymongo.collection import Collection
 from redis import Redis
-from utlits.objects import convert_guild, BotGuild
+from utlits.objects import Channel, Role, convert_guild, BotGuild
+from utlits.rest import RestWebhook, Webhook
 
 guilds = Blueprint("guilds", __name__, url_prefix="/guilds")
 
@@ -37,7 +38,7 @@ def update_guild(guild_id: int):
         return jsonify({"message": "No data sent"}), 400
 
     # cehck values
-    keys = ["channel", "time", "embed", "role_id"]
+    keys = ["channel_id", "time", "embed", "role_id"]
     if (False in [True for i in list(data.keys()) if i in keys]) and len(data.keys()) != len(keys):
         return jsonify({"message": "Missing values"}), 400
     # chcek values type
@@ -56,24 +57,43 @@ def update_guild(guild_id: int):
         if key not in keys:
             info.pop(key)
 
-    data["channel"] = int(data.get("channel")) if data.get("channel") else None
+    data["channel_id"] = int(data.get("channel_id")) if data.get("channel_id") else None
     data["role_id"] = int(data.get("role_id")) if data.get("role_id") else None
     # check if not make updates
     if info == data:
         return jsonify({"message": "No updates"}), 400
 
     guild_data = json.loads(redis.get(f"guild:{guild_id}"))
-    guild = BotGuild(channels=guild_data["channels"], roles=guild_data["roles"])
-
+    guild = BotGuild(
+        channels=[Channel(**channel) for channel in guild_data["channels"]], 
+        roles=[Role(**role) for role in guild_data["roles"]]
+    )
     # check if channel is valid
-    if data.get("channel") and str(data.get("channel")) not in [i.id for i in guild.channels]:
+    if data.get("channel_id") and str(data.get("channel_id")) not in [i.id for i in guild.channels]:
         return jsonify({"message": "Invalid channel"}), 400
     
     # check if role is valid
     if data.get("role_id") and str(data.get("role_id")) not in [i.id for i in guild.roles]:
         return jsonify({"message": "Invalid role"}), 400
+    
+    webhook = {}
 
-    db.update_one({"_id": guild_id}, {"$set": data}, upsert=True)
+    if data["channel_id"] and info["channel_id"] != data["channel_id"]:
+        channel_webhooks = RestWebhook.get_webhooks(app.config["TOKEN"], int(data["channel_id"]))
+        bot_webhooks = list(filter(lambda i: (i.name == "فاذكروني" and int(i.get_user().id) == app.config["CLIENT_ID"]) , channel_webhooks))
+        if not bot_webhooks:
+            webhook["channel_id"] = data["channel_id"]
+            webhook["channel_name"] = RestWebhook.get_channel(app.config["TOKEN"], int(data["channel_id"])).name
+        
+    
+    new_data = {
+        "channel_id": data["channel_id"] if (data["channel_id"] != "0") else None,
+        "time": int(data["time"]),
+        "embed": data["embed"],
+        "role_id": data["role_id"] if (data["role_id"] != "0") else None,
+        "webhook": {}
+    }
+    db.update_one({"_id": guild_id}, {"$set": new_data}, upsert=True)
     return jsonify({"message": "Success!"})
 
 @guilds.route("/<int:guild_id>", methods=["GET"])
@@ -91,8 +111,8 @@ def get_guild(guild_id: int):
     data.update(guild)
     del info["_id"]
     del info["webhook"]
-    info["channel_id"] = str(info.get("channel_id")) if info.get("channel_id") else None
-    info["role_id"] = str(info.get("role_id")) if info.get("role_id") else None
+    info["channel_id"] = str(info.get("channel_id")) if info.get("channel_id") else "0"
+    info["role_id"] = str(info.get("role_id")) if info.get("role_id") else "0"
     info["time"] = str(info.get("time")) if info.get("time") else None
     data.update(info)
     return jsonify(data)

@@ -1,8 +1,36 @@
 from requests import request
-from .objects import AccessToken, User, Guild, Permissions, convert_guild, convert_user
+from .objects import AccessToken, User, Guild, Permissions, convert_guild, convert_user, Webhook, WebhookUser
 import typing as t
 
-BASE = "https://discord.com/api/v9"
+BASE = "https://discord.com/api/v10"
+
+
+class RestWebhook(object):
+    def __init__(self, url: str, token: str):
+        self.url = url
+        self.token = "Bot " + token
+
+    def create(self, data: t.Dict[str, str]) -> Webhook:
+        return Webhook(**request("POST", self.url, headers={"Authorization": self.token}, json=data).json())
+
+    def delete(self):
+        return request("DELETE", self.url, headers={"Authorization": self.token})
+
+    def get(self):
+        return request("GET", self.url, headers={"Authorization": self.token})
+
+    @classmethod
+    def get_webhooks(self, token: str, channel_id: int) -> t.List["Webhook"]:
+        res = request(
+            "GET",
+            f"{BASE}/channels/{channel_id}/webhooks",
+            headers={"Authorization": "Bot " + token},
+        )
+        return [Webhook(**webhook) for webhook in res.json()]
+
+    def __repr__(self) -> str:
+        return f"<Webhook url={self.url} token={self.token}>"
+
 
 class Auth(object):
     def __init__(
@@ -17,16 +45,18 @@ class Auth(object):
 
     def access_token(self, code: str) -> AccessToken:
         r = request(
-            method="POST", 
-            url=f"{BASE}/oauth2/token", 
+            method="POST",
+            url=f"{BASE}/oauth2/token",
             data={
                 "client_id": self.CLIENT_ID,
                 "client_secret": self.CLIENT_SECRET,
                 "grant_type": "authorization_code",
                 "code": code,
-                "redirect_uri": self.REDIRECT_URI.replace("%3A", ":").replace("%2F", "/")
-            }, 
-            headers={"Content-Type": "application/x-www-form-urlencoded"}
+                "redirect_uri": self.REDIRECT_URI.replace("%3A", ":").replace(
+                    "%2F", "/"
+                ),
+            },
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
         )
         r.raise_for_status()
         data = r.json()
@@ -48,9 +78,7 @@ class Auth(object):
                 "grant_type": "refresh_token",
                 "refresh_token": token.refresh_token,
             },
-            headers = {
-                "Content-Type": "application/x-www-form-urlencoded"
-            }
+            headers={"Content-Type": "application/x-www-form-urlencoded"},
         )
         r.raise_for_status()
         data = r.json()
@@ -64,18 +92,20 @@ class Auth(object):
 
     def user(self, token: AccessToken) -> User:
         r = request(
-            method="GET", 
+            method="GET",
             url=f"{BASE}/users/@me",
-            headers={"Authorization": f"Bearer {token.access_token}"}
+            headers={"Authorization": f"Bearer {token.access_token}"},
         )
         data = r.json()
         return convert_user(token, data, int(data["id"]))
 
-    def get_guild(self, token: AccessToken, guild_id) -> t.Optional[t.Union[Guild, dict]]:
+    def get_guild(
+        self, token: AccessToken, guild_id
+    ) -> t.Optional[t.Union[Guild, dict]]:
         r = request(
-            method="GET", 
+            method="GET",
             url=f"{BASE}/users/@me/guilds",
-            headers={"Authorization": f"Bearer {token.access_token}"}
+            headers={"Authorization": f"Bearer {token.access_token}"},
         )
         guild = [i for i in r.json() if i["id"] == str(guild_id)]
         # check if guild is found
@@ -83,15 +113,22 @@ class Auth(object):
             return None
         guild: dict = guild[0]
         # check if user owner or admin
-        if guild["owner"] or Permissions.any(int(guild["permissions"]), Permissions.MANAGE_GUILD):
+        if guild["owner"] or Permissions.any(
+            int(guild["permissions"]), Permissions.MANAGE_GUILD
+        ):
             return convert_guild(guild)
         return {"code": 1, "Error": "Missing Permissions"}  # missing permissions
 
     def guilds(self, token: AccessToken) -> t.List[Guild]:
         r = request(
-            method="GET", 
+            method="GET",
             url=f"{BASE}/users/@me/guilds",
-            headers={"Authorization": f"Bearer {token.access_token}"}
+            headers={"Authorization": f"Bearer {token.access_token}"},
         )
-        x = [guild for guild in r.json() if guild["owner"] or Permissions.any(int(guild["permissions"]), Permissions.ADMINISTRATOR)]
+        x = [
+            guild
+            for guild in r.json()
+            if guild["owner"]
+            or Permissions.any(int(guild["permissions"]), Permissions.ADMINISTRATOR)
+        ]
         return [convert_guild(guild) for guild in x]

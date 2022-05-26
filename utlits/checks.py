@@ -1,6 +1,8 @@
 from __future__ import annotations
 from flask import session, redirect, current_app as app, abort, request, jsonify
 from functools import wraps
+
+from utlits.rest import Auth
 from .objects import convert_data_user
 from datetime import datetime
 from .encrypt import decrypt_token
@@ -11,6 +13,7 @@ def is_auth(function_to_protect):
     def wrapper(*args, **kwargs):
         with app.app_context():
             col_logins: Collection = app.col_logins
+            auth: Auth = app.auth
         authorization = request.headers.get('Authorization')
         if not authorization:
             return jsonify({"error": "No authorization"}), 400
@@ -29,8 +32,8 @@ def is_auth(function_to_protect):
             return jsonify({"error": "Inviled token"}), 400
         if token:
             if datetime.now() >= user.expires_in:
-                token = app.auth.refresh_token(user.access_token)
-                user = app.auth.user(token)
+                token = auth.refresh_token(user.access_token)
+                user = auth.user(token)
                 data = col_logins.find_one({"_id": user.id})
                 if not data:
                     col_logins.insert_one(user.as_dict)
@@ -47,10 +50,11 @@ def check_permission(function_to_protect):
     def deco(*args, **kwargs):
         with app.app_context():
             col_logins: Collection = app.col_logins
+            auth: Auth = app.auth
         user = convert_data_user(col_logins.find_one({"token.access_token": session["token"]}))
         if is_admin(user.id):
             return function_to_protect(*args, **kwargs)
-        guild = app.auth.get_guild(user.access_token, kwargs.get("guild_id"))
+        guild = auth.get_guild(user.access_token, kwargs.get("guild_id"))
         if not guild:
             return abort(403)
             # Success!

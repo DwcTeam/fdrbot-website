@@ -226,3 +226,33 @@ class User:
     
     def get_guild(self, guild_id: int) -> Guild:
         return app.auth.get_guild(self.access_token, guild_id)
+
+@dataclass
+class WebhookUser:
+    id: str
+    username: str
+    avatar: t.Optional[str]
+    discriminator: str
+    public_flags: int
+    avatar_decoration: t.Optional[str] = None
+    bot: bool = False
+
+
+@dataclass
+class Webhook:
+    type: int
+    id: str
+    name: str
+    avatar: t.Optional[str]
+    channel_id: str
+    guild_id: int
+    application_id: t.Optional[str]
+    token: str
+    user: t.Dict
+
+    @property
+    def url(self) -> str:
+        return f"https://discordapp.com/api/v10/webhooks/{self.id}/{self.token}"
+
+    def get_user(self) -> WebhookUser:
+        return WebhookUser(**self.user)
