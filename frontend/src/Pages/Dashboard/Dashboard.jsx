@@ -6,6 +6,7 @@ import ColorMenu from "../../components/UpdateOption/ColorMenu";
 import SaveMenu from "../../components/UpdateOption/SaveMenu";
 import SelectMenu from "../../components/UpdateOption/SelectMenu";
 import Warning from "../../components/Warning/Warning";
+import { api_url } from "../../Config";
 import { AppContext } from "../../Context";
 
 
@@ -42,7 +43,7 @@ const DashboardGuild = () => {
   }
 
   useEffect(() => {
-    axios.get(`/guilds/${guild_id}`).then((res) => {
+    axios.get(api_url + `/guilds/${guild_id}`).then((res) => {
       setChannels(res.data.channels);
       setRoles(res.data.roles);
       var info = {
@@ -157,7 +158,7 @@ const DashboardGuild = () => {
       <SaveMenu 
         show={isChange} 
         saveCallback={() => {
-          axios.post(`/guilds/${guild_id}/update`, state).then((res) => {
+          axios.post(api_url + `/guilds/${guild_id}/update`, state).then((res) => {
             setInfo(state);
           }).catch((err) => {
             console.log(err);

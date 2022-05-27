@@ -3,13 +3,14 @@ import React, { Fragment, useState } from "react";
 import FontAwesome from "react-fontawesome";
 import Info from "../../components/Guild/Info";
 import Missing from "../../components/Guild/Missing";
+import { api_url } from "../../Config";
 
 
 function Admin() {
     const [element, setElement] = useState();
     const search_handler = () => {
         var guild_id = document.getElementsByClassName("guild-id-input")[0].value;
-        axios.get(`/guilds/${guild_id}/info`).then((res) => {
+        axios.get(api_url + `/guilds/${guild_id}/info`).then((res) => {
             setElement(<Info guild={res.data} />);
         }).catch((err) => {
             setElement(<Missing/>);

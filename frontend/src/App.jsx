@@ -16,12 +16,13 @@ import Login from "./Pages/Dashboard/Login";
 import axios from "axios";
 import "bootstrap"
 import Redirect from "./components/Redirect/Redirect";
-import { authorization_uri, invite_uri, support_server_uri, vote_uri } from "./Config";
+import { api_url, authorization_uri, invite_uri, support_server_uri, vote_uri } from "./Config";
 import { AppContext } from "./Context"
 import Loading from "./components/Loading/Loading";
 import Logout from "./Pages/Dashboard/Logout";
 import Admin from "./Pages/Admin/Admin";
 // import Suggestions from "./Pages/Suggestions";
+
 
 function App() {
   let routes = useRoutes([
@@ -60,7 +61,7 @@ function AppWrapper() {
   const [user, setUser] = useState();
   if (token) {
     useEffect(() => {
-      axios.get("/user/@me/guilds").then(response => {
+      axios.get(api_url + "/user/@me/guilds").then(response => {
           setGuilds(response.data);
         }).catch(err => {
           console.log(err);
@@ -68,7 +69,7 @@ function AppWrapper() {
     }, []);
 
     useEffect(() => {
-      axios.get("/user/@me").then(response => {
+      axios.get(api_url + "/user/@me").then(response => {
         setUser(response.data);
       }).catch(err => {
         console.log(err);
@@ -77,7 +78,7 @@ function AppWrapper() {
   };
 
   useEffect(() => {
-    axios.get("/stats").then(response => {
+    axios.get(api_url + "/stats").then(response => {
       setStats(response.data);
     }).catch(err => {
       console.log(err);
