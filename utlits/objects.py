@@ -247,8 +247,8 @@ class Webhook:
     channel_id: str
     guild_id: int
     application_id: t.Optional[str]
-    token: str
     user: t.Dict
+    token: t.Optional[str] = None
 
     @property
     def url(self) -> str:
