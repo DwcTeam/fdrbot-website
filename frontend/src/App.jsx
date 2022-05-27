@@ -59,20 +59,22 @@ function AppWrapper() {
   const [guilds, setGuilds] = useState();
   const [stats, setStats] = useState();
   const [user, setUser] = useState();
+  const [isIssus, setIsIssus] = useState(false);
   if (token) {
     useEffect(() => {
       axios.get(api_url + "/user/@me/guilds").then(response => {
           setGuilds(response.data);
-        }).catch(err => {
+        }).catch((err) => {
           console.log(err);
+          setIsIssus(true);
         });
     }, []);
 
     useEffect(() => {
       axios.get(api_url + "/user/@me").then(response => {
         setUser(response.data);
-      }).catch(err => {
-        console.log(err);
+      }).catch((err) => {
+        setIsIssus(true);
       });
     }, []);
   };
@@ -80,14 +82,14 @@ function AppWrapper() {
   useEffect(() => {
     axios.get(api_url + "/stats").then(response => {
       setStats(response.data);
-    }).catch(err => {
-      console.log(err);
+    }).catch((err) => {
+      setStats({});
     })
   }, []);
   if (!stats) {
     return <Loading />
   }
-  if (token) {
+  if (token && !isIssus) {
     if (!user || !guilds) {
       return <Loading />
     }
@@ -95,11 +97,12 @@ function AppWrapper() {
   return (
     <Router>
       <AppContext.Provider value={{
-        available_guilds: guilds ? guilds.available_guilds : [],
-        unavailable_guilds: guilds ? guilds.unavailable_guilds : [],
+        available_guilds: guilds ? (!isIssus ? guilds.available_guilds : []) : [],
+        unavailable_guilds: guilds ? (!isIssus ? guilds.unavailable_guilds : []) : [],
         is_login: user ? true : false,
         user: user ? user : {},
         stats: stats,
+        issus: isIssus
       }}> 
           <Nav />
           <App />

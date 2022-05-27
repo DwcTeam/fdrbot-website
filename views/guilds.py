@@ -1,12 +1,12 @@
 from flask import Blueprint, request, jsonify, current_app as app
 import json
 import typing as t
-from utlits import convert_data_user, is_auth
+from utlits import convert_data_user, is_auth, required_bot_alive
 from utlits.encrypt import decrypt_token
 from pymongo.collection import Collection
 from redis import Redis
-from utlits.objects import Channel, Role, convert_guild, BotGuild
-from utlits.rest import RestWebhook, Webhook
+from utlits.objects import Channel, Role, BotGuild
+from utlits.rest import RestWebhook
 
 guilds = Blueprint("guilds", __name__, url_prefix="/guilds")
 
@@ -16,6 +16,7 @@ def index():
 
 
 @guilds.route("/<int:guild_id>/update", methods=["POST"])
+@required_bot_alive
 @is_auth
 def update_guild(guild_id: int):
     authorization = request.headers.get('Authorization')
@@ -104,6 +105,7 @@ def update_guild(guild_id: int):
     return jsonify({"message": "Success!"})
 
 @guilds.route("/<int:guild_id>", methods=["GET"])
+@required_bot_alive
 @is_auth
 def get_guild(guild_id: int):
     with app.app_context():

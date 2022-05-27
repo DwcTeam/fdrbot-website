@@ -29,6 +29,7 @@ app.register_blueprint(views.index)
 app.register_blueprint(views.admin)
 app.register_error_handler(404, views.not_found)
 app.register_error_handler(403, views.forbidden)
+app.register_error_handler(503, views.unavailable)
 
 if __name__ == '__main__':
     # from waitress import serve

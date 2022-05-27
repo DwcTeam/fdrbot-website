@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Navigate, useParams } from "react-router-dom";
+import Issus from "../../components/Issus/Issus";
 import CheckBox from "../../components/UpdateOption/CheckBox";
 import ColorMenu from "../../components/UpdateOption/ColorMenu";
 import SaveMenu from "../../components/UpdateOption/SaveMenu";
@@ -12,6 +13,11 @@ import { AppContext } from "../../Context";
 
 const DashboardGuild = () => {
   const context = useContext(AppContext);
+
+  if (context.issus) {
+    return <Issus />
+  }
+
   const guild_id = useParams().id;
 
   const [info, setInfo] = useState({});

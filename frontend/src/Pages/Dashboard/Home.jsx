@@ -1,6 +1,7 @@
 import React, { Fragment } from "react";
 import { Navigate } from "react-router-dom";
 import Guild from "../../components/Guild/Guild";
+import Issus from "../../components/Issus/Issus";
 import { default_banner } from "../../Config";
 import { AppContext } from "../../Context";
 
@@ -8,11 +9,12 @@ import { AppContext } from "../../Context";
 class Dashboard extends React.Component {
     static contextType = AppContext;
     render() {
-
         if (!this.context.is_login) {
             return <Navigate to="/login" replace={true} />
         } 
-
+        if (this.context.issus) {
+            return <Issus />
+        }
         const available_guilds = this.context.available_guilds;
         const unavailable_guilds = this.context.unavailable_guilds;
         const user = this.context.user

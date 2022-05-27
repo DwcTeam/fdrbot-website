@@ -1,12 +1,23 @@
 import axios from "axios";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import FontAwesome from "react-fontawesome";
+import { Navigate } from "react-router-dom";
 import Info from "../../components/Guild/Info";
 import Missing from "../../components/Guild/Missing";
+import Warning from "../../components/Warning/Warning";
 import { api_url } from "../../Config";
+import { AppContext } from "../../Context";
 
 
 function Admin() {
+    const context = useContext(AppContext);
+    if (!context.is_login) {
+        return <Navigate to="/login" replace={true} />
+    }
+    if (!context.user.admin) {
+        return <Warning text="ليس لديك صلاحيات للدخول هنا" />
+    }
+    
     const [element, setElement] = useState();
     const search_handler = () => {
         var guild_id = document.getElementsByClassName("guild-id-input")[0].value;

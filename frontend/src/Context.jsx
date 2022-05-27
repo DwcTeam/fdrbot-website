@@ -6,5 +6,6 @@ export const AppContext = createContext({
     is_login: false,
     user: {},
     stats: {},
+    issus: false
 })
 

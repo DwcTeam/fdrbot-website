@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, current_app as app, request
 from redis import Redis
-from utlits import is_auth, is_admin, convert_data_user, decrypt_token
+from utlits import is_auth, is_admin, convert_data_user, decrypt_token, required_bot_alive
 from pymongo.collection import Collection
 
 
@@ -24,6 +24,7 @@ def user_data():
 
 
 @user.route('/@me/guilds')
+@required_bot_alive
 @is_auth
 def user_guilds():
     authorization = request.headers.get('Authorization')

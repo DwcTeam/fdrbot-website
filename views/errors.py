@@ -5,3 +5,6 @@ def not_found(error):
 
 def forbidden(error):
     return jsonify({"error": "Forbidden error"}), 403
+
+def unavailable(error):
+    return jsonify({"error": "Service unavailable"}), 503

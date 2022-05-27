@@ -16,7 +16,8 @@ def outh():
     # insert to logs for admin page
     with app.app_context():
         col_logins: Collection = app.col_logins
-    col_logins.insert_one({"user_id": user.id, "username": user.username, "avatar_url": user.avatar, "type": "login", "time": datetime.now()})
+        col_logs: Collection = app.col_logs
+    col_logs.insert_one({"user_id": user.id, "username": user.username, "avatar_url": user.avatar, "type": "login", "time": datetime.now()})
     data = col_logins.find_one({"_id": user.id})
     if not data:
         col_logins.insert_one(user.as_dict)

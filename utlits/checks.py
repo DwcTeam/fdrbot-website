@@ -1,6 +1,9 @@
 from __future__ import annotations
+import json
 from flask import session, redirect, current_app as app, abort, request, jsonify
 from functools import wraps
+
+from redis import Redis
 
 from utlits.rest import Auth
 from .objects import convert_data_user
@@ -72,6 +75,17 @@ def only_admin(function_to_protect):
         user = convert_data_user(col_logins.find_one({"token.access_token": session["token"]}))
         if not is_admin(user.id):
             return abort(403)
+        return function_to_protect(*args, **kwargs)
+    return deco
+
+def required_bot_alive(function_to_protect):
+    @wraps(function_to_protect)
+    def deco(*args, **kwargs):
+        with app.app_context():
+            redis: Redis = app.redis
+        stats = json.loads(redis.get("bot:stats") or "{}")
+        if not stats or not stats["online"]:
+            return abort(503)
         return function_to_protect(*args, **kwargs)
     return deco
 
