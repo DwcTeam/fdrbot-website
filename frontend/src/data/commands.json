@@ -78,10 +78,6 @@
                 "description": "تغير البادئة الخاصة بالخادم"
             },
             {
-                "name": "set spam",
-                "description": "خاصية تمنع تكرر ارسال الاذكار في حالة عدم تفاعل الشات"
-            },
-            {
                 "name": "set embed",
                 "description": "تغير خاصيه ارسال الاذكار الى امبد"
             },
@@ -90,7 +86,7 @@
                 "description": "تغير وقت ارسال الأذكار"
             },
             {
-                "name": "set room",
+                "name": "set channel",
                 "description": "أختيار قناة الأذكار"
             },
             {
