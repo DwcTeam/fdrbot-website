@@ -49,7 +49,7 @@ def convert_user(token: AccessToken, data: dict, user_id: int) -> User:
     return User(
         id=user_id,
         username=data["username"] if len(data["username"]) < 15 else data["username"][:10] + "...",
-        avatar=convert_avatar(data) if not data["avatar"].startswith(IMAGE_BASE) else data["avatar"],
+        avatar=convert_avatar(data) if (not data["avatar"] or not data["avatar"].startswith(IMAGE_BASE)) else data["avatar"],
         discriminator=int(data["discriminator"]),
         public_flags=data["public_flags"],
         flags=data["flags"],
