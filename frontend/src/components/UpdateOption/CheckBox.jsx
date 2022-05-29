@@ -1,8 +1,11 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 
 
 function CheckBox({ title, name, checked, callback, description }) {
-    const [isChecked, setIsChecked] = useState(checked);
+    const [isChecked, setIsChecked] = useState();
+    useEffect(() => {
+        setIsChecked(checked);
+    }, [checked]);
     return ( 
         <Fragment>
             <div className="col" dir="ltr">
