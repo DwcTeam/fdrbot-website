@@ -37,15 +37,15 @@
         "childrens": [
             {
                 "name": "quran play",
-                "description": "تشغيل القران الكريم"
+                "description": "تشغيل القرآن الكريم"
             },
             {
                 "name": "quran radio",
-                "description": "تشغيل اذاعه القران الكريم"
+                "description": "تشغيل اذاعه القرآن الكريم"
             },
             {
                 "name": "quran stop",
-                "description": "إيقاف تشغيل القران الكريم"
+                "description": "إيقاف تشغيل القرآن الكريم"
             },
             {
                 "name": "quran volume",
