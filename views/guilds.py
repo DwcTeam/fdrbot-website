@@ -134,7 +134,7 @@ def get_guild(guild_id: int):
             "role_id": None,
             "webhook": None
         })
-    data = {} or {
+        info = {
             "_id": guild_id, 
             "channel_id": None, 
             "time": 3600, 
@@ -142,6 +142,8 @@ def get_guild(guild_id: int):
             "role_id": None,
             "webhook": None
         }
+    data = {}
+
     del guild["roles"][0]
     data.update(guild)
     del info["_id"]
