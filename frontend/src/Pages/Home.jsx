@@ -24,7 +24,7 @@ class Home extends React.Component {
                             <img className="img-respnsive img-fluid mx-auto d-block avatar-image lds-circle" src={logo} alt="logo">
                             </img>
                             <br />
-                            <h1 className="title">فاذكروني</h1>
+                            <h2 className="text-center h1 title">فاذكروني</h2>
                             <hr style={{ border: "1px solid",  height: "1px"}}/>
                             <h5 className="text">بوت فاذكروني اول بوت عربي اسلامي للأذكار | بوت فاذكروني للتذكير بذكر الله في الشات</h5>
                             <br />
