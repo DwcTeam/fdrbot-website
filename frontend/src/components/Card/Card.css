@@ -2,7 +2,7 @@
 
 .card-custome {
     border-radius: 10px;
-    background: #222222;
+    background: #252731;
     transition: all ease .5s; 
 }
 
@@ -31,3 +31,12 @@
 .card-animation:hover {
     transform: scale(1.02);
 }
+
+.card-3 {
+    background-color: #252731;
+    display: flex;
+    border-radius: 3rem;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5);
+} 

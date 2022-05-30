@@ -8,8 +8,8 @@ class Login extends React.Component {
             <Fragment>
                 <section className="bg-fdr">
                     <div className="container">
-                        <div className="text-center" style={{ width: "100%", height: "366px" }}>
-                            <div className="card-body" style={{ margin: "100px" }}>
+                        <div className="text-center">
+                            <div className="card-body">
                                 <div className="card-text">
                                     <h1 className="card-title text-light login">يجب أن تسجل دخولك لـ تتمكن من رؤية الصفحة!</h1>
                                 </div>

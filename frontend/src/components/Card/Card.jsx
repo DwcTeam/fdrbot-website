@@ -7,7 +7,7 @@ class Card extends React.Component {
         return (
             <Fragment>
                 <div className="col-sm card-animation">
-                    <div className="card text-light mb-3 card-custome">
+                    <div className="card text-light mb-3 card-custome card-3">
                         <div className="card-outline-custome"></div>
                         <div className="h1 mt-3">
                             <br />

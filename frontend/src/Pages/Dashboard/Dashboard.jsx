@@ -59,7 +59,7 @@ const DashboardGuild = () => {
         time: res.data.time,
         embed: res.data.embed,
       }
-      setInfo(info);
+      setInfo(res.data);
       setState(info);
     }).catch((err) => {
       console.log(err);
@@ -89,12 +89,31 @@ const DashboardGuild = () => {
       }
     }
   }, [state, info, isChange]);
+  const user = context.user
   return (
     <Fragment>
       <div className="all text first div">
         <section className="py-5 text-white text first div">
+        <div class="features">
+                  <div class="features-list">
+                      <div class="feature">
+                              <div class="content">
+                                  {/* <i class="fa-solid fa-server"></i> */}
+                                  <img src={ guild.icon } alt={ guild.name } className="guild-icon" />
+                                  <h2 className="about-fdr">يا هلا والله فيك, { user.username }</h2>
+                                  <span className="text-white m-2">اسم الخادم : { guild.name }</span>
+                                  <span className="text-white m-2">الرتب : { roles.length }</span>
+                                  <span className="text-white m-2">القنوات : { channels.length }</span><br />
+                                  <span className="text-white m-2 description">البايو : { info.description }</span>
+                              </div>
+                      </div>
+                  </div>
+              </div>
           <div className="container">
-            <div className="row row-cols-1 row-cols-md-3 g-1">
+                        {/* <div className="d-flex align-items-center justify-content-center flex-row-reverse" dir="rtl">
+                            <h1 className="text-white text-center title">يا هلا والله فيك, { user.username }</h1>
+                        </div> */}
+            <div className="row row-cols-1 row-cols-md-3 g-1 mb-3">
               <SelectMenu 
                 title="تحديد روم للأذكار"  
                 items={channels.filter(channel => channel.type === 0)} 
@@ -114,16 +133,6 @@ const DashboardGuild = () => {
                 }}
               />
               <SelectMenu 
-                title="تحديد روم صوتي" 
-                items={[]} 
-                defaultValue="0" 
-                defaultOption="قريباً .." 
-                isDisabled={true} 
-                callback={(e) => {}}
-              />
-            </div>
-            <div className="row row-cols-1 row-cols-md-3 g-3">
-              <SelectMenu 
                 title="تغير الوقت" 
                 items={available_times}
                 defaultValue={info.time} 
@@ -132,6 +141,16 @@ const DashboardGuild = () => {
                 }}
                 isDisabledDefault={true}
                 />
+            </div>
+            <div className="row row-cols-1 row-cols-md-3 g-3">
+              <SelectMenu 
+                title="تحديد روم صوتي" 
+                items={[]} 
+                defaultValue="0" 
+                defaultOption="قريباً .." 
+                isDisabled={true} 
+                callback={(e) => {}}
+              />
               <ColorMenu 
                 title="علبة الوان" 
                 defaultValue="#262727" 
