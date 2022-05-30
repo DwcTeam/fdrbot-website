@@ -53,7 +53,18 @@ def update_guild(guild_id: int):
     if int(data.get("time")) not in [1800, 3600, 7200, 21600, 43200, 86400]:
         return jsonify({"message": "Invalid time"}), 400
 
+    guild_data = json.loads(redis.get(f"guild:{guild_id}"))
+
     info = db.find_one({"_id": guild_id})
+    if guild_data and not info:
+        db.insert_one({
+            "_id": guild_id, 
+            "channel_id": None, 
+            "time": 3600, 
+            "embed": False, 
+            "role_id": None, 
+            "webhook": None
+        })
     for key in list(info.keys()):
         if key not in keys:
             info.pop(key)
@@ -64,7 +75,6 @@ def update_guild(guild_id: int):
     if info == data:
         return jsonify({"message": "No updates"}), 400
 
-    guild_data = json.loads(redis.get(f"guild:{guild_id}"))
     guild = BotGuild(
         channels=[Channel(**channel) for channel in guild_data["channels"]], 
         roles=[Role(**role) for role in guild_data["roles"]]
@@ -99,7 +109,7 @@ def update_guild(guild_id: int):
         "time": int(data["time"]),
         "embed": data["embed"],
         "role_id": data["role_id"] if (data["role_id"] != "0") else None,
-        "webhook": webhook_data
+        "webhook": webhook_data or None
     }
     db.update_one({"_id": guild_id}, {"$set": new_data}, upsert=True)
     return jsonify({"message": "Success!"})
@@ -115,7 +125,25 @@ def get_guild(guild_id: int):
     guild = json.loads(redis.get(f"guild:{guild_id}") or "{}")
     if not guild:
         return jsonify({"error": "Guild not found"}), 404
+    if not info:
+        db.insert_one({
+            "_id": guild_id, 
+            "channel_id": None, 
+            "time": 3600, 
+            "embed": False, 
+            "role_id": None,
+            "webhook": None
+        })
+        info = {
+            "_id": guild_id, 
+            "channel_id": None, 
+            "time": 3600, 
+            "embed": False, 
+            "role_id": None,
+            "webhook": None
+        }
     data = {}
+
     del guild["roles"][0]
     data.update(guild)
     del info["_id"]

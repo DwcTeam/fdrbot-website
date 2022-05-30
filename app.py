@@ -14,7 +14,7 @@ app.config.from_pyfile('config.py')
 app.secret_key = app.config["SECRET_KEY"]
 
 with app.app_context():
-    app.mongodb = MongoClient(app.config["MONGO_URI"]).get_database("fa-azcrone")
+    app.mongodb = MongoClient(app.config["MONGO_URI"]).get_database("fdrbot")
     app.col_guilds = app.mongodb.get_collection("guilds")
     app.col_logins = app.mongodb.get_collection("logins")
     app.col_logs = app.mongodb.get_collection("logs")
