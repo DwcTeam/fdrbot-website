@@ -1,10 +1,8 @@
 import React, { Fragment } from "react";
+import "./Tasbih.css"
 
 
 class Redirect extends React.Component {
-    componentDidMount() {
-        window.location.href = this.props.redirect_uri
-    }
     render() {
         return (
             <Fragment>

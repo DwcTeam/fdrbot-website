@@ -5,6 +5,7 @@ import "./static/css/normalize.css";
 import "./static/css/App.css";
 import Home from "./Pages/Home";
 import About from "./Pages/About";
+import Tasbih from "./Pages/Tasbih";
 import Commands from "./Pages/Commands";
 import Error from "./Pages/Error";
 import Dashboard from "./Pages/Dashboard/Home";
@@ -28,6 +29,7 @@ function App() {
   let routes = useRoutes([
     {path: "/", element: <Home />},
     {path: "/about", element: <About />},
+    {path: "/tasbih", element: <Tasbih />},
     {path: "/commands", element: <Commands />},
     {path: "/dashboard/", element: <Dashboard />},
     {path: "/dashboard/:id", element: <DashboardGuild />},

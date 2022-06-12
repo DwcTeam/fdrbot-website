@@ -17,6 +17,9 @@ a {
 img {
     pointer-events: none;
 }
+#phone-navbar {
+    margin-top: 10px;
+}
 
 
 /* login */

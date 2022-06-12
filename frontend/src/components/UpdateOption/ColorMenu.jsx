@@ -6,9 +6,9 @@ class ColorMenu extends React.Component {
         title: PropTypes.string.isRequired,
         defaultValue: PropTypes.string.isRequired,
         callback: PropTypes.func.isRequired,
-        isDisabled: PropTypes.bool,   
+        isDisabled: PropTypes.bool,
     }
-    
+
     render() {
         return (
             <div className="col">
@@ -17,18 +17,18 @@ class ColorMenu extends React.Component {
                         <h1 className="set text-light text-center">{this.props.title}</h1>
                     </div>
                     <div className="card-footer">
-                        <input 
-                            type="color" 
+                        <input
+                            type="color"
                             className="form-control form-control-color w-100"
-                            value={this.props.defaultValue} 
-                            title="Choose your color" 
+                            value={this.props.defaultValue}
+                            title="Choose your color"
                             disabled={this.props.isDisabled}
                             onChange={this.props.callback}
                         />
                         <br />
-                  </div>
+                    </div>
                 </div>
-              </div>
+            </div>
         );
     }
 }

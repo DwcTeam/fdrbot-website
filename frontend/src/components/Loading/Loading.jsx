@@ -8,9 +8,9 @@ class Loading extends React.Component {
             <Fragment>
                 <div id="loading" dir="ltr">
                     <div className="load">
-                        <div className="load-one"></div>
-                        <div className="load-two"></div>
-                        <div className="load-three"></div>
+                        <div className="loading">
+                            <div className="loading-load"></div>
+                        </div>
                     </div>
                 </div>
             </Fragment>
