@@ -104,7 +104,9 @@ const DashboardGuild = () => {
                                   <span className="text-white m-2">اسم الخادم : { guild.name }</span>
                                   <span className="text-white m-2">الرتب : { roles.length }</span>
                                   <span className="text-white m-2">القنوات : { channels.length }</span><br />
-                                  <span className="text-white m-2 description">البايو : { info.description }</span>
+                                  {
+                                    info.description? <span className="text-white m-2 description">البايو : { info.description }</span> : null
+                                  }
                               </div>
                       </div>
                   </div>

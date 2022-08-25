@@ -6,12 +6,6 @@ import { api_url } from "../../Config";
 
 class Outh extends React.Component {
     render(){
-        var token = localStorage.getItem("token");
-        if (token) {
-            return (
-                <Navigate to="/dashboard" replace={true} />
-            )
-        }
         var params = queryString.parse(window.location.search);
         if (!params.code) {
             return (
