@@ -173,7 +173,7 @@ const DashboardGuild = () => {
               <CheckBox 
                 title="تحديد نوع الامبد" 
                 checked={info.embed} 
-                description="يضع الاذكار في سندوق مرتب" 
+                description="يضع الاذكار في صندوق مرتب" 
                 callback={(checked) => {
                   setState({...state, embed: checked});
                 }}

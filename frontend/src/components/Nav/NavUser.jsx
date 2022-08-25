@@ -21,9 +21,6 @@ class NavUser extends React.Component {
                             <li className="nav-item">
                                 <Link className="dropdown-item text-center primary" to="/suggestions">ارسال اقتراح</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link className="dropdown-item text-center primary" to="/tasbih">تسبيح</Link>
-                            </li>
                             <li>
                                 <hr className="dropdown-divider bg-light" />
                             </li>
